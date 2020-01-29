@@ -15,7 +15,7 @@ export default class LoginScreen extends React.Component {
 
       if (result.type === "success") {
         console.log("LoginScreen.js.js 21 | ", result);
-        this.props.navigation.navigate("DashboardScreen", {
+        this.props.navigation.navigate("Dashboard", {
           name: result.user.givenName,
           email: result.user.email
         }); //after Google login redirect to Profile
@@ -46,48 +46,3 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 });
-
-  // state = { user: null };
-
-  // componentDidMount() {
-  //   this.initAsync();
-  // }
-
-  // initAsync = async () => {
-  //   await GoogleSignIn.initAsync({
-  //     clientId: '44478915750-gotvo1r8p03ifarkv378qp9a0o2b4slk.apps.googleusercontent.com',
-  //   });
-  // };
-
-  // _syncUserWithStateAsync = async () => {
-  //   const user = await GoogleSignIn.signInSilentlyAsync();
-  //   this.setState({ user });
-  // };
-
-  // signOutAsync = async () => {
-  //   await GoogleSignIn.signOutAsync();
-  //   this.setState({ user: null });
-  // };
-
-  // signInAsync = async () => {
-  //   try {
-  //     const { type, user } = await GoogleSignIn.signInAsync();
-  //     if (type === 'success') {
-  //       this._syncUserWithStateAsync();
-  //     }
-  //   } catch ({ message }) {
-  //     alert('login: Error:' + message);
-  //   }
-  // };
-
-  // onPress = () => {
-  //   if (this.state.user) {
-  //     this.signOutAsync();
-  //   } else {
-  //     this.signInAsync();
-  //   }
-  // };
-
-  // render() {
-  //   return <Text onPress={this.onPress}>Toggle Auth</Text>;
-  // }
