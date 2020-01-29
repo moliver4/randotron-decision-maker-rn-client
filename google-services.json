@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "44478915750",
+    "firebase_url": "https://randotron-rn.firebaseio.com",
+    "project_id": "randotron-rn",
+    "storage_bucket": "randotron-rn.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:44478915750:android:3c1c027a6aff49d8004067",
+        "android_client_info": {
+          "package_name": "com.rnexpo.randotrondecisionmaker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "44478915750-gotvo1r8p03ifarkv378qp9a0o2b4slk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzWl2nlGkx7U3BeF-o3RklNZO1D6fYPsE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "44478915750-gotvo1r8p03ifarkv378qp9a0o2b4slk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "44478915750-nla04k880ko6jvcpgfuls2efec77a256.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.rnexpo.randotrondecisionmaker"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
