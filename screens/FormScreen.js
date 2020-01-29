@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native';
 
  class FormScreen extends React.Component {
 
@@ -9,7 +9,9 @@ import { View, Text, Button, StyleSheet } from 'react-native';
       <View style={styles.container}>
           <Text> Form Screen</Text>
           
-        <Button title="should move me forward to Decision Screen" />
+        
+          <Button title="should move me forward to Decision Screen" onPress={() => this.props.navigation.navigate('Decision')}/>
+  
       </View>
     );
   }

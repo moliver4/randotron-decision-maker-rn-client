@@ -32,7 +32,8 @@ const defaultNavOptions = {
   headerBackTitleStyle: {
     fontFamily: 'open-sans'
   },
-  headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primary
+  headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primary,
+  
 };
 
 // const ProductsNavigator = createStackNavigator(
@@ -54,10 +55,20 @@ const defaultNavOptions = {
 //     defaultNavigationOptions: defaultNavOptions
 //   }
 // );
-const DecisionsNavigator = createStackNavigator(
+const AuthNavigator = createStackNavigator(
+    {
+      Auth: LoginScreen
+    },
+    {
+      defaultNavigationOptions: defaultNavOptions
+    }
+    
+  );
+
+const DecisionsStackNavigator = createStackNavigator(
     {
       Dashboard: {
-        screen: DashboardScreen
+          screen: DashboardScreen
       },
       Decision: {
         screen: DecisionScreen
@@ -68,11 +79,8 @@ const DecisionsNavigator = createStackNavigator(
     }
   );
 
-  const HelpNavigator = createStackNavigator(
+  const HelpStackNavigator = createStackNavigator(
     {
-      Dashboard: {
-        screen: DashboardScreen
-      },
       Help: {
         screen: HelpScreen
       }
@@ -80,10 +88,11 @@ const DecisionsNavigator = createStackNavigator(
     {
      defaultNavigationOptions: defaultNavOptions
     }
+    
   );
 
 
-  const NewNavigator = createStackNavigator(
+  const NewStackNavigator = createStackNavigator(
     {
       Form: {
         screen: FormScreen
@@ -99,7 +108,7 @@ const DecisionsNavigator = createStackNavigator(
 
 const tabScreenConfig = {
   Dashboard: {
-    screen: DecisionsNavigator,
+    screen: DecisionsStackNavigator,
     navigationOptions: {
       tabBarIcon: tabInfo => {
         return (
@@ -116,7 +125,7 @@ const tabScreenConfig = {
     }
   },
   New: {
-    screen: NewNavigator,
+    screen: NewStackNavigator,
     navigationOptions: {
       tabBarIcon: tabInfo => {
         return (
@@ -133,7 +142,7 @@ const tabScreenConfig = {
     }
   },
   Help: {
-    screen: HelpNavigator,
+    screen: HelpStackNavigator,
     navigationOptions: {
       tabBarIcon: tabInfo => {
         return (
@@ -151,6 +160,7 @@ const tabScreenConfig = {
   }
 };
 
+
 const DashboardNewHelpTabNavigator =
   Platform.OS === 'android'
     ? createMaterialBottomTabNavigator(tabScreenConfig, {
@@ -167,24 +177,15 @@ const DashboardNewHelpTabNavigator =
           },
           activeTintColor: Colors.accent
         }
+
       }
   );
 
 
-
-const AuthNavigator = createStackNavigator(
-    {
-      Auth: LoginScreen
-    },
-    {
-      defaultNavigationOptions: defaultNavOptions
-    }
-);
-
-const DashNavigator = createDrawerNavigator(
+const AppDrawerNavigator = createDrawerNavigator(
     {
       DashboardHome: {
-
+        //screen: DashboardScreen
         screen: DashboardNewHelpTabNavigator,
         navigationOptions: {
           drawerLabel: 'Home'
@@ -225,7 +226,7 @@ const DashNavigator = createDrawerNavigator(
 const MainNavigator = createSwitchNavigator({
     LoadingScreen: LoadingScreen,
     Auth: AuthNavigator,
-    Dashboard: DashNavigator
+    Dashboard: AppDrawerNavigator
   })
   
   

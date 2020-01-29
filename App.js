@@ -9,7 +9,7 @@ import { firebaseConfig } from './config'
 // import LoginScreen from './screens/LoginScreen'
 // import DashboardScreen from './screens/DashboardScreen'
 // import LoadingScreen from './screens/LoadingScreen'
-import MainNavigator from './navigator/MainNavigator.js'
+import MainNavigator from './navigator/1MainNavigator.js'
 
 
 firebase.initializeApp(firebaseConfig)

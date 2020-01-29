@@ -1,19 +1,38 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button} from 'react-native';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import HeaderButton from '../components/HeaderButton';
 
 
-
-export default class DashboardScreen extends React.Component {
+class DashboardScreen extends React.Component {
     render () {
         return (
             <View style={styles.container} >
                 <Text>
                     Dashboard SCREEN
                 </Text>
+                <Button title="should move me forward from Dash to Decision Screen" onPress={() => this.props.navigation.navigate('Decision')}/>
             </View>
         )
     }
 }
+
+DashboardScreen.navigationOptions = navData => {
+    return {
+      headerTitle: 'Your Decisions', 
+      headerLeft: (
+        <HeaderButtons HeaderButtonComponent={HeaderButton}>
+          <Item
+            title="Menu"
+            iconName="ios-menu"
+            onPress={() => {
+              navData.navigation.toggleDrawer();
+            }}
+          />
+        </HeaderButtons>
+      )
+    };
+  };
 
 const styles = StyleSheet.create({
     container: {
@@ -24,3 +43,4 @@ const styles = StyleSheet.create({
     },
   });
   
+  export default DashboardScreen
