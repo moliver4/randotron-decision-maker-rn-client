@@ -27,4 +27,10 @@ const styles = StyleSheet.create({
   }
 });
 
+FormScreen.navigationOptions = navData => {
+  return {
+    headerTitle: 'New Question'
+  };
+};
+
 export default FormScreen

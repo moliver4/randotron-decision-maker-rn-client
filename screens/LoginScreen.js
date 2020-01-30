@@ -29,10 +29,18 @@ export default class LoginScreen extends React.Component {
     }
   };
 
+  continueAsGuest = () => {
+    this.props.navigation.navigate("Dashboard", {
+      name: null
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Button title="Login with Google" onPress={this.signInWithGoogle} />
+
+        <Button title="Continue as Guest" onPress={this.continueAsGuest} />
       </View>
     );
   }

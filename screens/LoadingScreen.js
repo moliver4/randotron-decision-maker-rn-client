@@ -24,6 +24,7 @@ export default class LoadingScreen extends React.Component {
     render () {
         return (
             <View style={styles.container}>
+                <Text>One moment...</Text>
                 <ActivityIndicator size='large'/>
             </View>
         )

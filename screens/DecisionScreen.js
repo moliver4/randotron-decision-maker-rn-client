@@ -25,4 +25,11 @@ const styles = StyleSheet.create({
   }
 });
 
+DecisionScreen.navigationOptions = navData => {
+  return {
+    headerTitle: 'Final Answer'
+  };
+};
+
+
 export default DecisionScreen

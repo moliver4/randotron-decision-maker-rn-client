@@ -24,4 +24,10 @@ const styles = StyleSheet.create({
   }
 });
 
+
+HelpScreen.navigationOptions = navData => {
+  return {
+    headerTitle: 'How to Play'
+  };
+};
 export default HelpScreen
