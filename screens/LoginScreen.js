@@ -1,11 +1,13 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import * as Google from "expo-google-app-auth";
+import {login} from '../store/actions/userAuth'
+import { connect } from 'react-redux'
 // import { GoogleSignIn } from 'expo-google-sign-in';
 
 import { IOS_CLIENT_ID } from '../config'
 
-export default class LoginScreen extends React.Component {
+class LoginScreen extends React.Component {
   signInWithGoogle = async () => {
     try {
       const result = await Google.logInAsync({
@@ -15,10 +17,8 @@ export default class LoginScreen extends React.Component {
 
       if (result.type === "success") {
         console.log("LoginScreen.js.js 21 | ", result);
-        this.props.navigation.navigate("Dashboard", {
-          name: result.user.givenName,
-          email: result.user.email
-        }); //after Google login redirect to Profile
+        this.props.login(result.user.email, result.user.givenName, result.accessToken)
+        this.props.navigation.navigate("Dashboard"); //after Google login redirect to Profile
         return result.accessToken;
       } else {
         return { cancelled: true };
@@ -30,9 +30,8 @@ export default class LoginScreen extends React.Component {
   };
 
   continueAsGuest = () => {
-    this.props.navigation.navigate("Dashboard", {
-      name: null
-    });
+    this.props.login(null, null, null)
+    this.props.navigation.navigate("Dashboard");
   }
 
   render() {
@@ -46,6 +45,12 @@ export default class LoginScreen extends React.Component {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    login: (email, name, token) => dispatch(login(email, name, token))
+  }
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -54,3 +59,5 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 });
+
+export default connect(null, mapDispatchToProps)(LoginScreen)

@@ -1,24 +1,20 @@
-import React, { useState } from 'react';
-import * as Font from 'expo-font';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
 import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 import MainApp from './MainApp'
+import reducer from './store/reducers/userAuth'
 
+const store = createStore(reducer)
 
-export default function App() {
-  return (
-    <MainApp/>
-  )
+class App extends Component {
+  render() {
+    return (
+      <Provider store={store}> 
+        <MainApp/>
+      </Provider>
+    )
+  }
 }
 
 
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App
