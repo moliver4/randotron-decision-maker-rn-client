@@ -49,7 +49,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
     return { 
         user: state.user,
-        isLoggedIn: state.isLoggedIn
+        isLoggedIn: state.isLoggedIn,
+        questions: state.questions
     }
 }
   

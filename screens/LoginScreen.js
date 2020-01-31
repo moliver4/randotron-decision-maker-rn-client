@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import * as Google from "expo-google-app-auth";
 import {login} from '../store/actions/userAuth'
+import {loadQuestions} from '../store/actions/questions'
 import { connect } from 'react-redux'
 import ServerAdapter from '../services/ServerAdapter'
 // import { GoogleSignIn } from 'expo-google-sign-in';
@@ -16,8 +17,8 @@ class LoginScreen extends React.Component {
   }
 
   handleUserData = (data) => {
-    console.log(data.user)
-    console.log(data.questions)
+    this.props.login(data.user.email, data.user.name, data.user.id)
+    this.props.loadQuestions(data.questions)
   }
 
   signInWithGoogle = async () => {
@@ -59,7 +60,8 @@ class LoginScreen extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    login: (email, name, token) => dispatch(login(email, name, token))
+    login: (email, name, token) => dispatch(login(email, name, token)),
+    loadQuestions: (questions) => dispatch(loadQuestions(questions))
   }
 }
 

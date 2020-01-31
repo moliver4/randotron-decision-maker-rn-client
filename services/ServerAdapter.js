@@ -1,4 +1,4 @@
-const USERSURL = 'http://10.137.6.122:3000/users'
+const USERSURL = 'http://192.168.0.19:3000/users'
 const QUESTIONSURL = 'http://10.137.6.122:3000/questions'
 const CHOICESURL = 'http://10.137.6.122:3000/choices'
 const DECISIONSURL = 'http://10.137.6.122:3000/decisions'

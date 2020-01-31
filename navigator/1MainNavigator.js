@@ -36,25 +36,6 @@ const defaultNavOptions = {
   
 };
 
-// const ProductsNavigator = createStackNavigator(
-//   {
-//     ProductsOverview: ProductsOverviewScreen,
-//     ProductDetail: ProductDetailScreen,
-//     Cart: CartScreen
-//   },
-//   {
-//     navigationOptions: {
-//       drawerIcon: drawerConfig => (
-//         <Ionicons
-//           name={Platform.OS === 'android' ? 'md-cart' : 'ios-cart'}
-//           size={23}
-//           color={drawerConfig.tintColor}
-//         />
-//       )
-//     },
-//     defaultNavigationOptions: defaultNavOptions
-//   }
-// );
 const AuthNavigator = createStackNavigator(
     {
       Auth: LoginScreen

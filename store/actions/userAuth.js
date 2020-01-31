@@ -4,13 +4,13 @@ export const LOGOUT = 'LOGOUT';
 
 
   
-export const login = (email, name, token) => {
+export const login = (email, name, id) => {
     return {
         type: LOGIN, 
         user: {
             name: name, 
             email: email, 
-            token: token
+            id: id
         }
     } 
 };
