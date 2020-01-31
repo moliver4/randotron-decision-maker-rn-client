@@ -16,7 +16,8 @@ class LoginScreen extends React.Component {
   }
 
   handleUserData = (data) => {
-    console.log(data)
+    console.log(data.user)
+    console.log(data.questions)
   }
 
   signInWithGoogle = async () => {

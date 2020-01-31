@@ -1,7 +1,7 @@
 export const LOGIN = 'LOGIN';
 export const GUEST = 'GUEST';
 export const LOGOUT = 'LOGOUT';
-export const LOAD_QUESTIONS = 'LOAD_QUESTIONS'
+
 
   
 export const login = (email, name, token) => {
@@ -14,10 +14,3 @@ export const login = (email, name, token) => {
         }
     } 
 };
-
-export const loadQuestions = (questions) => {
-    return {
-        type: LOAD_QUESTIONS,
-        questions: questions
-    }
-}
