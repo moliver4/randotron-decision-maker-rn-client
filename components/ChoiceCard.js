@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Button, Text, TextInput, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 
 
-const ChoiceCard = ({ choice, index } ) => {
+const ChoiceCard = ({ choice, index, deleteChoice } ) => {
 
     const reason = choice.reason.length > 0? true : false
     
@@ -14,7 +14,7 @@ const ChoiceCard = ({ choice, index } ) => {
                     {reason? <Text> Readon: {choice.reason} </Text> : null }
                     <Text> Weight: {choice.weight} </Text>
                 </View>
-                <Button title='delete' />
+                <Button title='delete' onPress={()=>deleteChoice(choice)} />
             </View>
 
 

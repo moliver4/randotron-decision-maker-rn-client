@@ -2,8 +2,11 @@ import React from 'react';
 import { View, Text, Button, TextInput, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import ChoiceForm from '../components/ChoiceForm'
 import ChoiceCard from '../components/ChoiceCard'
+import { connect } from 'react-redux'
+import Calculator from '../services/Calculator'
+import ServerAdapter from '../services/ServerAdapter'
 
-const INITAL_STATE = {
+const INITIAL_STATE = {
         isEditing: false,
         newQuestion: {
             title: ''
@@ -13,24 +16,14 @@ const INITAL_STATE = {
             title: '',
             reason: '',
             weight: null
-        }
+        },
+        decision: {}
 
     }
 
 class FormScreen extends React.Component {
-    state = {
-        isEditing: false,
-        newQuestion: {
-            title: ''
-        },
-        choices: [],
-        newChoice: {
-            title: '',
-            reason: '',
-            weight: null
-        }
+    state = INITIAL_STATE
 
-    }
     handleNewQuestionChange=(text) => {
         this.setState(prevState => {
              return {
@@ -65,6 +58,7 @@ class FormScreen extends React.Component {
          }
     })
 }
+
     handleChoiceWeightChange = (text) => {
        let num = parseInt(text)
         if (num) {
@@ -90,7 +84,7 @@ class FormScreen extends React.Component {
     }
 
     cancelAddChoice = () => {
-        this.setState(INITAL_STATE)
+        this.setState(INITIAL_STATE)
     }
 
     submitAddChoice = () => {
@@ -101,6 +95,11 @@ class FormScreen extends React.Component {
             return {
                 ...prevState,
                 isEditing: false,
+                newChoice: {
+                    title: '',
+                    reason: '',
+                    weight: null
+                },
                 choices: [...prevState.choices, this.state.newChoice]
             }
         })
@@ -112,24 +111,44 @@ class FormScreen extends React.Component {
         }
         console.log(this.state.choices)
         return this.state.choices.map ((choice, index) => {
-            return <ChoiceCard choice={choice} key={index} index={index}/>
+            return <ChoiceCard choice={choice} key={index} index={index} deleteChoice={this.deleteChoiceHandler}/>
         })
     }
 
-    handleSubmit = () => {
-        console.log('Submitting')
+    deleteChoiceHandler = (obj) => {
+        this.setState((prevState) => {
+          return ({
+            choices: prevState.choices.filter(function(item) {
+              return item !== obj
+          })
+          
+          })
+        })
+      }
+
+      // if user is logged in, should POST question to user, then POST choices to the question. When choices come back, calculate answer, POST answer, update state, update STORE with new decision object? 
+      //if user is not logged in, calculate answer, update state
+
+      //navigate to decision page when ready
+      handleSubmitforDecision = (props) => {
+        if (props.user.id !== null) {
+            console.log(props.user.id)
+        } else {
+            console.log('user is not logged in')
+        }
+        // const user = props.user
+        // const userId=props.user.id
+        // let answer = Calculator.getDecision(this.state.choices)
+        // this.setState(prevState => {
+        //     return {
+        //         ...prevState,
+        //         decision: answer
+        //     }
+        // })
+        // console.log('Submitting')
     }
 
-    // deleteChoiceHandler = (obj) => {
-    //     this.setState((prevState) => {
-    //       return ({
-    //         options: prevState.choices.filter(function(item) {
-    //           return item !== obj
-    //       })
-          
-    //       })
-    //     })
-    //   }
+    /////////////////////////////////////////////////////////
 
 
   render() {
@@ -160,7 +179,7 @@ class FormScreen extends React.Component {
             /> : null
             }
             <View >
-                <TouchableOpacity onPress={this.handleSubmit} title='SUBMIT FOR LATER'><Button title='Submit'/></TouchableOpacity>
+                <Button title='Submit'onPress={() => this.handleSubmitforDecision(this.props)}/>
                 <Button title='To Decision Navigate' onPress={() => this.props.navigation.navigate('Decision')}/>
             </View>
             
@@ -190,5 +209,14 @@ FormScreen.navigationOptions = navData => {
       headerTitle: 'New Question'
     };
   };
+
+  const mapStatetoProps = state => {
+      return {
+        isLoggedIn: state.isLoggedIn,
+        user: state.user
+    }
+  }
   
-export default FormScreen;
+
+
+export default connect(mapStatetoProps)(FormScreen);
