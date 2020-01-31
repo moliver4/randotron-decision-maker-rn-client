@@ -8,6 +8,7 @@ const INITAL_STATE = {
         newQuestion: {
             title: ''
         },
+        choices: [],
         newChoice: {
             title: '',
             reason: '',
@@ -22,6 +23,7 @@ class FormScreen extends React.Component {
         newQuestion: {
             title: ''
         },
+        choices: [],
         newChoice: {
             title: '',
             reason: '',
@@ -91,15 +93,28 @@ class FormScreen extends React.Component {
         this.setState(INITAL_STATE)
     }
 
-    submitChoice = () => {
-        console.log('submitting Choice, will add to Store')
+    submitAddChoice = () => {
+        if (this.state.newChoice.title.length < 1) {
+            return
+        }
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                isEditing: false,
+                choices: [...prevState.choices, this.state.newChoice]
+            }
+        })
     }
 
-    // renderChoices = (choices) => {
-    //     return choices.map ((choice, index) => {
-    //         return <ChoiceCard choice={choice} key={index} index={index}/>
-    //     })
-    // }
+    renderChoices = () => {
+        if (this.state.choices.length < 1) {
+            return
+        }
+        console.log(this.state.choices)
+        return this.state.choices.map ((choice, index) => {
+            return <ChoiceCard choice={choice} key={index} index={index}/>
+        })
+    }
 
     handleSubmit = () => {
         console.log('Submitting')
@@ -132,8 +147,7 @@ class FormScreen extends React.Component {
                     placeholderTextColor='grey'
                 />
             </View>
-        
-            <View><Text>Choices will go here</Text></View>
+            {this.renderChoices()}
 
             <Button title='Add Choice' onPress={this.addChoice}/>
             {isEditing ? <ChoiceForm 
@@ -141,6 +155,8 @@ class FormScreen extends React.Component {
                 titleChange={this.handleChoiceTitleChange} 
                 reasonChange={this.handleChoiceReasonChange} 
                 weightChange={this.handleChoiceWeightChange}
+                cancelAddChoice={this.cancelAddChoice}
+                submitAddChoice={this.submitAddChoice}
             /> : null
             }
             <View >
