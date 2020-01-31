@@ -3,11 +3,22 @@ import { View, Text, Button, StyleSheet } from 'react-native';
 import * as Google from "expo-google-app-auth";
 import {login} from '../store/actions/userAuth'
 import { connect } from 'react-redux'
+import ServerAdapter from '../services/ServerAdapter'
 // import { GoogleSignIn } from 'expo-google-sign-in';
 
 import { IOS_CLIENT_ID } from '../config'
 
 class LoginScreen extends React.Component {
+
+  fetchLogin = (email, name) => {
+    let prom = ServerAdapter.fetchUser({email: email, name: name})
+    prom.then(data => this.handleUserData(data))
+  }
+
+  handleUserData = (data) => {
+    console.log(data)
+  }
+
   signInWithGoogle = async () => {
     try {
       const result = await Google.logInAsync({
@@ -17,7 +28,7 @@ class LoginScreen extends React.Component {
 
       if (result.type === "success") {
         console.log("LoginScreen.js.js 21 | ", result);
-        this.props.login(result.user.email, result.user.givenName, result.accessToken)
+        this.fetchLogin(result.user.email, result.user.givenName)
         this.props.navigation.navigate("Dashboard"); //after Google login redirect to Profile
         return result.accessToken;
       } else {
