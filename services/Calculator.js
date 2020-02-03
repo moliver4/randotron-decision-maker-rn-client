@@ -1,7 +1,7 @@
 //class for logic to generate answers
 class Calculator {
 
-    static getDecision = (question, choices) => {
+    static getDecision = (choices) => {
         let weighted
         choices.forEach(choice => {
             if (choice.weight > 0) {
@@ -11,7 +11,9 @@ class Calculator {
         if (weighted) {
             console.log('weighted')
         }
-        return choices.first
+        return 0
+        //returns an index number
+        //currently hard coded for test purposes!
         
     }
 

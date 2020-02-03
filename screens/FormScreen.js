@@ -17,8 +17,7 @@ const INITIAL_STATE = {
             reason: '',
             weight: null
         },
-        decision: {}
-
+        decision: null
     }
 
 class FormScreen extends React.Component {
@@ -120,8 +119,7 @@ class FormScreen extends React.Component {
           return ({
             choices: prevState.choices.filter(function(item) {
               return item !== obj
-          })
-          
+            }) 
           })
         })
       }
@@ -132,7 +130,22 @@ class FormScreen extends React.Component {
       //navigate to decision page when ready
       handleSubmitforDecision = (props) => {
         if (props.user.id !== null) {
-            console.log(props.user.id)
+            console.log('logged in posting question', props.user.id)
+            const body = {
+                title: this.state.newQuestion.title,
+                user_id: props.user.id,
+                choices: this.state.choices
+            }
+            let promise = ServerAdapter.addQuestion(body)
+            promise.then(data => console.log('data from fetch', data))
+            let answerIndex = Calculator.getDecision(this.state.choices)
+            console.log('answerIndex', answerIndex)
+            // this.setState(prevState => {
+            //     return {
+            //         ...prevState,
+            //         decision: choices[answerIndex]
+            //     }
+            // })
         } else {
             console.log('user is not logged in')
         }
