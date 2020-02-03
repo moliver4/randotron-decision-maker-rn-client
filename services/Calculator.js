@@ -11,7 +11,7 @@ class Calculator {
         if (weighted) {
             console.log('weighted')
         }
-        return 0
+        return choices[0]
         //returns an index number
         //currently hard coded for test purposes!
         

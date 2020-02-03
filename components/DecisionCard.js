@@ -2,12 +2,12 @@ import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 
 
-const DecisionCard = props => {
+const DecisionCard = decision => {
 
   return (
     <View style={styles.container}>
         <Text>
-            Your Decision Here
+            {decision.title}
         </Text>
     </View>
   );

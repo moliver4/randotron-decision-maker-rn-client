@@ -1,4 +1,5 @@
-import { LOGIN, LOGOUT, LOAD_QUESTIONS } from '../actions/userAuth';
+import { LOGIN, LOGOUT, GUEST } from '../actions/userAuth';
+import { LOAD_QUESTIONS } from '../actions/questions';
 
 const initialState = {
   isLoggedIn: false,
@@ -11,7 +12,7 @@ const initialState = {
 };
 
  const reducer = (state = initialState, action) => {
-  console.log(action)
+
   switch (action.type) {
     case LOGIN:
       return {
@@ -22,6 +23,7 @@ const initialState = {
         }
       };
     case LOAD_QUESTIONS:
+      console.log('IM HEREEEEEEEEEEEEE', action.questions)
       return {
         ...state,
         questions: action.questions

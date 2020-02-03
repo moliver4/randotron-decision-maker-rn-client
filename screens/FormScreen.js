@@ -45,19 +45,6 @@ class FormScreen extends React.Component {
             }
        })
    }
-
-   handleChoiceReasonChange = (text) => {
-    this.setState(prevState => {
-         return {
-             ...prevState,
-             newChoice: {
-                 ...prevState.newChoice,
-                 reason: text
-             }
-         }
-    })
-}
-
     handleChoiceWeightChange = (text) => {
        let num = parseInt(text)
         if (num) {
@@ -110,7 +97,7 @@ class FormScreen extends React.Component {
         }
         console.log(this.state.choices)
         return this.state.choices.map ((choice, index) => {
-            return <ChoiceCard choice={choice} key={index} index={index} deleteChoice={this.deleteChoiceHandler}/>
+            return <ChoiceCard choice={choice} key={index} index={index} deleteChoice={this.deleteChoiceHandler} decision={this.state.decision}/>
         })
     }
 
@@ -138,7 +125,7 @@ class FormScreen extends React.Component {
                 choices: this.state.choices
             }
             let promise = ServerAdapter.addQuestion(body)
-            promise.then(data => this.findAnswer(data.choices))
+            promise.then(data => this.findAnswer(data))
         } else {
             console.log('user is not logged in')
         }
@@ -154,16 +141,31 @@ class FormScreen extends React.Component {
         // console.log('Submitting')
     }
 
-    findAnswer(choices) {
-        let answerIndex = Calculator.getDecision(this.state.choices)
-        console.log('answerIndex', answerIndex)
-        this.setState(prevState => {
+    findAnswer=(data) => {
+        let final = Calculator.getDecision(data.choices)
+        let body = {
+            question_id: data.question.id,
+            choice_id: final.id
+        }
+        let prom = ServerAdapter.addDecision(body)
+        prom.then(dec => this.setState(prevState => {
             return {
                 ...prevState,
-                decision: choices[answerIndex]
+                question: data.question,
+                choices: data.choices,
+                decision: dec
             }
+        }, () => this.props.navigation.navigate('Decision', {
+            decision: this.state.decision,
+            choices: this.state.choices,
+            question: this.state.question
         })
+     ))
     }
+
+    // newAnswer = () => {
+        
+    // }
     /////////////////////////////////////////////////////////
 
 
@@ -188,7 +190,6 @@ class FormScreen extends React.Component {
             {isEditing ? <ChoiceForm 
                 newChoice={newChoice} 
                 titleChange={this.handleChoiceTitleChange} 
-                reasonChange={this.handleChoiceReasonChange} 
                 weightChange={this.handleChoiceWeightChange}
                 cancelAddChoice={this.cancelAddChoice}
                 submitAddChoice={this.submitAddChoice}

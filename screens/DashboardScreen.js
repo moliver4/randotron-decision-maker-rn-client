@@ -6,6 +6,14 @@ import { connect } from 'react-redux'
 
 
 class DashboardScreen extends React.Component {
+
+    showQuestions = questions=> {
+      console.log('trying to show all questions on desh', questions)
+      return questions.map (question => {
+        return <Text>{question.question.title}</Text>
+      })
+    }
+
     render () {
         return (
             <View style={styles.container} >
@@ -13,6 +21,9 @@ class DashboardScreen extends React.Component {
                     {this.props.isLoggedIn ? this.props.user.name : 'hello'}
                     Dashboard SCREEN
                 </Text>
+                <View>
+                  {this.showQuestions(this.props.questions)}
+                </View>
                 <Button title="should move me forward from Dash to Decision Screen" onPress={() => this.props.navigation.navigate('Decision')}/>
             </View>
         )

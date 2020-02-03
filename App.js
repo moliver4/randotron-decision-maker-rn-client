@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import MainApp from './MainApp'
-import reducer from './store/reducers/userAuth'
+import reducer from './store/reducers/mainReducer'
 
 const store = createStore(reducer)
 

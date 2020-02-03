@@ -2,12 +2,12 @@ import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 
 
-const QuestionCard = props => {
+const QuestionCard = question => {
 
   return (
     <View style={styles.container}>
         <Text>
-            Your Question Here
+            {question.title}
         </Text>
     </View>
   );
