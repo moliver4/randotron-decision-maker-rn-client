@@ -17,8 +17,12 @@ class LoginScreen extends React.Component {
   }
 
   handleUserData = (data) => {
+    console.log(data)
     this.props.login(data.user.email, data.user.name, data.user.id)
-    this.props.loadQuestions(data.questions)
+    if (data.questions.length > 0) {
+      this.props.loadQuestions(data.questions)
+    }
+      
   }
 
   signInWithGoogle = async () => {

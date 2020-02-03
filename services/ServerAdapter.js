@@ -1,7 +1,7 @@
-const USERSURL = 'http://192.168.0.19:3000/users'
-const QUESTIONSURL = 'http://10.137.6.122:3000/questions'
-const CHOICESURL = 'http://10.137.6.122:3000/choices'
-const DECISIONSURL = 'http://10.137.6.122:3000/decisions'
+const USERSURL = 'http://10.137.4.119:3000/users'
+const QUESTIONSURL = 'http://10.137.4.119:3000/questions'
+const CHOICESURL = 'http://10.137.4.119:3000/choices'
+const DECISIONSURL = 'http://10.137.4.119:3000/decisions'
 
 
  class ServerAdapter {
@@ -16,12 +16,12 @@ const DECISIONSURL = 'http://10.137.6.122:3000/decisions'
             body: JSON.stringify(body)
             })
             .then(res => res.json())
-            .catch(err=> console.log(err))
+            .catch(err=> console.log('error on server', err))
   }
 
   //adding field
   static addQuestion(body){
-    return fetch(`${QUESTIONS}`, {
+    return fetch(`${QUESTIONSURL}`, {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',

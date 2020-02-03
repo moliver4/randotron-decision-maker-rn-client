@@ -129,6 +129,7 @@ class FormScreen extends React.Component {
 
       //navigate to decision page when ready
       handleSubmitforDecision = (props) => {
+          console.log(this.state.choices)
         if (props.user.id !== null) {
             console.log('logged in posting question', props.user.id)
             const body = {
@@ -137,15 +138,7 @@ class FormScreen extends React.Component {
                 choices: this.state.choices
             }
             let promise = ServerAdapter.addQuestion(body)
-            promise.then(data => console.log('data from fetch', data))
-            let answerIndex = Calculator.getDecision(this.state.choices)
-            console.log('answerIndex', answerIndex)
-            // this.setState(prevState => {
-            //     return {
-            //         ...prevState,
-            //         decision: choices[answerIndex]
-            //     }
-            // })
+            promise.then(data => this.findAnswer(data.choices))
         } else {
             console.log('user is not logged in')
         }
@@ -161,6 +154,16 @@ class FormScreen extends React.Component {
         // console.log('Submitting')
     }
 
+    findAnswer(choices) {
+        let answerIndex = Calculator.getDecision(this.state.choices)
+        console.log('answerIndex', answerIndex)
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                decision: choices[answerIndex]
+            }
+        })
+    }
     /////////////////////////////////////////////////////////
 
 
