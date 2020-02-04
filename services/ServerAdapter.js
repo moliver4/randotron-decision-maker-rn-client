@@ -6,7 +6,7 @@ const DECISIONSURL = 'http://10.137.3.6:3000/decisions'
 
  class ServerAdapter {
   static fetchUser(body){
-      console.log(body)
+      // console.log(body)
     return fetch(`${USERSURL}`, {
             method: 'POST',
             headers: {

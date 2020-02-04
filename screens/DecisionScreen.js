@@ -27,7 +27,7 @@ const DecisionScreen= ({ navigation, currentQuestion, loadCurrentQuestion, addQu
 
     const reRun = () => {
       console.log('running again!')
-      let final = Calculator.reRun(choices)
+      let final = Calculator.getDecision(choices)
       let body = {
           question_id: question.id,
           choice_id: final.id

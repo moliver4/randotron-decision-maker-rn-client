@@ -5,7 +5,7 @@ import DefaultText from './DefaultText';
 
 
 const MiniCard = ( props ) => {
-    console.log(props)
+    // console.log(props)
     //props have index, onselect question, question object with all the info
     return (
         <View style={styles.card}>

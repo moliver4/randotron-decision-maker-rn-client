@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, FlatList, Text,  StyleSheet } from 'react-native';
+import DefaultText from './DefaultText';
 
 import MiniCard from './MiniCard';
 
@@ -15,7 +16,9 @@ const QuestionList = props => {
           props.navigation.navigate({
             routeName: 'DecisionScreen',
             params: {
-              DecisionId: itemData.item.decision.id
+              oldDecision: true,
+              question: itemData.question,  
+              decisionId: itemData.item.decision.id
             }
           });
         }}
@@ -23,15 +26,11 @@ const QuestionList = props => {
     );
   };
 
-//   return (
-//       <View>
-//           <Text> Hello???</Text>
-//       </View>
-//   )
-
   return (
     <View style={styles.list}>
-        <Text> Hello??</Text>
+        <DefaultText>
+            {props.questions.length <1 ? 'No decisions yet! Let us help you make some!': 'Here are your previous decisions' } 
+        </DefaultText>
       <FlatList
         data={props.questions}
         keyExtractor={(item, index) => `question-${index}`}
