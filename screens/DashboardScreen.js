@@ -9,22 +9,14 @@ import ServerAdapter from '../services/ServerAdapter'
 
 class DashboardScreen extends React.Component {
 
-
-    showQuestions = questions=> {
-        return <QuestionList questions={questions} navigation={this.props.navigation}/>
-    }
-
     render () {
         return (
-            <View style={styles.container} >
+            <View style={styles.container}>
                 <Text>
-                    {this.props.isLoggedIn ? this.props.user.name : 'hello'}
-                    Dashboard SCREEN
+                    {this.props.isLoggedIn ? `Hello ${ this.props.user.name }` : 'hello'}
                 </Text>
-                <View>
-                  {this.showQuestions(this.props.questions)}
-                </View>
-                <Button title="should move me forward from Dash to Decision Screen" onPress={() => this.props.navigation.navigate('Decision')}/>
+                <QuestionList questions={this.props.questions} navigation={this.props.navigation}/>
+          
             </View>
         )
     }
@@ -54,6 +46,8 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
+      marginTop: 40,
+      marginBottom: 50
     }
   });
   

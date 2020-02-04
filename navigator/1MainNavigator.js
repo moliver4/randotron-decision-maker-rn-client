@@ -24,6 +24,7 @@ import Colors from '../constants/Colors';
 
 const defaultNavOptions = {
   headerStyle: {
+    marginBottom: 5,
     backgroundColor: Platform.OS === 'android' ? Colors.primary : ''
   },
   headerTitleStyle: {

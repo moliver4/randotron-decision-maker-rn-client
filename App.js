@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { StyleSheet, SafeAreaView } from 'react-native';
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import MainApp from './MainApp'
@@ -10,11 +11,14 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}> 
-        <MainApp/>
+      
+          <MainApp/>
+ 
       </Provider>
     )
   }
 }
+
 
 
 export default App

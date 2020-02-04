@@ -4,23 +4,18 @@ import { View, FlatList, Text,  StyleSheet } from 'react-native';
 import MiniCard from './MiniCard';
 
 const QuestionList = props => {
-    // console.log('ORIGINAL PROP QUESTIONS', props.questions)
+
   const renderQuestionItem = itemData => {
-    //   console.log('things im getting', itemData)
-    //   return(
-    //       <Text>
-    //           HELLO?????
-    //           {itemData.item.question.title}
-    //       </Text>
-    //   )
+    //itemData has an index and an item (question object)
     return (
       <MiniCard
-        question={itemData.item.question}
+        question={itemData.item}
+        index={itemData.index}
         onSelectQuestion={() => {
           props.navigation.navigate({
             routeName: 'DecisionScreen',
             params: {
-              QuestionId: question.decision.id
+              DecisionId: itemData.item.decision.id
             }
           });
         }}
@@ -41,18 +36,19 @@ const QuestionList = props => {
         data={props.questions}
         keyExtractor={(item, index) => `question-${index}`}
         renderItem={renderQuestionItem}
-        
+        style={{ width: '100%' }}
       />
     </View>
   );
 };
-// style={{ width: '100%' }}
+
 const styles = StyleSheet.create({
   list: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 15
+
+    marginTop: 20
   }
 });
 
