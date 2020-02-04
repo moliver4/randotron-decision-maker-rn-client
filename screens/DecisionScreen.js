@@ -68,9 +68,7 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
       } 
     }
     const handleUserData = (data) => {
-      if (data.questions.length > 0) {
-        loadQuestions(data.questions)
-      }
+      loadQuestions(data.questions)
     }
 
 
