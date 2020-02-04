@@ -187,11 +187,7 @@ class FormScreen extends React.Component {
         }
         this.props.loadCurrentQuestion(body)
         this.props.navigation.navigate('Decision', {
-            // decision: this.state.decision,
-            // choices: this.state.choices,
-            // question: this.state.question,
-            clearForm: this.clearForm,
-            // reRun: this.reRun
+            clearForm: this.clearForm
         })
         
     }
