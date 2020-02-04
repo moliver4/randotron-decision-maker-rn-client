@@ -128,7 +128,7 @@ class FormScreen extends React.Component {
       //navigate to decision page when ready
       handleSubmitforDecision = (props) => {
         if(this.state.choices.length < 2 ) {
-            console.log('fuck you im not gunna work')
+
             return
         }
         if (props.user.id !== null) {
