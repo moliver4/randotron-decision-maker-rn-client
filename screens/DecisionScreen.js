@@ -6,34 +6,47 @@ import QuestionCard from '../components/QuestionCard'
 import Calculator from '../services/Calculator'
 import ServerAdapter from '../services/ServerAdapter'
 import { connect } from 'react-redux'
-import { addQuestion, loadCurrentQuestion } from '../store/actions/questions'
+import { addQuestion, loadCurrentQuestion, loadQuestions } from '../store/actions/questions'
 
 
-const DecisionScreen= ({ navigation, currentQuestion, loadCurrentQuestion, addQuestion } ) => {
+const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurrentQuestion, addQuestion, loadQuestions } ) => {
+  console.log('current question object on Decision screen', currentQuestion)
+    const isOld = navigation.getParam('oldDecision', false)
+    //if it is old, then load the current question in store with the question object given to us 
 
-    const clearForm = navigation.getParam('clearForm', 'nothing')
-    console.log('current question object on Decision screen', currentQuestion)
-    const choices = currentQuestion.choices
-    const question = currentQuestion.question
-    const decision = currentQuestion.decision
-    const decisionID = decision.id
-    const decisionChoice= decision.choice
+      const question = currentQuestion.question
+      const choices = currentQuestion.choices
+      const decision = currentQuestion.decision
+      const decisionID = decision.id
+      const decisionChoice= decision.choice
+      const clearForm = navigation.getParam('clearForm', 'nothing')
+  
+
 
     const renderChoices = () => {
       return choices.map ((choice, index) => {
-          return <ChoiceCard choice={choice} key={index} index={index} />
+          return <ChoiceCard choice={choice} key={`choice-${index}`} index={index} />
       })
     }
 
     const reRun = () => {
       console.log('running again!')
       let final = Calculator.getDecision(choices)
-      let body = {
-          question_id: question.id,
-          choice_id: final.id
+      if (isLoggedIn) {
+        let body = {
+            question_id: question.id,
+            choice_id: final.id
+        }
+        let prom = ServerAdapter.editDecision(decisionID, body)
+        prom.then(dec => updateDecision(dec))
+      } else {
+        //if user is not logged in, skip server step, just update with new object with choice key
+        //update to 'current question' in store
+        let newDec = {
+          choice: final
+        }
+        updateDecisionc(newDec)
       }
-      let prom = ServerAdapter.editDecision(decisionID, body)
-      prom.then(dec => updateDecision(dec))
   }
 
 
@@ -44,27 +57,37 @@ const DecisionScreen= ({ navigation, currentQuestion, loadCurrentQuestion, addQu
         decision: dec
       }
       loadCurrentQuestion(body)
+      getUpdate()
     }
 
-    const handleNewQuestion = () => {
-      //this should persist the question into the STATE!! will need to think of a way to update currentQuestion then use that to add to questions in state
-      addQuestion(currentQuestion)
-      clearForm()
-      navigation.navigate('Form')
- 
+    //If a user is logged in, will send GET request for new user questions list and repopulate list of questions
+    const getUpdate = () => {
+      if (isLoggedIn) {
+        let promise = ServerAdapter.getSignedInUser(user.id)
+        promise.then(data => handleUserData(data))
+      } 
+    }
+    const handleUserData = (data) => {
+      if (data.questions.length > 0) {
+        loadQuestions(data.questions)
+      }
     }
 
 
     const deleteQuestion = () => {
-      console.log('deleteing this question', question.id)
+      console.log('deleting this question', question.id)
       let prom = ServerAdapter.deleteQuestion(question.id)
-      prom.then(data => navigateToForm(data))
+      prom.then(data => navigateBack(data))
     }
 
-    const navigateToForm=(data) => {
+    const navigateBack=(data) => {
+      //whenever we navigate to form, we want to get update
       console.log('question deleted, going back to form')
-      clearForm()
-      navigation.navigate('Form')
+      getUpdate()
+      if (!isOld) {
+        clearForm()
+      }
+      navigation.goBack()
     }
 
     return (
@@ -74,9 +97,9 @@ const DecisionScreen= ({ navigation, currentQuestion, loadCurrentQuestion, addQu
           <QuestionCard question= {question}/>
           {renderChoices()}
           <DecisionCard choice={decisionChoice} />
-          <Button title="Delete Everything" onPress={deleteQuestion}/>
+          {isLoggedIn? <Button title="Delete This Question" onPress={deleteQuestion}/> : null }
           <Button title='ReRun' onPress={reRun}/>
-          <Button title="Save and New Question" onPress={handleNewQuestion}/>
+          {isOld? null : <Button title="New Question" onPress={navigateBack}/>}
       </View>
     );
 }
@@ -97,18 +120,21 @@ DecisionScreen.navigationOptions = navData => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchtoProps = dispatch => {
   return {
-    addQuestion: (question) => dispatch(addQuestion(question)),
-    loadCurrentQuestion: (question) => dispatch(loadCurrentQuestion(question))
-  }
+      loadQuestions: (questions) => dispatch(loadQuestions(questions)), 
+      addQuestion: (question) => dispatch(addQuestion(question)),
+      loadCurrentQuestion: (question) => dispatch(loadCurrentQuestion(question))
+    }
 }
 
 const mapStatetoProps = state => {
   return {
+    isLoggedIn: state.isLoggedIn,
+    user: state.user,
     currentQuestion: state.currentQuestion
   }
 }
 
 
-export default connect(mapStatetoProps, mapDispatchToProps)(DecisionScreen)
+export default connect(mapStatetoProps, mapDispatchtoProps)(DecisionScreen)

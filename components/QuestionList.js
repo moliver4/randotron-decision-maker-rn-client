@@ -14,11 +14,9 @@ const QuestionList = props => {
         index={itemData.index}
         onSelectQuestion={() => {
           props.navigation.navigate({
-            routeName: 'DecisionScreen',
+            routeName: 'Decision',
             params: {
               oldDecision: true,
-              question: itemData.question,  
-              decisionId: itemData.item.decision.id
             }
           });
         }}

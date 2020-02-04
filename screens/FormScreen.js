@@ -5,7 +5,7 @@ import ChoiceCard from '../components/ChoiceCard'
 import { connect } from 'react-redux'
 import Calculator from '../services/Calculator'
 import ServerAdapter from '../services/ServerAdapter'
-import { addQuestion, loadCurrentQuestion } from '../store/actions/questions'
+import { addQuestion, loadCurrentQuestion, loadQuestions } from '../store/actions/questions'
 
 const INITIAL_STATE = {
         isEditing: false,
@@ -140,16 +140,6 @@ class FormScreen extends React.Component {
         } else {
             console.log('user is not logged in')
         }
-        // const user = props.user
-        // const userId=props.user.id
-        // let answer = Calculator.getDecision(this.state.choices)
-        // this.setState(prevState => {
-        //     return {
-        //         ...prevState,
-        //         decision: answer
-        //     }
-        // })
-        // console.log('Submitting')
     }
 
     clearForm =() => {
@@ -175,16 +165,29 @@ class FormScreen extends React.Component {
                 choices: data.choices,
                 decision: decision
             }
-        }, () => this.handleFinalNavigation())
+        }, () => this.reloadQuestions())
      )
     }
 
+    reloadQuestions = () => {
+        let promise = ServerAdapter.getSignedInUser(this.props.user.id)
+        promise.then(data => this.handleUserData(data))
+    }
+
+    handleUserData = (data) => {
+        if (data.questions.length > 0) {
+          this.props.loadQuestions(data.questions)
+        }
+        this.handleFinalNavigation()
+      }
+
+    //can be used regardless of if user is signed in or not
     handleFinalNavigation = () => {
         const body = {
             question: this.state.question,
             choices: this.state.choices,
             decision: this.state.decision
-        }
+        }  
         this.props.loadCurrentQuestion(body)
         this.props.navigation.navigate('Decision', {
             clearForm: this.clearForm
@@ -263,6 +266,7 @@ FormScreen.navigationOptions = navData => {
 
   const mapDispatchtoProps = dispatch => {
     return {
+        loadQuestions: (questions) => dispatch(loadQuestions(questions)), 
         addQuestion: (question) => dispatch(addQuestion(question)),
         loadCurrentQuestion: (question) => dispatch(loadCurrentQuestion(question))
       }

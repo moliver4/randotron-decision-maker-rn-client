@@ -19,6 +19,19 @@ const DECISIONSURL = 'http://10.137.3.6:3000/decisions'
             .catch(err=> console.log('error on server', err))
   }
 
+  static getSignedInUser(id){
+    // console.log(body)
+  return fetch(`${USERSURL}/${id}`, {
+          method: 'GET',
+          headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+          }
+          })
+          .then(res => res.json())
+          .catch(err=> console.log('error on server', err))
+  }
+
   //adding field
   static newQuestion(body){
     return fetch(`${QUESTIONSURL}`, {

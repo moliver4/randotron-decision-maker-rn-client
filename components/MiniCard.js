@@ -2,14 +2,19 @@ import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import DefaultText from './DefaultText';
-
+import { connect } from 'react-redux'
+import { loadCurrentQuestion} from '../store/actions/questions'
 
 const MiniCard = ( props ) => {
     // console.log(props)
     //props have index, onselect question, question object with all the info
+    const handleSelectQuestion = () => {
+        props.loadCurrentQuestion(props.question)
+        props.onSelectQuestion()
+    }
     return (
         <View style={styles.card}>
-            <TouchableOpacity onPress={() => console.log('im pressedddd AF')}> 
+            <TouchableOpacity onPress={handleSelectQuestion}> 
                 <View>
                     <View style={{...styles.row, ...styles.header }}>
                 
@@ -76,4 +81,10 @@ const styles = StyleSheet.create({
 
   });
 
-export default MiniCard;
+  const mapDispatchtoProps = dispatch => {
+    return {
+        loadCurrentQuestion: (question) => dispatch(loadCurrentQuestion(question))
+      }
+  }
+
+export default connect(null, mapDispatchtoProps)(MiniCard);
