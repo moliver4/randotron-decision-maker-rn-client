@@ -17,13 +17,11 @@ class LoginScreen extends React.Component {
   }
 
   handleUserData = (data) => {
-    console.log(data.user.email)
     if (data.questions.length > 0) {
       console.log('data questions', data.questions)
       this.props.loadQuestions(data.questions)
     }
-    setTimeout(()=>this.props.login(data.user.email, data.user.name, data.user.id), 3000)
-      
+    this.props.login(data.user.email, data.user.name, data.user.id)
   }
  
 
@@ -66,7 +64,7 @@ class LoginScreen extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    login: (email, name, token) => dispatch(login(email, name, token)),
+    login: (email, name, id) => dispatch(login(email, name, id)),
     loadQuestions: (questions) => dispatch(loadQuestions(questions))
   }
 }

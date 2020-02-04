@@ -3,14 +3,20 @@ import { View, Text, StyleSheet, Button} from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButton';
 import { connect } from 'react-redux'
-
+import {loadQuestions} from '../store/actions/questions'
+import ServerAdapter from '../services/ServerAdapter'
 
 class DashboardScreen extends React.Component {
 
+    // componentDidMount = () => {
+    //   console.log('mounting component!!!')
+    //   let prom = ServerAdapter.fetchUser({email: this.props.user.email})
+    //   prom.then(data => this.props.loadQuestions(data.questions))
+    // }
+
     showQuestions = questions=> {
-      console.log('trying to show all questions on desh', questions)
-      return questions.map (question => {
-        return <Text>{question.question.title}</Text>
+      return questions.map ((question, index) => {
+        return <Text key={index}>{question.question.title}</Text>
       })
     }
 
@@ -64,5 +70,11 @@ const mapStateToProps = state => {
         questions: state.questions
     }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    loadQuestions: (questions) => dispatch(loadQuestions(questions))
+  }
+}
   
-  export default connect(mapStateToProps)(DashboardScreen)
+  export default connect(mapStateToProps, mapDispatchToProps)(DashboardScreen)

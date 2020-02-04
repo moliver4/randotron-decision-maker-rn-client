@@ -17,6 +17,10 @@ class Calculator {
         
     }
 
+    static reRun = (choices) => {
+        return choices[1]
+    }
+
 
 
 

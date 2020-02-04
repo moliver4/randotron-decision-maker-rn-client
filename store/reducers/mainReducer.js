@@ -1,14 +1,15 @@
 import { LOGIN, LOGOUT, GUEST } from '../actions/userAuth';
-import { LOAD_QUESTIONS } from '../actions/questions';
+import { LOAD_QUESTIONS, ADD_QUESTION } from '../actions/questions';
 
 const initialState = {
   isLoggedIn: false,
   user: {
     name: '',
     email: '',
-    token: null
+    id: null
   },
-  questions: []
+  questions: [],
+  currentQuestion: {}
 };
 
  const reducer = (state = initialState, action) => {
@@ -23,11 +24,16 @@ const initialState = {
         }
       };
     case LOAD_QUESTIONS:
-      console.log('IM HEREEEEEEEEEEEEE', action.questions)
       return {
         ...state,
         questions: action.questions
       } 
+    case ADD_QUESTION: 
+      console.log('ADDING QUESTION IN REDUCER', action.question)
+      return {
+        ...state,
+        questions: [...state.questions, action.question]
+      }
     case LOGOUT:
       return initialState;
     default:

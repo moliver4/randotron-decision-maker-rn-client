@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 
 
-const QuestionCard = question => {
+const QuestionCard = ( { question } ) => {
 
   return (
     <View style={styles.container}>

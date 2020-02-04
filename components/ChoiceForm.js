@@ -18,15 +18,6 @@ const ChoiceForm = ( { newChoice, titleChange, reasonChange, weightChange, submi
                         placeholder='Enter Choice'
                     />
                 </View>
-                <View> 
-                   
-                    <TextInput
-                        onChangeText={text=>reasonChange(text)}
-                        name='reason'
-                        value={newChoice.reason}
-                        placeholder='Enter a Reason (Optional)'
-                    />
-                </View>
             
                 
                 <View style={{ alignItems: "center"}}> 

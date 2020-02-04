@@ -14,7 +14,6 @@ const INITIAL_STATE = {
         choices: [],
         newChoice: {
             title: '',
-            reason: '',
             weight: null
         },
         decision: null
@@ -23,6 +22,9 @@ const INITIAL_STATE = {
 class FormScreen extends React.Component {
     state = INITIAL_STATE
 
+    componentDidMount=() => {
+        console.log('FORM MOUNTING')
+    }
     handleNewQuestionChange=(text) => {
         this.setState(prevState => {
              return {
@@ -70,7 +72,16 @@ class FormScreen extends React.Component {
     }
 
     cancelAddChoice = () => {
-        this.setState(INITIAL_STATE)
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                isEditing: false,
+                newChoice: {
+                    title: '',
+                    weight: null
+                }
+            }
+        })
     }
 
     submitAddChoice = () => {
@@ -83,7 +94,6 @@ class FormScreen extends React.Component {
                 isEditing: false,
                 newChoice: {
                     title: '',
-                    reason: '',
                     weight: null
                 },
                 choices: [...prevState.choices, this.state.newChoice]
@@ -116,13 +126,13 @@ class FormScreen extends React.Component {
 
       //navigate to decision page when ready
       handleSubmitforDecision = (props) => {
-          console.log(this.state.choices)
         if (props.user.id !== null) {
-            console.log('logged in posting question', props.user.id)
             const body = {
+                
                 title: this.state.newQuestion.title,
                 user_id: props.user.id,
                 choices: this.state.choices
+             
             }
             let promise = ServerAdapter.addQuestion(body)
             promise.then(data => this.findAnswer(data))
@@ -141,7 +151,12 @@ class FormScreen extends React.Component {
         // console.log('Submitting')
     }
 
+    clearForm =() => {
+        this.setState(INITIAL_STATE)
+    }
+
     findAnswer=(data) => {
+        console.log('posting question', data)
         let final = Calculator.getDecision(data.choices)
         let body = {
             question_id: data.question.id,
@@ -149,23 +164,46 @@ class FormScreen extends React.Component {
         }
         let prom = ServerAdapter.addDecision(body)
         prom.then(dec => this.setState(prevState => {
+            let decision = {
+                id: dec.id,
+                choice: final
+            }
             return {
                 ...prevState,
                 question: data.question,
                 choices: data.choices,
-                decision: dec
+                decision: decision
             }
         }, () => this.props.navigation.navigate('Decision', {
             decision: this.state.decision,
             choices: this.state.choices,
-            question: this.state.question
+            question: this.state.question,
+            clearForm: this.clearForm,
+            reRun: this.reRun
         })
      ))
     }
 
-    // newAnswer = () => {
-        
-    // }
+    reRun = (choices, id) => {
+        console.log('running again!')
+        let final = Calculator.reRun(choices)
+        let body = {
+            question_id: this.state.question.id,
+            choice_id: final.id
+        }
+        let prom = ServerAdapter.editDecision(id, body)
+        prom.then(dec => this.setState(prevState => {
+            let decision = {
+                id: dec.id,
+                choice: final
+            }
+            return {
+                ...prevState,
+                decision: decision
+            }
+        }, () => console.log(this.state.decision.choice)))
+    }
+
     /////////////////////////////////////////////////////////
 
 

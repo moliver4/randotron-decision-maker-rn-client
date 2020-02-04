@@ -2,12 +2,14 @@ import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 
 
-const DecisionCard = decision => {
+const DecisionCard = ( { choice } ) => {
+  console.log(choice.title)
 
   return (
     <View style={styles.container}>
         <Text>
-            {decision.title}
+            Your Answer:
+            {choice.title}
         </Text>
     </View>
   );

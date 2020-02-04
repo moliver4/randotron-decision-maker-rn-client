@@ -59,8 +59,8 @@ const DECISIONSURL = 'http://10.137.4.119:3000/decisions'
   }
    //edits
 
-  static editDecision(body){
-    return fetch(`${DECISIONSURL}/${body.id}`, {
+  static editDecision(id, body){
+    return fetch(`${DECISIONSURL}/${id}`, {
             method: 'PATCH',
             headers: {
             'Content-Type': 'application/json',
@@ -93,7 +93,6 @@ const DECISIONSURL = 'http://10.137.4.119:3000/decisions'
             })
             .then(res => res.json())
   }
-
 
 }
 
