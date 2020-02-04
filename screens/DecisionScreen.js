@@ -10,13 +10,7 @@ import { addQuestion, loadCurrentQuestion } from '../store/actions/questions'
 
 
 const DecisionScreen= ({ navigation, currentQuestion, loadCurrentQuestion, addQuestion } ) => {
-    // const decision = navigation.getParam('decision', 'nothing')
-    // const id = decision.id
-    // const winningChoice = decision.choice
 
-    // const question = navigation.getParam('question', 'nothing')
-
-    // const reRun = navigation.getParam('reRun', 'nothing')
     const clearForm = navigation.getParam('clearForm', 'nothing')
     console.log('current question object on Decision screen', currentQuestion)
     const choices = currentQuestion.choices
@@ -34,7 +28,6 @@ const DecisionScreen= ({ navigation, currentQuestion, loadCurrentQuestion, addQu
     const reRun = () => {
       console.log('running again!')
       let final = Calculator.reRun(choices)
-      console.log('new answer is here', final)
       let body = {
           question_id: question.id,
           choice_id: final.id
@@ -63,13 +56,13 @@ const DecisionScreen= ({ navigation, currentQuestion, loadCurrentQuestion, addQu
 
 
     const deleteQuestion = () => {
-      console.log('deleteing this question and stuff', question.id)
+      console.log('deleteing this question', question.id)
       let prom = ServerAdapter.deleteQuestion(question.id)
       prom.then(data => navigateToForm(data))
     }
 
     const navigateToForm=(data) => {
-      console.log('question deleted', data)
+      console.log('question deleted, going back to form')
       clearForm()
       navigation.navigate('Form')
     }
