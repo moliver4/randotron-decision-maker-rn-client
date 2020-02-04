@@ -1,5 +1,5 @@
 import { LOGIN, LOGOUT, GUEST } from '../actions/userAuth';
-import { LOAD_QUESTIONS, ADD_QUESTION } from '../actions/questions';
+import { LOAD_QUESTIONS, LOAD_CURRENT_QUESTION, ADD_QUESTION } from '../actions/questions';
 
 const initialState = {
   isLoggedIn: false,
@@ -28,6 +28,12 @@ const initialState = {
         ...state,
         questions: action.questions
       } 
+    case LOAD_CURRENT_QUESTION:
+      console.log('loading current question to store in REDUCER')
+      return {
+        ...state,
+        currentQuestion: action.question
+      }
     case ADD_QUESTION: 
       console.log('ADDING QUESTION IN REDUCER', action.question)
       return {

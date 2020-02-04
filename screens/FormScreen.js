@@ -5,6 +5,7 @@ import ChoiceCard from '../components/ChoiceCard'
 import { connect } from 'react-redux'
 import Calculator from '../services/Calculator'
 import ServerAdapter from '../services/ServerAdapter'
+import { addQuestion, loadCurrentQuestion } from '../store/actions/questions'
 
 const INITIAL_STATE = {
         isEditing: false,
@@ -134,7 +135,7 @@ class FormScreen extends React.Component {
                 choices: this.state.choices
              
             }
-            let promise = ServerAdapter.addQuestion(body)
+            let promise = ServerAdapter.newQuestion(body)
             promise.then(data => this.findAnswer(data))
         } else {
             console.log('user is not logged in')
@@ -162,7 +163,7 @@ class FormScreen extends React.Component {
             question_id: data.question.id,
             choice_id: final.id
         }
-        let prom = ServerAdapter.addDecision(body)
+        let prom = ServerAdapter.newDecision(body)
         prom.then(dec => this.setState(prevState => {
             let decision = {
                 id: dec.id,
@@ -174,35 +175,27 @@ class FormScreen extends React.Component {
                 choices: data.choices,
                 decision: decision
             }
-        }, () => this.props.navigation.navigate('Decision', {
-            decision: this.state.decision,
-            choices: this.state.choices,
-            question: this.state.question,
-            clearForm: this.clearForm,
-            reRun: this.reRun
-        })
-     ))
+        }, () => this.handleFinalNavigation())
+     )
     }
 
-    reRun = (choices, id) => {
-        console.log('running again!')
-        let final = Calculator.reRun(choices)
-        let body = {
-            question_id: this.state.question.id,
-            choice_id: final.id
+    handleFinalNavigation = () => {
+        const body = {
+            question: this.state.question,
+            choices: this.state.choices,
+            decision: this.state.decision
         }
-        let prom = ServerAdapter.editDecision(id, body)
-        prom.then(dec => this.setState(prevState => {
-            let decision = {
-                id: dec.id,
-                choice: final
-            }
-            return {
-                ...prevState,
-                decision: decision
-            }
-        }, () => console.log(this.state.decision.choice)))
+        this.props.loadCurrentQuestion(body)
+        this.props.navigation.navigate('Decision', {
+            // decision: this.state.decision,
+            // choices: this.state.choices,
+            // question: this.state.question,
+            clearForm: this.clearForm,
+            // reRun: this.reRun
+        })
+        
     }
+
 
     /////////////////////////////////////////////////////////
 
@@ -271,7 +264,14 @@ FormScreen.navigationOptions = navData => {
         user: state.user
     }
   }
+
+  const mapDispatchtoProps = dispatch => {
+    return {
+        addQuestion: (question) => dispatch(addQuestion(question)),
+        loadCurrentQuestion: (question) => dispatch(loadCurrentQuestion(question))
+      }
+  }
   
 
 
-export default connect(mapStatetoProps)(FormScreen);
+export default connect(mapStatetoProps, mapDispatchtoProps)(FormScreen);

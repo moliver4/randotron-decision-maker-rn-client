@@ -20,7 +20,7 @@ const DECISIONSURL = 'http://10.137.4.119:3000/decisions'
   }
 
   //adding field
-  static addQuestion(body){
+  static newQuestion(body){
     return fetch(`${QUESTIONSURL}`, {
             method: 'POST',
             headers: {
@@ -33,20 +33,20 @@ const DECISIONSURL = 'http://10.137.4.119:3000/decisions'
     
   }
 
-  static addChoice(body){
-    return fetch(`${CHOICESURL}`, {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-            },
-            body: JSON.stringify(body)
-            })
-            .then(res => res.json())
+  // static addChoice(body){
+  //   return fetch(`${CHOICESURL}`, {
+  //           method: 'POST',
+  //           headers: {
+  //           'Content-Type': 'application/json',
+  //           'Accept': 'application/json'
+  //           },
+  //           body: JSON.stringify(body)
+  //           })
+  //           .then(res => res.json())
     
-  }
+  // }
 
-  static addDecision(body){
+  static newDecision(body){
     return fetch(`${DECISIONSURL}`, {
             method: 'POST',
             headers: {

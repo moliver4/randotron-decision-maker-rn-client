@@ -6,19 +6,24 @@ import QuestionCard from '../components/QuestionCard'
 import Calculator from '../services/Calculator'
 import ServerAdapter from '../services/ServerAdapter'
 import { connect } from 'react-redux'
-import {loadQuestions} from '../store/actions/questions'
+import { addQuestion, loadCurrentQuestion } from '../store/actions/questions'
 
 
-const DecisionScreen= ({ navigation } ) => {
-    const decision = navigation.getParam('decision', 'nothing')
-    const id = decision.id
-    const winningChoice = decision.choice
+const DecisionScreen= ({ navigation, currentQuestion, loadCurrentQuestion, addQuestion } ) => {
+    // const decision = navigation.getParam('decision', 'nothing')
+    // const id = decision.id
+    // const winningChoice = decision.choice
 
-    const question = navigation.getParam('question', 'nothing')
+    // const question = navigation.getParam('question', 'nothing')
 
-    const reRun = navigation.getParam('reRun', 'nothing')
+    // const reRun = navigation.getParam('reRun', 'nothing')
     const clearForm = navigation.getParam('clearForm', 'nothing')
-    const choices = navigation.getParam('choices', 'nothing')
+    console.log('current question object on Decision screen', currentQuestion)
+    const choices = currentQuestion.choices
+    const question = currentQuestion.question
+    const decision = currentQuestion.decision
+    const decisionID = decision.id
+    const decisionChoice= decision.choice
 
     const renderChoices = () => {
       return choices.map ((choice, index) => {
@@ -26,14 +31,31 @@ const DecisionScreen= ({ navigation } ) => {
       })
     }
 
+    const reRun = () => {
+      console.log('running again!')
+      let final = Calculator.reRun(choices)
+      console.log('new answer is here', final)
+      let body = {
+          question_id: question.id,
+          choice_id: final.id
+      }
+      let prom = ServerAdapter.editDecision(decisionID, body)
+      prom.then(dec => updateDecision(dec))
+  }
 
-    const handleNewQuestion = () => {
-      const question_object = {
+
+    const updateDecision = (dec) => {
+      const body = {
         question: question,
         choices: choices,
-        decision: decision
+        decision: dec
       }
-      this.props.addQuestion(question_object)
+      loadCurrentQuestion(body)
+    }
+
+    const handleNewQuestion = () => {
+      //this should persist the question into the STATE!! will need to think of a way to update currentQuestion then use that to add to questions in state
+      addQuestion(currentQuestion)
       clearForm()
       navigation.navigate('Form')
  
@@ -43,10 +65,11 @@ const DecisionScreen= ({ navigation } ) => {
     const deleteQuestion = () => {
       console.log('deleteing this question and stuff', question.id)
       let prom = ServerAdapter.deleteQuestion(question.id)
-      prom.then(data => navigateToForm())
+      prom.then(data => navigateToForm(data))
     }
 
-    const navigateToForm=() => {
+    const navigateToForm=(data) => {
+      console.log('question deleted', data)
       clearForm()
       navigation.navigate('Form')
     }
@@ -57,9 +80,9 @@ const DecisionScreen= ({ navigation } ) => {
           <Text> Decision Screen</Text>
           <QuestionCard question= {question}/>
           {renderChoices()}
-          <DecisionCard choice={winningChoice} />
+          <DecisionCard choice={decisionChoice} />
           <Button title="Delete Everything" onPress={deleteQuestion}/>
-          <Button title='ReRun' onPress={() => reRun(choices, id)}/>
+          <Button title='ReRun' onPress={reRun}/>
           <Button title="Save and New Question" onPress={handleNewQuestion}/>
       </View>
     );
@@ -83,9 +106,16 @@ DecisionScreen.navigationOptions = navData => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addQuestion: (question) => dispatch(addQuestion(question))
+    addQuestion: (question) => dispatch(addQuestion(question)),
+    loadCurrentQuestion: (question) => dispatch(loadCurrentQuestion(question))
+  }
+}
+
+const mapStatetoProps = state => {
+  return {
+    currentQuestion: state.currentQuestion
   }
 }
 
 
-export default connect(null, mapDispatchToProps)(DecisionScreen)
+export default connect(mapStatetoProps, mapDispatchToProps)(DecisionScreen)
