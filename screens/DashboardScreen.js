@@ -2,22 +2,16 @@ import React from 'react';
 import { View, Text, StyleSheet, Button} from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButton';
+import QuestionList from '../components/QuestionList';
 import { connect } from 'react-redux'
 import {loadQuestions} from '../store/actions/questions'
 import ServerAdapter from '../services/ServerAdapter'
 
 class DashboardScreen extends React.Component {
 
-    // componentDidMount = () => {
-    //   console.log('mounting component!!!')
-    //   let prom = ServerAdapter.fetchUser({email: this.props.user.email})
-    //   prom.then(data => this.props.loadQuestions(data.questions))
-    // }
 
     showQuestions = questions=> {
-      return questions.map ((question, index) => {
-        return <Text key={index}>{question.question.title}</Text>
-      })
+        return <QuestionList questions={questions} navigation={this.props.navigation}/>
     }
 
     render () {
@@ -60,7 +54,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
-    },
+    }
   });
   
 const mapStateToProps = state => {

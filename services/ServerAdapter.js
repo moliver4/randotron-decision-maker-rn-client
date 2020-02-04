@@ -1,7 +1,7 @@
-const USERSURL = 'http://10.137.4.119:3000/users'
-const QUESTIONSURL = 'http://10.137.4.119:3000/questions'
-const CHOICESURL = 'http://10.137.4.119:3000/choices'
-const DECISIONSURL = 'http://10.137.4.119:3000/decisions'
+const USERSURL = 'http://10.137.3.6:3000/users'
+const QUESTIONSURL = 'http://10.137.3.6:3000/questions'
+const CHOICESURL = 'http://10.137.3.6:3000/choices'
+const DECISIONSURL = 'http://10.137.3.6:3000/decisions'
 
 
  class ServerAdapter {

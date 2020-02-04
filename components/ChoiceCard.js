@@ -6,7 +6,7 @@ const ChoiceCard = ({ choice, index, deleteChoice } ) => {
 
     
     return (
-        <View>
+        <View style={styles.card}>
             <View style={styles.row}>
                 <View style={styles.column}>
                     <Text> Choice {index+1}: {choice.title} </Text>
@@ -21,6 +21,16 @@ const ChoiceCard = ({ choice, index, deleteChoice } ) => {
 }
 
 const styles=StyleSheet.create({
+    card: {
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 6,
+        shadowOpacity: 0.26,
+        elevation: 8,
+        backgroundColor: 'white',
+        padding: 20,
+        borderRadius: 10
+      },
     row: {
         padding: 5,
         flexDirection: 'row'
