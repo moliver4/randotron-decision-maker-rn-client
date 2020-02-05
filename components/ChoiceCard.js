@@ -12,7 +12,7 @@ const ChoiceCard = ({ choice, index, deleteChoice } ) => {
                     <Text> Choice {index+1}: {choice.title} </Text>
                     <Text> Weight: {choice.weight} </Text>
                 </View>
-                {deleteChoice ? <AntDesign name="delete" size={20} onPress={()=>deleteChoice(choice)} /> : null}
+                {deleteChoice ? <AntDesign name="delete" size={20} color='firebrick' onPress={()=>deleteChoice(choice)} /> : null}
             </View>
 
 
@@ -28,7 +28,7 @@ const styles=StyleSheet.create({
         shadowOpacity: 0.26,
         elevation: 8,
         backgroundColor: 'white',
-        padding: 20,
+        padding: 10,
         borderRadius: 10,
         width: '80%'
       },
