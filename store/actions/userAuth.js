@@ -14,3 +14,16 @@ export const login = (email, name, id) => {
         }
     } 
 };
+
+
+  
+export const guest = () => {
+    return {
+        type: GUEST, 
+        user: {
+            name: 'Guest', 
+            email: null, 
+            id: null
+        }
+    } 
+};

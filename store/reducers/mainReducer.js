@@ -23,13 +23,20 @@ const initialState = {
           ...action.user
         }
       };
+    case GUEST:
+      return {
+        ...state,
+        isLoggedIn: false,
+        user: {...state.user, 
+          ...action.user
+        }
+      }
     case LOAD_QUESTIONS:
       return {
         ...state,
         questions: action.questions
       } 
     case LOAD_CURRENT_QUESTION:
-      console.log('loading current question to store in REDUCER')
       return {
         ...state,
         currentQuestion: action.question

@@ -1,11 +1,10 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import * as Google from "expo-google-app-auth";
-import {login} from '../store/actions/userAuth'
+import {login, guest} from '../store/actions/userAuth'
 import {loadQuestions} from '../store/actions/questions'
 import { connect } from 'react-redux'
 import ServerAdapter from '../services/ServerAdapter'
-// import { GoogleSignIn } from 'expo-google-sign-in';
 
 import { IOS_CLIENT_ID } from '../config'
 
@@ -47,7 +46,7 @@ class LoginScreen extends React.Component {
   };
 
   continueAsGuest = () => {
-    this.props.login(null, null, null)
+    this.props.guest(null, null, null)
     this.props.navigation.navigate("Dashboard");
   }
 
@@ -64,6 +63,7 @@ class LoginScreen extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
+    guest: () => {dispatch(guest())},
     login: (email, name, id) => dispatch(login(email, name, id)),
     loadQuestions: (questions) => dispatch(loadQuestions(questions))
   }

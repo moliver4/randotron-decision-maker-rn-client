@@ -45,7 +45,7 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
         let newDec = {
           choice: final
         }
-        updateDecisionc(newDec)
+        updateDecision(newDec)
       }
   }
 

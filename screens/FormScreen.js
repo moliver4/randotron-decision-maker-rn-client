@@ -137,9 +137,9 @@ class FormScreen extends React.Component {
                 choices: this.state.choices   
             }
             let promise = ServerAdapter.newQuestion(body)
-            promise.then(data => this.findAnswer(data))
+            promise.then(data => this.findUserAnswer(data))
         } else {
-            console.log('user is not logged in')
+            this.findGuestAnswer()
         }
     }
 
@@ -147,8 +147,7 @@ class FormScreen extends React.Component {
         this.setState(INITIAL_STATE)
     }
 
-    findAnswer=(data) => {
-        
+    findUserAnswer=(data) => {
         let final = Calculator.getDecision(data.choices)
         console.log('here is my answer', final)
         let body = {
@@ -163,7 +162,7 @@ class FormScreen extends React.Component {
             }
             return {
                 ...prevState,
-                question: data.question,
+                newQuestion: data.question,
                 choices: data.choices,
                 decision: decision
             }
@@ -171,9 +170,28 @@ class FormScreen extends React.Component {
      )
     }
 
+    findGuestAnswer = () => {
+        let final = Calculator.getDecision(this.state.choices)
+        let decision = {
+            id: null,
+            choice: final
+        }
+        this.setState(prevState => {
+            return {
+                ...prevState,
+                decision: decision
+            }
+        }, () => this.handleFinalNavigation())
+    }
+
     reloadQuestions = () => {
-        let promise = ServerAdapter.getSignedInUser(this.props.user.id)
-        promise.then(data => this.handleUserData(data))
+        if (this.props.isLoggedIn){
+            let promise = ServerAdapter.getSignedInUser(this.props.user.id)
+            promise.then(data => this.handleUserData(data))
+        }
+        else {
+            console.log('user not logged in right now')
+        }
     }
 
     handleUserData = (data) => {
@@ -186,10 +204,11 @@ class FormScreen extends React.Component {
     //can be used regardless of if user is signed in or not
     handleFinalNavigation = () => {
         const body = {
-            question: this.state.question,
+            question: this.state.newQuestion,
             choices: this.state.choices,
             decision: this.state.decision
         }  
+        console.log('BODY OF NOT LOGGED IN', body)
         this.props.loadCurrentQuestion(body)
         this.props.navigation.navigate('Decision', {
             clearForm: this.clearForm
