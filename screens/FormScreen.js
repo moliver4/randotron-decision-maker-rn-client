@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, TextInput, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Button, TextInput, KeyboardAvoidingView, TouchableOpacity, StyleSheet } from 'react-native';
 import ChoiceForm from '../components/ChoiceForm'
 import ChoiceCard from '../components/ChoiceCard'
 import { connect } from 'react-redux'
@@ -204,8 +204,8 @@ class FormScreen extends React.Component {
   render() {
     let { newChoice, newQuestion, isEditing } = this.state
     return (
-     
-        <View style={styles.container}>
+        
+        <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
             <View style={{height:50}} >
                 <Text htmlFor='decision'>What's the Question?</Text>
                 <TextInput 
@@ -218,7 +218,7 @@ class FormScreen extends React.Component {
             </View>
             {this.renderChoices()}
 
-            <Button title='Add Choice' onPress={this.addChoice}/>
+            {!isEditing? <Button title='Add Choice' onPress={this.addChoice}/> : null}
             {isEditing ? <ChoiceForm 
                 newChoice={newChoice} 
                 titleChange={this.handleChoiceTitleChange} 
@@ -229,11 +229,10 @@ class FormScreen extends React.Component {
             }
             <View >
                 <Button title='Submit'onPress={() => this.handleSubmitforDecision(this.props)}/>
-                <Button title='To Decision Navigate' onPress={() => this.props.navigation.navigate('Decision')}/>
             </View>
             
                   
-        </View>
+            </KeyboardAvoidingView>
 
 
     )
