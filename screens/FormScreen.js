@@ -128,16 +128,13 @@ class FormScreen extends React.Component {
       //navigate to decision page when ready
       handleSubmitforDecision = (props) => {
         if(this.state.choices.length < 2 ) {
-
             return
         }
         if (props.user.id !== null) {
             const body = {
-                
                 title: this.state.newQuestion.title,
                 user_id: props.user.id,
-                choices: this.state.choices
-             
+                choices: this.state.choices   
             }
             let promise = ServerAdapter.newQuestion(body)
             promise.then(data => this.findAnswer(data))
@@ -151,8 +148,9 @@ class FormScreen extends React.Component {
     }
 
     findAnswer=(data) => {
-        console.log('posting question', data)
+        
         let final = Calculator.getDecision(data.choices)
+        console.log('here is my answer', final)
         let body = {
             question_id: data.question.id,
             choice_id: final.id
