@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, Button} from 'react-native';
-import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import HeaderButton from '../components/HeaderButton';
+import { Ionicons } from '@expo/vector-icons';
+// import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+// import HeaderButton from '../components/HeaderButton';
 import QuestionList from '../components/QuestionList';
 import { connect } from 'react-redux'
 import {loadQuestions, logout} from '../store/actions/questions'
-import ServerAdapter from '../services/ServerAdapter'
+
 
 
 const DashboardScreen = props => {
@@ -28,14 +29,10 @@ DashboardScreen.navigationOptions = props => {
       return {
         headerTitle: 'Your Decisions', 
         headerRight: (
-          <HeaderButtons HeaderButtonComponent={HeaderButton}>
-            <Item
-              title="Exit"
-              onPress={() => {
+          <Ionicons name="ios-log-out" size={30} style={{paddingRight: 10}} onPress={() => {
                 props.navigation.navigate('Auth');
               }}
             />
-          </HeaderButtons>
         )
       };
   
