@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text, Button, TextInput, KeyboardAvoidingView, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Button, TextInput, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, StyleSheet } from 'react-native';
 import ChoiceForm from '../components/ChoiceForm'
 import ChoiceCard from '../components/ChoiceCard'
 import { connect } from 'react-redux'
 import Calculator from '../services/Calculator'
 import ServerAdapter from '../services/ServerAdapter'
 import { addQuestion, loadCurrentQuestion, loadQuestions } from '../store/actions/questions'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const INITIAL_STATE = {
         isEditing: false,
@@ -223,7 +224,7 @@ class FormScreen extends React.Component {
   render() {
     let { newChoice, newQuestion, isEditing } = this.state
     return (
-        
+        <TouchableWithoutFeedback onPress={()=> Keyboard.dismiss()}>
         <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
             <View style={{height:50}} >
                 <Text htmlFor='decision'>What's the Question?</Text>
@@ -253,7 +254,7 @@ class FormScreen extends React.Component {
                   
             </KeyboardAvoidingView>
 
-
+            </TouchableWithoutFeedback>
     )
   }
 }

@@ -34,7 +34,7 @@ export default class LoadingScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: '#D7F5EF',
       alignItems: 'center',
       justifyContent: 'center',
     },
