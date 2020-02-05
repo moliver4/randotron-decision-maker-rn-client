@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import * as Google from "expo-google-app-auth";
-import {login, guest} from '../store/actions/userAuth'
+import {login, guest, logout} from '../store/actions/userAuth'
 import {loadQuestions} from '../store/actions/questions'
 import { connect } from 'react-redux'
 import ServerAdapter from '../services/ServerAdapter'
@@ -9,6 +9,10 @@ import ServerAdapter from '../services/ServerAdapter'
 import { IOS_CLIENT_ID } from '../config'
 
 class LoginScreen extends React.Component {
+
+  componentDidMount () {
+    this.props.logout()
+  }
 
   fetchLogin = (email, name) => {
     let prom = ServerAdapter.fetchUser({email: email, name: name})
@@ -51,6 +55,7 @@ class LoginScreen extends React.Component {
   }
 
   render() {
+  
     return (
       <View style={styles.container}>
         <Button title="Login with Google" onPress={this.signInWithGoogle} />
@@ -64,6 +69,7 @@ class LoginScreen extends React.Component {
 const mapDispatchToProps = dispatch => {
   return {
     guest: () => {dispatch(guest())},
+    logout: () => {dispatch(logout())},
     login: (email, name, id) => dispatch(login(email, name, id)),
     loadQuestions: (questions) => dispatch(loadQuestions(questions))
   }

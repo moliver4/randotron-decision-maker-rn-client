@@ -27,3 +27,10 @@ export const guest = () => {
         }
     } 
 };
+
+  
+export const logout = () => {
+    return {
+        type: LOGOUT
+    } 
+};

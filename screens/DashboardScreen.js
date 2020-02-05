@@ -4,40 +4,42 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButton';
 import QuestionList from '../components/QuestionList';
 import { connect } from 'react-redux'
-import {loadQuestions} from '../store/actions/questions'
+import {loadQuestions, logout} from '../store/actions/questions'
 import ServerAdapter from '../services/ServerAdapter'
 
-class DashboardScreen extends React.Component {
 
-    render () {
+const DashboardScreen = props => {
+  
         return (
             <View style={styles.container}>
                 <Text>
-                    {this.props.isLoggedIn ? `Hello ${ this.props.user.name }` : 'hello'}
+                    {props.isLoggedIn ? `Hello ${ props.user.name }` : 'Hello'}
                 </Text>
-                <QuestionList questions={this.props.questions} navigation={this.props.navigation}/>
+                <QuestionList questions={props.questions} navigation={props.navigation}/>
           
             </View>
         )
-    }
-    
 }
+    
 
-DashboardScreen.navigationOptions = navData => {
-    return {
-      headerTitle: 'Your Decisions', 
-      headerLeft: (
-        <HeaderButtons HeaderButtonComponent={HeaderButton}>
-          <Item
-            title="Menu"
-            iconName="ios-menu"
-            onPress={() => {
-              navData.navigation.toggleDrawer();
-            }}
-          />
-        </HeaderButtons>
-      )
-    };
+
+DashboardScreen.navigationOptions = props => {
+ 
+      return {
+        headerTitle: 'Your Decisions', 
+        headerRight: (
+          <HeaderButtons HeaderButtonComponent={HeaderButton}>
+            <Item
+              title="Exit"
+              onPress={() => {
+                props.navigation.navigate('Auth');
+              }}
+            />
+          </HeaderButtons>
+        )
+      };
+  
+    
   };
 
 const styles = StyleSheet.create({
@@ -61,6 +63,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    logout: () => dispatch(logout()),
     loadQuestions: (questions) => dispatch(loadQuestions(questions))
   }
 }

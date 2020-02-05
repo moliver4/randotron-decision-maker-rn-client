@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text, Button, TextInput, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, StyleSheet } from 'react-native';
+import { View, Alert, Text, Button, TextInput, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, StyleSheet } from 'react-native';
 import ChoiceForm from '../components/ChoiceForm'
 import ChoiceCard from '../components/ChoiceCard'
 import { connect } from 'react-redux'
 import Calculator from '../services/Calculator'
 import ServerAdapter from '../services/ServerAdapter'
 import { addQuestion, loadCurrentQuestion, loadQuestions } from '../store/actions/questions'
-import { TouchableOpacity } from 'react-native-gesture-handler';
+// import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const INITIAL_STATE = {
         isEditing: false,
@@ -24,9 +24,6 @@ const INITIAL_STATE = {
 class FormScreen extends React.Component {
     state = INITIAL_STATE
 
-    componentDidMount=() => {
-        console.log('FORM MOUNTING')
-    }
     handleNewQuestionChange=(text) => {
         this.setState(prevState => {
              return {
@@ -88,6 +85,7 @@ class FormScreen extends React.Component {
 
     submitAddChoice = () => {
         if (this.state.newChoice.title.length < 1) {
+            Alert.alert('Invalid Choice!', 'You should probably write something here...', [{text: 'Okay', style: 'destructive'}])
             return
         }
         this.setState(prevState => {
@@ -123,12 +121,14 @@ class FormScreen extends React.Component {
         })
       }
 
-      // if user is logged in, should POST question to user, then POST choices to the question. When choices come back, calculate answer, POST answer, update state, update STORE with new decision object? 
-      //if user is not logged in, calculate answer, update state
 
-      //navigate to decision page when ready
       handleSubmitforDecision = (props) => {
+        if(this.state.newQuestion.title.length < 1) {
+            Alert.alert('Oops!', 'Please at least enter *something* as your question.', [{text: 'Okay', style: 'destructive'}])
+            return
+        }
         if(this.state.choices.length < 2 ) {
+            Alert.alert('Oops!', 'You need at least 2 choices to make a decision...', [{text: 'Okay', style: 'destructive'}])
             return
         }
         if (props.user.id !== null) {

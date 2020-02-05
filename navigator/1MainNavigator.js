@@ -111,7 +111,7 @@ const tabScreenConfig = {
     navigationOptions: {
       tabBarIcon: tabInfo => {
         return (
-          <Ionicons name="ios-add-circle-outline" size={25} color={tabInfo.tintColor} />
+          <Ionicons name="ios-add-circle-outline" size={30} color={tabInfo.tintColor} />
         );
       },
       tabBarColor: Colors.primary,
@@ -164,51 +164,53 @@ const DashboardNewHelpTabNavigator =
   );
 
 
-const AppDrawerNavigator = createDrawerNavigator(
-    {
-      DashboardHome: {
-        //screen: DashboardScreen
-        screen: DashboardNewHelpTabNavigator,
-        navigationOptions: {
-          drawerLabel: 'Home'
-        }
-      }
-    },
-    {
-      contentOptions: {
-        activeTintColor: Colors.accent,
-        labelStyle: {
-          fontFamily: 'open-sans-bold'
-        }
-        // contentComponent: props => {
-        //         //   const dispatch = useDispatch();
-        //           return (
-        //             <View style={{ flex: 1, paddingTop: 20 }}>
-        //               <SafeAreaView forceInset={{ top: 'always', horizontal: 'never' }}>
-        //                 <DrawerItems {...props} />
-        //                 <Button
-        //                   title="Logout"
-        //                   color={Colors.primary}
-        //                   onPress={() => {
-        //                       console.log('this should log us out')
-        //                     {/* dispatch(authActions.logout()); */}
-        //                     // props.navigation.navigate('Auth');
-        //                   }}
-        //                 />
-        //               </SafeAreaView>
-        //             </View>
-        //           );
-        //         }
-        }
-    },
+// const AppDrawerNavigator = createDrawerNavigator(
+//     {
+//       DashboardHome: {
+//         //screen: DashboardScreen
+//         screen: DashboardNewHelpTabNavigator,
+//         navigationOptions: {
+//           drawerLabel: 'Home'
+//         }
+//       }
+//     },
+//     {
+//       contentOptions: {
+//         activeTintColor: Colors.accent,
+//         labelStyle: {
+//           fontFamily: 'open-sans-bold'
+//         }
+//       }
+//     },
+//       {contentComponent: props => {
+//                 //   const dispatch = useDispatch();
+//                   return (
+//                     <View style={{ flex: 1, paddingTop: 20 }}>
+//                       <SafeAreaView forceInset={{ top: 'always', horizontal: 'never' }}>
+//                         <DrawerItems {...props} />
+//                         <Button
+//                           title="Logout"
+//                           color={Colors.primary}
+//                           onPress={() => {
+//                               console.log('this should log us out')
+//                             {/* dispatch(authActions.logout()); */}
+//                             // props.navigation.navigate('Auth');
+//                           }}
+//                         />
+//                       </SafeAreaView>
+//                     </View>
+//                   );
+//                 }
+        
+//     }
     
-  );
+//   );
 
 
 const MainNavigator = createSwitchNavigator({
     LoadingScreen: LoadingScreen,
     Auth: AuthNavigator,
-    Dashboard: AppDrawerNavigator
+    Dashboard: DashboardNewHelpTabNavigator
   })
   
   
