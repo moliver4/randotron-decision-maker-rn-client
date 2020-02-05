@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput, Text, Button, ScrollView, Keyboard, TouchableWithoutFeedback, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TextInput, Text, Button, StyleSheet } from 'react-native';
 import NumericInput from 'react-native-numeric-input'
 
 const ChoiceForm = ( { newChoice, titleChange, reasonChange, weightChange, submitAddChoice, cancelAddChoice }) => {
@@ -12,6 +12,7 @@ const ChoiceForm = ( { newChoice, titleChange, reasonChange, weightChange, submi
                 <View> 
                     <Text> Choice: </Text>
                     <TextInput
+                        style={styles.input}
                         onChangeText={text=>titleChange(text)}
                         name='title'
                         value={newChoice.title}
@@ -36,7 +37,7 @@ const ChoiceForm = ( { newChoice, titleChange, reasonChange, weightChange, submi
             </View>
             <View >
                 <Button title='cancel' onPress={cancelAddChoice}/>
-                <Button title='submit' onPress={submitAddChoice}/>
+                <Button title='save choice' onPress={submitAddChoice}/>
             </View>
         </View>
             
@@ -45,9 +46,13 @@ const ChoiceForm = ( { newChoice, titleChange, reasonChange, weightChange, submi
 
 const styles = StyleSheet.create({
     input: {
-        flex: 1,
-        backgroundColor: '#ececec',
-        paddingLeft: 5
+    
+    
+            height: 30,
+            borderBottomColor: 'grey',
+            borderBottomWidth: 1,
+            marginVertical: 10
+  
     }
 })
 
