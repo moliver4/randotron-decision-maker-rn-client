@@ -4,7 +4,9 @@ import { View, Text, Button, StyleSheet } from 'react-native';
 const HelpInfo = () => {
     return (
         <View>
-            
+            <Text>
+                
+            </Text>
         </View>
     );
 }

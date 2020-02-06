@@ -35,10 +35,9 @@ const styles=StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        
     },
     column: {
-        alignItems: 'flex-start'
+        alignItems: 'center'
     }
 })
 

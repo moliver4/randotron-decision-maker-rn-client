@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import { addQuestion, loadCurrentQuestion, loadQuestions } from '../store/actions/questions'
 
 
-const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurrentQuestion, addQuestion, loadQuestions } ) => {
+const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurrentQuestion, loadQuestions } ) => {
   console.log('current question object on Decision screen', currentQuestion)
     const isOld = navigation.getParam('oldDecision', false)
     //if it is old, then load the current question in store with the question object given to us 
@@ -88,9 +88,11 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
     return (
       <View style={styles.container}>
           
-          <Text> Decision Screen</Text>
           <QuestionCard question= {question}/>
-          {renderChoices()}
+
+          <View style={styles.choiceContainer}>
+            {renderChoices()}
+          </View>
           <DecisionCard choice={decisionChoice} />
           {isLoggedIn? <Button title="Delete This Question" onPress={deleteQuestion}/> : null }
           <Button title='ReRun' onPress={reRun}/>
@@ -106,7 +108,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center"
-  }
+  },
+  choiceContainer: {
+    width: '80%',
+  },
 });
 
 DecisionScreen.navigationOptions = navData => {

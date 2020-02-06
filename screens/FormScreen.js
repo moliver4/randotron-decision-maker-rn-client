@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Alert, Text, Button, TextInput, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, StyleSheet } from 'react-native';
 import ChoiceForm from '../components/ChoiceForm'
+import QuestionForm from '../components/QuestionForm'
 import ChoiceCard from '../components/ChoiceCard'
 import { connect } from 'react-redux'
 import Calculator from '../services/Calculator'
@@ -226,16 +227,8 @@ class FormScreen extends React.Component {
     return (
         <TouchableWithoutFeedback onPress={()=> Keyboard.dismiss()}>
             <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
-                <View style={styles.questionContainer}>
-                    <Text htmlFor='decision'>What's the Question?</Text>
-                    <TextInput 
-                        style={styles.input} 
-                        value={newQuestion.title} 
-                        onChangeText={text=> this.handleNewQuestionChange(text)} 
-                        placeholder="Your Question Here"
-                        placeholderTextColor='grey'
-                    />
-                </View>
+                <QuestionForm newQuestion={newQuestion} handleNewQuestionChange={this.handleNewQuestionChange}/>
+                
                 <View style={styles.choiceContainer}>
                     {this.renderChoices()}
                 </View>
@@ -275,13 +268,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         marginBottom: 50,
       },
-      input: {
-        height: 30,
-        width: '80%',
-        borderBottomColor: 'grey',
-        borderBottomWidth: 1,
-        marginVertical: 10
-    }
+
 })
 
 FormScreen.navigationOptions = navData => {

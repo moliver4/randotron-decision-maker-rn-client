@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, TextInput, Text, Button, StyleSheet } from 'react-native';
 import NumericInput from 'react-native-numeric-input'
+import Colors from '../constants/Colors';
 
 const ChoiceForm = ( { newChoice, titleChange, reasonChange, weightChange, submitAddChoice, cancelAddChoice }) => {
 
@@ -10,7 +11,7 @@ const ChoiceForm = ( { newChoice, titleChange, reasonChange, weightChange, submi
             <View >
 
                 <View style={styles.choiceInputContainer}> 
-                    <Text> Choice: </Text>
+                    <Text style={styles.text}> Choice: </Text>
                     <TextInput
                         style={styles.input}
                         onChangeText={text=>titleChange(text)}
@@ -23,19 +24,23 @@ const ChoiceForm = ( { newChoice, titleChange, reasonChange, weightChange, submi
                 
                 <View style={{ alignItems: "center"}}> 
             
-                    <Text> Weight: </Text> 
-                    <Text>(Optional but all must total up to 10 for best results)</Text>
+                    <Text style={styles.text}> Weight: </Text> 
+                    <Text style={styles.text}>(Optional)</Text>
                     
                     <NumericInput 
                         type='up-down' 
                         value={newChoice.weight} 
-                        minValue={0}
+                        minValue={1}
                         maxValue={10}
+                        rounded
+                        containerStyle={{margin: 10}}
+                        borderColor={Colors.accent}
+                        
                         onChange={value => weightChange(value)} 
                     />
                 </View>
             </View>
-            <View >
+            <View style={styles.buttonRow} >
                 <Button title='cancel' onPress={cancelAddChoice}/>
                 <Button title='save choice' onPress={submitAddChoice}/>
             </View>
@@ -46,19 +51,23 @@ const ChoiceForm = ( { newChoice, titleChange, reasonChange, weightChange, submi
 
 const styles = StyleSheet.create({
     container: {
-       justifyContent: 'space-between'
+       justifyContent: 'space-between',
+       width: '80%'
     },
-    choiceInputContainer:{
-
+    text: {
+        padding: 5,
+        fontSize: 15,
+        fontFamily: 'open-sans'
     },
     input: {
-    
-    
-            height: 30,
+            height: 40,
             borderBottomColor: 'grey',
             borderBottomWidth: 1,
             marginVertical: 10
-  
+    },
+    buttonRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly'
     }
 })
 
