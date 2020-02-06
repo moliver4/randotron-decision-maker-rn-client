@@ -225,36 +225,36 @@ class FormScreen extends React.Component {
     let { newChoice, newQuestion, isEditing } = this.state
     return (
         <TouchableWithoutFeedback onPress={()=> Keyboard.dismiss()}>
-        <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
-            <View style={{height:50}} >
-                <Text htmlFor='decision'>What's the Question?</Text>
-                <TextInput 
-                    style={styles.input} 
-                    value={newQuestion.title} 
-                    onChangeText={text=> this.handleNewQuestionChange(text)} 
-                    placeholder="Your Question Here"
-                    placeholderTextColor='grey'
-                />
-            </View>
-            {this.renderChoices()}
+            <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
+                <View style={styles.questionContainer}>
+                    <Text htmlFor='decision'>What's the Question?</Text>
+                    <TextInput 
+                        style={styles.input} 
+                        value={newQuestion.title} 
+                        onChangeText={text=> this.handleNewQuestionChange(text)} 
+                        placeholder="Your Question Here"
+                        placeholderTextColor='grey'
+                    />
+                </View>
+                {this.renderChoices()}
 
-            {!isEditing? <Button title='Add Choice' onPress={this.addChoice}/> : null}
-            {isEditing ? <ChoiceForm 
-                newChoice={newChoice} 
-                titleChange={this.handleChoiceTitleChange} 
-                weightChange={this.handleChoiceWeightChange}
-                cancelAddChoice={this.cancelAddChoice}
-                submitAddChoice={this.submitAddChoice}
-            /> : null
-            }
-            <View >
-                <Button title='Submit'onPress={() => this.handleSubmitforDecision(this.props)}/>
-            </View>
-            
-                  
+                {!isEditing? <Button title='Add Choice' onPress={this.addChoice}/> : null}
+                {isEditing ? <ChoiceForm 
+                    newChoice={newChoice} 
+                    titleChange={this.handleChoiceTitleChange} 
+                    weightChange={this.handleChoiceWeightChange}
+                    cancelAddChoice={this.cancelAddChoice}
+                    submitAddChoice={this.submitAddChoice}
+                /> : null
+                }
+                <View >
+                    <Button title='Submit'onPress={() => this.handleSubmitforDecision(this.props)}/>
+                </View>
+                
+                    
             </KeyboardAvoidingView>
 
-            </TouchableWithoutFeedback>
+        </TouchableWithoutFeedback>
     )
   }
 }
@@ -265,10 +265,17 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center"
       },
-    input: {
-        flex: 1,
-        backgroundColor: '#ececec',
-        paddingLeft: 5
+      questionContainer: {
+        width: '100%',
+        alignItems: "center",
+        marginBottom: 50,
+      },
+      input: {
+        height: 30,
+        width: '80%',
+        borderBottomColor: 'grey',
+        borderBottomWidth: 1,
+        marginVertical: 10
     }
 })
 

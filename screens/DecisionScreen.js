@@ -20,8 +20,6 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
       const decisionID = decision.id
       const decisionChoice= decision.choice
       const clearForm = navigation.getParam('clearForm', 'nothing')
-  
-
 
     const renderChoices = () => {
       return choices.map ((choice, index) => {
@@ -48,7 +46,6 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
         updateDecision(newDec)
       }
   }
-
 
     const updateDecision = (dec) => {
       const body = {

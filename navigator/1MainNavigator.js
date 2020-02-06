@@ -9,8 +9,6 @@ import {
 } from 'react-navigation';
 import { Platform, SafeAreaView, Button, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-// import { useDispatch } from 'react-redux';
-
 import LoginScreen from '../screens/LoginScreen'
 import DashboardScreen from '../screens/DashboardScreen'
 import LoadingScreen from '../screens/LoadingScreen'
@@ -149,7 +147,7 @@ const DashboardNewHelpTabNavigator =
         activeTintColor: 'white',
         shifting: true,
         barStyle: {
-          backgroundColor: Colors.primary
+          backgroundColor: Colors.extra
         }
       })
     : createBottomTabNavigator(tabScreenConfig, {
