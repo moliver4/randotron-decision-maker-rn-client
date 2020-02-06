@@ -6,10 +6,10 @@ const ChoiceForm = ( { newChoice, titleChange, reasonChange, weightChange, submi
 
    
     return (
-        <View>
+        <View style={styles.container}>
             <View >
 
-                <View> 
+                <View style={styles.choiceInputContainer}> 
                     <Text> Choice: </Text>
                     <TextInput
                         style={styles.input}
@@ -45,6 +45,12 @@ const ChoiceForm = ( { newChoice, titleChange, reasonChange, weightChange, submi
 }
 
 const styles = StyleSheet.create({
+    container: {
+       justifyContent: 'space-between'
+    },
+    choiceInputContainer:{
+
+    },
     input: {
     
     

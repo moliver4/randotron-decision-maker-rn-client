@@ -236,7 +236,9 @@ class FormScreen extends React.Component {
                         placeholderTextColor='grey'
                     />
                 </View>
-                {this.renderChoices()}
+                <View style={styles.choiceContainer}>
+                    {this.renderChoices()}
+                </View>
 
                 {!isEditing? <Button title='Add Choice' onPress={this.addChoice}/> : null}
                 {isEditing ? <ChoiceForm 
@@ -263,7 +265,10 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#fff",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "space-evenly"
+      },
+      choiceContainer: {
+        width: '80%'
       },
       questionContainer: {
         width: '100%',
