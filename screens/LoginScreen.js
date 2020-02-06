@@ -19,7 +19,7 @@ class LoginScreen extends React.Component {
 
   fetchLogin = (email, name) => {
     let prom = ServerAdapter.fetchUser({email: email, name: name})
-    prom.then(data => this.handleUserData(data))
+    prom.then(data => this.handleUserData(data)).then(this.props.navigation.navigate("Dashboard"));
   }
 
   handleUserData = (data) => {
@@ -41,7 +41,7 @@ class LoginScreen extends React.Component {
       if (result.type === "success") {
         console.log("LoginScreen.js.js 21 | ", result);
         this.fetchLogin(result.user.email, result.user.givenName)
-        this.props.navigation.navigate("Dashboard"); //after Google login redirect to Profile
+         //after Google login redirect to Profile
         return result.accessToken;
       } else {
         return { cancelled: true };
