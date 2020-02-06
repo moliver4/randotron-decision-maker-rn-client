@@ -11,7 +11,9 @@ import HelpInfo from '../components/HelpInfo'
     return (
       
         <MyGradient>
+          <View style={{padding: 50}}> 
             <HelpInfo/>
+          </View>
           </MyGradient>
           
           
