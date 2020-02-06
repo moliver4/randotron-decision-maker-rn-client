@@ -3,12 +3,15 @@ import { View, Modal, Text, Image, TouchableHighlight, StyleSheet } from 'react-
 import { SocialIcon, Button } from 'react-native-elements'
 import MyGradient from '../components/MyGradient'
 import InfoButton from '../components/InfoButton'
+import CloseModalButton from '../components/CloseModalButton'
+import HelpInfo from '../components/HelpInfo'
 import DefaultText from '../components/DefaultText';
 import * as Google from "expo-google-app-auth";
 import {login, guest, logout} from '../store/actions/userAuth'
 import {loadQuestions} from '../store/actions/questions'
 import { connect } from 'react-redux'
 import ServerAdapter from '../services/ServerAdapter'
+import Colors from '../constants/Colors'
 
 import { IOS_CLIENT_ID } from '../config'
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -111,16 +114,11 @@ class LoginScreen extends React.Component {
               Alert.alert('Modal has been closed.');
             }}>
             <View style={styles.modal}>
-              <View>
-                <Text>Hello World!</Text>
+              
+                <HelpInfo/>
 
-                <TouchableHighlight
-                  onPress={() => {
-                    this.setModalVisible(!this.state.modalVisible);
-                  }}>
-                  <Text>Got it!</Text>
-                </TouchableHighlight>
-              </View>
+                <CloseModalButton setModalVisible={this.setModalVisible}/>
+            
             </View>
           </Modal>
       </MyGradient>
@@ -150,10 +148,10 @@ const styles = StyleSheet.create({
   //   justifyContent: "center"
   // },
   modal: {
-    marginHorizontal: 50,
+    marginHorizontal: 30,
     marginVertical: 100,
     borderRadius: 10,
-    backgroundColor: '#D7F5EF',
+    backgroundColor: 'white',
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center'

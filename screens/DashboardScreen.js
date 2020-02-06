@@ -19,9 +19,7 @@ const DashboardScreen = props => {
                 </Text>
                 :
                 <View style={styles.greeting}> 
-                  <Text style={styles.text}>
-                    Welcome Guest! 
-                  </Text>
+
                   <Text style={styles.text}>Since You Aren't Logged In, </Text> 
                   <Text style={styles.text}> Your Answers Won't Be Saved :( </Text>
                 </View>

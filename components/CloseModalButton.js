@@ -3,11 +3,11 @@ import { View, Text,TouchableOpacity, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Colors from '../constants/Colors'
 
-export default InfoButton = (props) => {
+export default CloseModalButton = (props) => {
     return (
-        <TouchableOpacity style={styles.position} onPress={() => props.setModalVisible(true)}> 
+        <TouchableOpacity style={styles.position} onPress={() => props.setModalVisible(false)}> 
             <View style={styles.buttonContainer} >
-                <MaterialCommunityIcons name="information-variant" size={30} color='white'/>
+                <Text style={{color:Colors.accent}}>Got it!</Text>
             </View>
         </TouchableOpacity>
     )
@@ -16,15 +16,15 @@ export default InfoButton = (props) => {
 const styles=StyleSheet.create({
     position:{
         position: 'absolute', 
-        bottom: 50, 
+        bottom: 10, 
         right: 30
     },
     buttonContainer: {
-        width: 40,
+        width: 60,
         height: 40,
-        borderRadius: 25,
+        borderRadius: 20,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: Colors.accent
+        backgroundColor: Colors.extra
     }
 })
