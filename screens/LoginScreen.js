@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Modal, Text, Image, TouchableHighlight, StyleSheet } from 'react-native';
 import { SocialIcon, Button } from 'react-native-elements'
 import MyGradient from '../components/MyGradient'
 import InfoButton from '../components/InfoButton'
@@ -14,9 +14,13 @@ import { IOS_CLIENT_ID } from '../config'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class LoginScreen extends React.Component {
+  state = {
+    modalVisible: false
+  }
 
-  componentDidMount () {
-    this.props.logout()
+
+  setModalVisible= (visible)=> {
+    this.setState({modalVisible: visible});
   }
 
   fetchLogin = (email, name) => {
@@ -30,6 +34,9 @@ class LoginScreen extends React.Component {
       this.props.loadQuestions(data.questions)
     }
     this.props.login(data.user.email, data.user.name, data.user.id)
+  }
+  componentDidMount () {
+    this.props.logout()
   }
  
 
@@ -64,6 +71,9 @@ class LoginScreen extends React.Component {
     return (
       <MyGradient>
      
+        <View>
+          <Image source={require('../assets/cat-logo.png')} style={{width:60, height: 60, marginBottom: 40}}/>
+        </View>
         <View style={styles.titleContainer}>
           <View>
             <Text style={styles.text}> Decisions are tiring.</Text>
@@ -92,8 +102,27 @@ class LoginScreen extends React.Component {
               onPress={this.continueAsGuest} />
           </View>
           
-          <InfoButton/>
-  
+          <InfoButton setModalVisible={this.setModalVisible}/>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={this.state.modalVisible}
+            onRequestClose={() => {
+              Alert.alert('Modal has been closed.');
+            }}>
+            <View style={styles.modal}>
+              <View>
+                <Text>Hello World!</Text>
+
+                <TouchableHighlight
+                  onPress={() => {
+                    this.setModalVisible(!this.state.modalVisible);
+                  }}>
+                  <Text>Got it!</Text>
+                </TouchableHighlight>
+              </View>
+            </View>
+          </Modal>
       </MyGradient>
     );
   }
@@ -120,6 +149,15 @@ const styles = StyleSheet.create({
   //   alignItems: "center",
   //   justifyContent: "center"
   // },
+  modal: {
+    marginHorizontal: 50,
+    marginVertical: 100,
+    borderRadius: 10,
+    backgroundColor: '#D7F5EF',
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center'
+  },
   titleContainer: {
     alignItems: "center",
     justifyContent: "center",

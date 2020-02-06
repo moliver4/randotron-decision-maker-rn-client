@@ -2,11 +2,11 @@ import React from 'react'
 import { View, Text,TouchableOpacity, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-export default function InfoButton() {
+export default InfoButton = (props) => {
     return (
-        <TouchableOpacity style={styles.position}> 
+        <TouchableOpacity style={styles.position} onPress={() => props.setModalVisible(true)}> 
             <View style={styles.buttonContainer} >
-                <MaterialCommunityIcons name="information-variant" size={30} color='white' onPress={() => console.log('pressed AF')}/>
+                <MaterialCommunityIcons name="information-variant" size={30} color='white'/>
             </View>
         </TouchableOpacity>
     )
