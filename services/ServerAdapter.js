@@ -44,18 +44,7 @@ const DECISIONSURL = 'http://10.137.1.16:3000/decisions'
     
   }
 
-  // static addChoice(body){
-  //   return fetch(`${CHOICESURL}`, {
-  //           method: 'POST',
-  //           headers: {
-  //           'Content-Type': 'application/json',
-  //           'Accept': 'application/json'
-  //           },
-  //           body: JSON.stringify(body)
-  //           })
-  //           .then(res => res.json())
-    
-  // }
+
 
   static newDecision(body){
     return fetch(`${DECISIONSURL}`, {
@@ -107,25 +96,6 @@ const DECISIONSURL = 'http://10.137.1.16:3000/decisions'
 
 }
 
-//   static deleteSkill(id){
-//     return fetch(`${SKILLSURL}/${id}`, {
-//             method: 'DELETE',
-//             headers: {
-//             'Content-Type': 'application/json',
-//             'Accept': 'application/json'}
-//             })
-//             .then(res => res.json())
-//   }
-  
-//   static deleteProject(id){
-//     return fetch(`${PROJECTSURL}/${id}`, {
-//             method: 'DELETE',
-//             headers: {
-//             'Content-Type': 'application/json',
-//             'Accept': 'application/json'}
-//             })
-//             .then(res => res.json())
-//   }
 
 
 export default ServerAdapter

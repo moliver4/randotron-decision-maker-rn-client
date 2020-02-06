@@ -24,7 +24,7 @@ export default class LoadingScreen extends React.Component {
     render () {
         return (
             <View style={styles.container}>
-                <Text>One moment...</Text>
+                <Text style={styles.text}>One moment...</Text>
                 <ActivityIndicator size='large'/>
             </View>
         )
@@ -38,5 +38,9 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
+    text: {
+        color: 'black',
+        fontSize: 24
+    }
   });
   

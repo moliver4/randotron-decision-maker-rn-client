@@ -7,7 +7,7 @@ import { View, Text, Button, StyleSheet } from 'react-native';
   render() {
     return (
       <View style={styles.container}>
-          <Text> Help Screen</Text>
+          <Text style={{color: 'white'}}> Help Screen</Text>
           
       </View>
     );
@@ -18,7 +18,7 @@ import { View, Text, Button, StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#D7F5EF",
     alignItems: "center",
     justifyContent: "center"
   }
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
 
 HelpScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'How to Play'
+    header:null
   };
 };
 export default HelpScreen

@@ -13,7 +13,7 @@ const DashboardScreen = props => {
   
         return (
             <View style={styles.container}>
-                <Text>
+                <Text >
                     {props.isLoggedIn ? `Hello ${ props.user.name }` : 'Hello'}
                 </Text>
                 <QuestionList questions={props.questions} navigation={props.navigation}/>
