@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import { SocialIcon, Button } from 'react-native-elements'
+import DefaultText from '../components/DefaultText';
 import * as Google from "expo-google-app-auth";
 import {login, guest, logout} from '../store/actions/userAuth'
 import {loadQuestions} from '../store/actions/questions'
@@ -7,6 +9,7 @@ import { connect } from 'react-redux'
 import ServerAdapter from '../services/ServerAdapter'
 
 import { IOS_CLIENT_ID } from '../config'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class LoginScreen extends React.Component {
 
@@ -58,14 +61,44 @@ class LoginScreen extends React.Component {
   
     return (
       <View style={styles.container}>
-        <Button title="Login with Google" onPress={this.signInWithGoogle} />
+        <View style={styles.titleContainer}>
+          <View>
+            <Text style={styles.text}> Decisions are tiring.</Text>
+          </View>
+          <View>
+            <Text style={styles.text}> We can help.</Text>
+          </View>
+        </View>
+    
+          <View style={styles.buttonContainer}>
+            <SocialIcon
+                title='Login with Google'
+                button
+                style={{height: 50}}
+                type='google'
+                Component={TouchableOpacity}
+                onPress={this.signInWithGoogle}
+            />
+          </View>
 
-        <Button title="Continue as Guest" onPress={this.continueAsGuest} />
+          <View style={styles.buttonContainer}>
+            <Button 
+              buttonStyle={styles.buttonGuest} 
+              raised 
+              title="Continue as Guest" 
+              onPress={this.continueAsGuest} />
+          </View>
+  
       </View>
     );
   }
 }
 
+LoginScreen.navigationOptions = navData => {
+  return {
+    header:null
+  };
+};
 const mapDispatchToProps = dispatch => {
   return {
     guest: () => {dispatch(guest())},
@@ -78,9 +111,29 @@ const mapDispatchToProps = dispatch => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#D7F5EF",
     alignItems: "center",
     justifyContent: "center"
+  },
+  titleContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 100
+  },
+  buttonContainer: {
+    width: '80%',
+    height: 70,
+    marginBottom: 10
+  },
+  buttonGuest: {
+    paddingHorizontal: 20,
+    height: 45,
+    borderRadius:70,
+ 
+  },
+  text: {
+    color: 'slategrey',
+    fontFamily: 'open-sans-bold'
   }
 });
 
