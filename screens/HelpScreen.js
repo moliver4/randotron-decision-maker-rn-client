@@ -1,28 +1,33 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
+import MyGradient from '../components/MyGradient'
+import HelpInfo from '../components/HelpInfo'
+
 
  class HelpScreen extends React.Component {
 
 
   render() {
     return (
-      <View style={styles.container}>
-          <Text style={{color: 'white'}}> Help Screen</Text>
+      
+        <MyGradient>
+            <Text
+              style={{
+                backgroundColor: 'transparent',
+                fontSize: 15,
+                color: '#fff',
+              }}>
+              Help Screen
+            </Text>
+          </MyGradient>
           
-      </View>
+          
+      
     );
   }
 }
 
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#D7F5EF",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
 
 
 HelpScreen.navigationOptions = navData => {

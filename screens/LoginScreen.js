@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { SocialIcon, Button } from 'react-native-elements'
+import MyGradient from '../components/MyGradient'
 import DefaultText from '../components/DefaultText';
 import * as Google from "expo-google-app-auth";
 import {login, guest, logout} from '../store/actions/userAuth'
@@ -60,7 +61,7 @@ class LoginScreen extends React.Component {
   render() {
   
     return (
-      <View style={styles.container}>
+      <MyGradient>
         <View style={styles.titleContainer}>
           <View>
             <Text style={styles.text}> Decisions are tiring.</Text>
@@ -89,7 +90,7 @@ class LoginScreen extends React.Component {
               onPress={this.continueAsGuest} />
           </View>
   
-      </View>
+      </MyGradient>
     );
   }
 }
@@ -109,12 +110,12 @@ const mapDispatchToProps = dispatch => {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#D7F5EF",
-    alignItems: "center",
-    justifyContent: "center"
-  },
+  // container: {
+  //   flex: 1,
+  //   backgroundColor: "#D7F5EF",
+  //   alignItems: "center",
+  //   justifyContent: "center"
+  // },
   titleContainer: {
     alignItems: "center",
     justifyContent: "center",

@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Button} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 // import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 // import HeaderButton from '../components/HeaderButton';
+import MyGradient from '../components/MyGradient'
 import QuestionList from '../components/QuestionList';
 import { connect } from 'react-redux'
 import {loadQuestions, logout} from '../store/actions/questions'

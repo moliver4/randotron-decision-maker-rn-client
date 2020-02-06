@@ -24,8 +24,8 @@ import Colors from '../constants/Colors';
 
 const defaultNavOptions = {
   headerStyle: {
-    marginBottom: 5,
-    backgroundColor: Platform.OS === 'android' ? Colors.primary : ''
+ 
+    backgroundColor: Platform.OS === 'android' ? Colors.primary : Colors.extra
   },
   headerTitleStyle: {
     fontFamily: 'open-sans-bold'
@@ -33,7 +33,7 @@ const defaultNavOptions = {
   headerBackTitleStyle: {
     fontFamily: 'open-sans'
   },
-  headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primary,
+  headerTintColor: Platform.OS === 'android' ? 'white' : Colors.accent,
   
 };
 
@@ -157,7 +157,7 @@ const DashboardNewHelpTabNavigator =
           labelStyle: {
             fontFamily: 'open-sans'
           },
-          activeTintColor: Colors.accent
+          activeTintColor: Colors.extra
         }
 
       }
