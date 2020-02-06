@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { SocialIcon, Button } from 'react-native-elements'
 import MyGradient from '../components/MyGradient'
+import InfoButton from '../components/InfoButton'
 import DefaultText from '../components/DefaultText';
 import * as Google from "expo-google-app-auth";
 import {login, guest, logout} from '../store/actions/userAuth'
@@ -62,6 +63,7 @@ class LoginScreen extends React.Component {
   
     return (
       <MyGradient>
+     
         <View style={styles.titleContainer}>
           <View>
             <Text style={styles.text}> Decisions are tiring.</Text>
@@ -89,6 +91,8 @@ class LoginScreen extends React.Component {
               title="Continue as Guest" 
               onPress={this.continueAsGuest} />
           </View>
+          
+          <InfoButton/>
   
       </MyGradient>
     );

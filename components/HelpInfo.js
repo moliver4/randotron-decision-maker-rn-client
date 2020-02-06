@@ -1,13 +1,15 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 const HelpInfo = () => {
     return (
-        <View>
-            <Text>
-                
-            </Text>
-        </View>
+        
+            <View>
+                <Text>
+                    Have you ever had 'Decision Fatigue'?
+                </Text>
+            </View>
+      
     );
 }
 
