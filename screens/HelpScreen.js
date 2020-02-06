@@ -11,14 +11,7 @@ import HelpInfo from '../components/HelpInfo'
     return (
       
         <MyGradient>
-            <Text
-              style={{
-                backgroundColor: 'transparent',
-                fontSize: 15,
-                color: '#fff',
-              }}>
-              Help Screen
-            </Text>
+            <HelpInfo/>
           </MyGradient>
           
           
