@@ -3,6 +3,7 @@ import { View, Text, Button, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import DefaultText from './DefaultText';
 import { connect } from 'react-redux'
+import Colors from '../constants/Colors'
 import { loadCurrentQuestion} from '../store/actions/questions'
 
 const MiniCard = ( props ) => {
@@ -12,21 +13,32 @@ const MiniCard = ( props ) => {
         props.loadCurrentQuestion(props.question)
         props.onSelectQuestion()
     }
+
+    const showChoices = () => {
+        return props.question.choices.map( choice => {
+            if (choice.id === props.question.decision.choice.id) {
+                return <Text key={choice.id} style={ {...styles.decision}}> {choice.title} </Text>
+            } else {
+                return <Text key={choice.id} style={styles.choice}> {choice.title}</Text>
+            }
+        })
+
+    }
     return (
         <View style={styles.card}>
             <TouchableOpacity onPress={handleSelectQuestion}> 
                 <View>
                     <View style={{...styles.row, ...styles.header }}>
                 
-                            <DefaultText style={styles.title} numberOfLines={1}>
+                            <Text style={styles.title} numberOfLines={1}>
                                 
                                 {props.question.question.title}
-                            </DefaultText>
+                            </Text>
                        
                     </View>
           
                 <View style={{ ...styles.row, ...styles.decision }}>
-                    <DefaultText>{props.question.decision.choice.title}</DefaultText>
+                    {showChoices()}
                 </View>
                 
                 </View>
@@ -39,15 +51,15 @@ const styles = StyleSheet.create({
     card: {
       shadowColor: 'black',
       shadowOffset: { width: 0, height: 2 },
-      shadowRadius: 6,
+      shadowRadius: 5,
       shadowOpacity: 0.26,
       elevation: 8,
       backgroundColor: 'white',
       padding: 10,
       borderRadius: 10,
       marginBottom: 10,
-      width: 300,
-      maxWidth: '90%',
+      alignSelf: 'stretch',
+      maxWidth: '100%',
       maxHeight: 100,
       alignItems: 'center'
     },
@@ -58,14 +70,18 @@ const styles = StyleSheet.create({
         height: '50%'
     },
     header: {
-        alignItems: 'center',
+        textAlign: 'center',
         height: 50
     },
     decision: {
         paddingHorizontal: 10,
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        height: 30
+        height: 30,
+        fontFamily: 'open-sans-bold'
+    },
+    choice: {
+        paddingHorizontal: 10,
+        height: 30,
+        fontFamily: 'open-sans'
     },
     titleContainer: {
         backgroundColor: 'rgba(0,0,0,0.5)',
@@ -75,7 +91,7 @@ const styles = StyleSheet.create({
       title: {
         fontFamily: 'open-sans-bold',
         fontSize: 20,
-        color: 'white',
+        color: Colors.primary,
         textAlign: 'center'
       }
 

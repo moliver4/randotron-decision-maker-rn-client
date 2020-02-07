@@ -9,6 +9,7 @@ const initialState = {
     id: null
   },
   questions: [],
+  loaded: false,
   currentQuestion: {}
 };
 
@@ -27,6 +28,7 @@ const initialState = {
       return {
         ...state,
         isLoggedIn: false,
+        loaded: true,
         user: {...state.user, 
           ...action.user
         }
@@ -34,7 +36,8 @@ const initialState = {
     case LOAD_QUESTIONS:
       return {
         ...state,
-        questions: action.questions
+        questions: action.questions,
+        loaded: true
       } 
     case LOAD_CURRENT_QUESTION:
       return {

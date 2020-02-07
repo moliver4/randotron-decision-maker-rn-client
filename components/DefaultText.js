@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, StyleSheet } from 'react-native';
+import Colors  from '../constants/Colors';
 
 
 const DefaultText = props => {
@@ -8,7 +9,8 @@ const DefaultText = props => {
 
 const styles = StyleSheet.create({
   text: {
-    fontFamily: 'open-sans'
+    fontFamily: 'open-sans',
+    color: Colors.primary
   }
 });
 

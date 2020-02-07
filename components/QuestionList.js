@@ -27,13 +27,13 @@ const QuestionList = props => {
   return (
     <View style={styles.list}>
         <DefaultText>
-            {props.questions.length <1 ? 'No decisions yet! Let us help you make some!': 'Here are your previous decisions' } 
+            {props.questions.length <1 ? 'No decisions yet! Let us help you make some!': 'Here are your previous decisions:' } 
         </DefaultText>
       <FlatList
         data={props.questions}
         keyExtractor={(item, index) => `question-${index}`}
         renderItem={renderQuestionItem}
-        style={{ width: '100%' }}
+        style={{ width: '100%', paddingTop: 20 }}
       />
     </View>
   );
@@ -42,9 +42,9 @@ const QuestionList = props => {
 const styles = StyleSheet.create({
   list: {
     flex: 1,
+    alignSelf: 'stretch',
     justifyContent: 'center',
     alignItems: 'center',
-
     marginTop: 20
   }
 });
