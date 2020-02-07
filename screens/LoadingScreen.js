@@ -28,7 +28,7 @@ export default class LoadingScreen extends React.Component {
             <LinearGradient
             colors={[Colors.accent, Colors.extra]}
             start={{ x: 0, y: 0 }}
-          end={{ x: 0, y: 1 }}
+            end={{ x: 0, y: 1 }}
             style={styles.container}>
                 <Text style={styles.text}>One moment...</Text>
                 <ActivityIndicator size='large'/>

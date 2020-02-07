@@ -5,6 +5,7 @@ import MyGradient from '../components/MyGradient'
 import Colors from '../constants/Colors'
 import QuestionList from '../components/QuestionList';
 import { connect } from 'react-redux'
+import { LinearGradient } from 'expo-linear-gradient'
 import {loadQuestions, logout} from '../store/actions/questions'
 
 
@@ -12,7 +13,11 @@ import {loadQuestions, logout} from '../store/actions/questions'
 const DashboardScreen = props => {
   
         return (
-            <View style={styles.container}>
+            <LinearGradient
+            colors={[Colors.accent, Colors.extra]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0, y: 1 }}
+            style={styles.container}>
                 {props.isLoggedIn? 
                 <Text style={styles.text}>
                     Hey { props.user.name }!
@@ -26,18 +31,23 @@ const DashboardScreen = props => {
                 }
                 {props.isLoggedIn? <QuestionList questions={props.questions} navigation={props.navigation}/> : null}
           
-            </View>
+            </LinearGradient>
         )
 }
     
 
 
 DashboardScreen.navigationOptions = props => {
- 
       return {
         headerTitle: 'Your Decisions', 
+
         headerRight: (
-          <Ionicons name="ios-log-out" size={20} color={Colors.primary} style={{paddingRight: 10}} onPress={() => {
+          <Button
+            title='Logout' 
+            color='white'
+            accessibilityLabel='back to login screen'
+            style={styles.button} 
+            onPress={() => {
                 props.navigation.navigate('Auth');
               }}
             />
@@ -53,8 +63,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
-      marginTop: 40,
-      marginBottom: 50
+
     },
     greeting: {
       alignItems: 'center',
@@ -64,6 +73,10 @@ const styles = StyleSheet.create({
     text: {
       fontFamily: 'open-sans-bold',
       color: Colors.primary
+    },
+    button: {
+      paddingRight: 10,
+      width: 10
     }
   });
   

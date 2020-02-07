@@ -22,9 +22,10 @@ import Colors from '../constants/Colors';
 
 const defaultNavOptions = {
   headerStyle: {
- 
-    backgroundColor: Platform.OS === 'android' ? Colors.extra : Colors.accent
+    backgroundColor: Platform.OS === 'android' ? Colors.extra : Colors.accent,
+    borderBottomWidth: 0
   },
+
   headerTitleStyle: {
     fontFamily: 'open-sans-bold'
   },
