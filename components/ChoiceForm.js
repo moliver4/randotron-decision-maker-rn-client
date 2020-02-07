@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, TextInput, Text, Button, StyleSheet } from 'react-native';
+import { View, TextInput, KeyboardAvoidingView, Text, Button, StyleSheet } from 'react-native';
 import NumericInput from 'react-native-numeric-input'
 import Colors from '../constants/Colors';
 
-const ChoiceForm = ( { newChoice, titleChange, reasonChange, weightChange, submitAddChoice, cancelAddChoice }) => {
+const ChoiceForm = ( { newChoice, titleChange, weightChange, submitAddChoice, cancelAddChoice }) => {
 
    
     return (
@@ -51,7 +51,7 @@ const ChoiceForm = ( { newChoice, titleChange, reasonChange, weightChange, submi
 
 const styles = StyleSheet.create({
     container: {
-       justifyContent: 'space-between',
+       justifyContent: 'center',
        width: '80%'
     },
     text: {

@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Alert, Text, Button, TextInput, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, StyleSheet } from 'react-native';
+import { View, Alert, Text, ScrollView, Button, TextInput, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, StyleSheet } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import ChoiceForm from '../components/ChoiceForm'
 import QuestionForm from '../components/QuestionForm'
 import ChoiceCard from '../components/ChoiceCard'
@@ -100,16 +101,25 @@ class FormScreen extends React.Component {
             }
         })
     }
-
-    renderChoices = () => {
-        if (this.state.choices.length < 1) {
-            return
-        }
-        console.log(this.state.choices)
+    showChoices = () => {
         return this.state.choices.map ((choice, index) => {
             return <ChoiceCard choice={choice} key={index} index={index} deleteChoice={this.deleteChoiceHandler} decision={this.state.decision}/>
         })
     }
+    renderChoices = () => {
+        if (this.state.choices.length < 1) {
+            return
+        }
+     
+        return  (
+            <ScrollView style={styles.choiceContainer}>
+                {this.showChoices()}
+            </ScrollView>
+        )
+        
+    }
+
+    
 
     deleteChoiceHandler = (obj) => {
         this.setState((prevState) => {
@@ -224,14 +234,13 @@ class FormScreen extends React.Component {
   render() {
     let { newChoice, newQuestion, isEditing } = this.state
     return (
-        <TouchableWithoutFeedback onPress={()=> Keyboard.dismiss()}>
-            <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
-                <QuestionForm newQuestion={newQuestion} handleNewQuestionChange={this.handleNewQuestionChange}/>
+        <TouchableWithoutFeedback style = {{flex:1}} onPress={()=> Keyboard.dismiss()}>
+            <KeyboardAwareScrollView contentContainerStyle={styles.container} extraScrollHeight={150}>
                 
-                <View style={styles.choiceContainer}>
+                    <QuestionForm newQuestion={newQuestion} handleNewQuestionChange={this.handleNewQuestionChange}/>
+               
                     {this.renderChoices()}
-                </View>
-
+            
                 {!isEditing? <Button title='Add Choice' onPress={this.addChoice}/> : null}
                 {isEditing ? <ChoiceForm 
                     newChoice={newChoice} 
@@ -244,11 +253,12 @@ class FormScreen extends React.Component {
                 <View >
                     <Button title='Submit'onPress={() => this.handleSubmitforDecision(this.props)}/>
                 </View>
-                
+           
                     
-            </KeyboardAvoidingView>
-
+            </KeyboardAwareScrollView>
         </TouchableWithoutFeedback>
+
+       
     )
   }
 }
@@ -257,15 +267,16 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#fff",
         alignItems: "center",
-        justifyContent: "space-evenly"
+        paddingVertical: 50
       },
       choiceContainer: {
-        width: '80%'
+        width: '100%',
+        maxHeight: '60%'
       },
       questionContainer: {
+        marginTop: 50, 
         width: '100%',
-        alignItems: "center",
-        marginBottom: 50,
+        alignItems: "center"
       },
 
 })

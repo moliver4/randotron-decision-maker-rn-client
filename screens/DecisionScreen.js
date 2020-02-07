@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import { addQuestion, loadCurrentQuestion, loadQuestions } from '../store/actions/questions'
 
 
-const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurrentQuestion, loadQuestions } ) => {
+const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurrentQuestion, editQuestion, loadQuestions } ) => {
   console.log('current question object on Decision screen', currentQuestion)
     const isOld = navigation.getParam('oldDecision', false)
     //if it is old, then load the current question in store with the question object given to us 
@@ -89,11 +89,11 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
       <View style={styles.container}>
           
           <QuestionCard question= {question}/>
-
+          <DecisionCard choice={decisionChoice} />
           <View style={styles.choiceContainer}>
             {renderChoices()}
           </View>
-          <DecisionCard choice={decisionChoice} />
+          
           {isLoggedIn? <Button title="Delete This Question" onPress={deleteQuestion}/> : null }
           <Button title='ReRun' onPress={reRun}/>
           {isOld? null : <Button title="New Question" onPress={navigateBack}/>}
@@ -124,6 +124,7 @@ const mapDispatchtoProps = dispatch => {
   return {
       loadQuestions: (questions) => dispatch(loadQuestions(questions)), 
       addQuestion: (question) => dispatch(addQuestion(question)),
+      editQuestion: (question) => dispatch(editQuestion(question)),
       loadCurrentQuestion: (question) => dispatch(loadCurrentQuestion(question))
     }
 }
