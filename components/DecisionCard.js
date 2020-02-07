@@ -1,17 +1,18 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
+import FadeInView from './AnimatedView'
 
 
 const DecisionCard = ( { choice } ) => {
   console.log(choice.title)
 
   return (
-    <View style={styles.container}>
+    <FadeInView style={styles.container}>
         <Text>
             Your Answer:
             {choice.title}
         </Text>
-    </View>
+    </FadeInView>
   );
 };
 
