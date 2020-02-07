@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Divider } from 'react-native-elements';
+import Colors from '../constants/Colors'
 
 const HelpInfo = () => {
     return (
@@ -52,7 +53,8 @@ const styles = StyleSheet.create({
     text: {
         textAlign: 'center',
         fontFamily: 'open-sans',
-        paddingBottom: 8
+        paddingBottom: 8,
+        color: Colors.primary
     }
 })
 

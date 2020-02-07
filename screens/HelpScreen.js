@@ -4,6 +4,7 @@ import MyGradient from '../components/MyGradient'
 import HelpInfo from '../components/HelpInfo'
 
 
+
  class HelpScreen extends React.Component {
 
 
