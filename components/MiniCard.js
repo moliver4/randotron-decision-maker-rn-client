@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import DefaultText from './DefaultText';
+import { TouchableOpacity} from 'react-native-gesture-handler';
+
 import { connect } from 'react-redux'
 import Colors from '../constants/Colors'
 import { loadCurrentQuestion} from '../store/actions/questions'
@@ -9,6 +9,8 @@ import { loadCurrentQuestion} from '../store/actions/questions'
 const MiniCard = ( props ) => {
     // console.log(props)
     //props have index, onselect question, question object with all the info
+
+
     const handleSelectQuestion = () => {
         props.loadCurrentQuestion(props.question)
         props.onSelectQuestion()
@@ -25,25 +27,26 @@ const MiniCard = ( props ) => {
 
     }
     return (
-        <View style={styles.card}>
-            <TouchableOpacity onPress={handleSelectQuestion}> 
-                <View>
-                    <View style={{...styles.row, ...styles.header }}>
-                
-                            <Text style={styles.title} numberOfLines={1}>
-                                
-                                {props.question.question.title}
-                            </Text>
-                       
+           
+                <TouchableOpacity  style={styles.card} onPress={handleSelectQuestion}> 
+                    <View>
+                        <View style={{...styles.row, ...styles.header }}>
+                    
+                                <Text style={styles.title} numberOfLines={1}>
+                                    
+                                    {props.question.question.title}
+                                </Text>
+                        
+                        </View>
+            
+                    <View style={{ ...styles.row, ...styles.decision }}>
+                        {showChoices()}
                     </View>
-          
-                <View style={{ ...styles.row, ...styles.decision }}>
-                    {showChoices()}
-                </View>
-                
-                </View>
-            </TouchableOpacity>
-        </View>
+                    
+                    </View>
+                </TouchableOpacity>
+    
+  
     );
 }
 

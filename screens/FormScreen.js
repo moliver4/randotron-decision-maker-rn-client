@@ -7,7 +7,6 @@ import { connect } from 'react-redux'
 import Calculator from '../services/Calculator'
 import ServerAdapter from '../services/ServerAdapter'
 import { addQuestion, loadCurrentQuestion, loadQuestions } from '../store/actions/questions'
-// import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const INITIAL_STATE = {
         isEditing: false,
@@ -168,7 +167,7 @@ class FormScreen extends React.Component {
                 choices: data.choices,
                 decision: decision
             }
-        }, () => this.reloadQuestions())
+        }, () => this.handleFinalNavigation())
      )
     }
 
@@ -186,22 +185,22 @@ class FormScreen extends React.Component {
         }, () => this.handleFinalNavigation())
     }
 
-    reloadQuestions = () => {
-        if (this.props.isLoggedIn){
-            let promise = ServerAdapter.getSignedInUser(this.props.user.id)
-            promise.then(data => this.handleUserData(data))
-        }
-        else {
-            console.log('user not logged in right now')
-        }
-    }
+    // reloadQuestions = () => {
+    //     if (this.props.isLoggedIn){
+    //         let promise = ServerAdapter.getSignedInUser(this.props.user.id)
+    //         promise.then(data => this.handleUserData(data))
+    //     }
+    //     else {
+    //         console.log('user not logged in right now')
+    //     }
+    // }
 
-    handleUserData = (data) => {
-        if (data.questions.length > 0) {
-          this.props.loadQuestions(data.questions)
-        }
-        this.handleFinalNavigation()
-      }
+    // handleUserData = (data) => {
+    //     if (data.questions.length > 0) {
+    //       this.props.loadQuestions(data.questions)
+    //     }
+    //     this.handleFinalNavigation()
+    // }
 
     //can be used regardless of if user is signed in or not
     handleFinalNavigation = () => {
@@ -210,7 +209,7 @@ class FormScreen extends React.Component {
             choices: this.state.choices,
             decision: this.state.decision
         }  
-        console.log('BODY OF NOT LOGGED IN', body)
+        this.props.addQuestion(body)
         this.props.loadCurrentQuestion(body)
         this.props.navigation.navigate('Decision', {
             clearForm: this.clearForm
