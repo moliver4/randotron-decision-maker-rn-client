@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Animated, Image, Button, StyleSheet } from 'react-native';
 import ChoiceCard from '../components/ChoiceCard'
 import DecisionCard from '../components/DecisionCard'
@@ -10,11 +10,10 @@ import { addQuestion, loadCurrentQuestion, loadQuestions } from '../store/action
 
 
 const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurrentQuestion, editQuestion, loadQuestions } ) => {
-  const [springValue, setSpringValue] = useState(new Animated.Value(0.3))
-
-  componentDidMount =() => {
-    spring()
-  }
+  const [springValue] = useState(new Animated.Value(0.3))
+  React.useEffect(() => {
+    spring();
+  }, [])
   
   const spring = () => {
     springValue.setValue(0.3)
@@ -25,6 +24,10 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
         friction: 1
       }
     ).start()
+  }
+
+  componentDidMount =() => {
+    spring()
   }
 
   console.log('current question object on Decision screen', currentQuestion)
@@ -106,15 +109,14 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
     return (
       <View style={styles.container}>
    
-          
           <QuestionCard question= {question}/>
-
-          <View style={styles.choiceContainer}>
-            {renderChoices()}
-          </View>
           <Animated.View style={{ width: '80%', height: 50, backgroundColor: 'blue', transform: [{scale: springValue}] }} >
             <DecisionCard choice={decisionChoice} />
           </Animated.View>
+          <View style={styles.choiceContainer}>
+            {renderChoices()}
+          </View>
+          
           {isLoggedIn? <Button title="Delete This Question" onPress={deleteQuestion}/> : null }
           <Button title='ReRun' onPress={reRun}/>
           {isOld? null : <Button title="New Question" onPress={navigateBack}/>}
@@ -128,9 +130,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "space-evenly"
   },
   choiceContainer: {
+    maxHeight: '30%',
     width: '80%',
   },
 });

@@ -19,7 +19,7 @@ const DecisionCard = ( { choice } ) => {
   // }
 
   return (
-    <View style={styles.container}>
+    <View >
         <Text>
             Your Answer:
             {choice.title}
