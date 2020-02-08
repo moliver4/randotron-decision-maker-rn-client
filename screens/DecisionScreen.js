@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import React, { useState, Component } from 'react';
+import { View, Text, Animated, Image, Button, StyleSheet } from 'react-native';
 import ChoiceCard from '../components/ChoiceCard'
 import DecisionCard from '../components/DecisionCard'
 import QuestionCard from '../components/QuestionCard'
@@ -10,6 +10,23 @@ import { addQuestion, loadCurrentQuestion, loadQuestions } from '../store/action
 
 
 const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurrentQuestion, editQuestion, loadQuestions } ) => {
+  const [springValue, setSpringValue] = useState(new Animated.Value(0.3))
+
+  componentDidMount =() => {
+    spring()
+  }
+  
+  const spring = () => {
+    springValue.setValue(0.3)
+    Animated.spring(
+      springValue,
+      {
+        toValue: 1,
+        friction: 1
+      }
+    ).start()
+  }
+
   console.log('current question object on Decision screen', currentQuestion)
     const isOld = navigation.getParam('oldDecision', false)
     //if it is old, then load the current question in store with the question object given to us 
@@ -55,6 +72,7 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
       }
       loadCurrentQuestion(body)
       getUpdate()
+      spring()
     }
 
     //If a user is logged in, will send GET request for new user questions list and repopulate list of questions
@@ -87,13 +105,16 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
 
     return (
       <View style={styles.container}>
+   
           
           <QuestionCard question= {question}/>
-          <DecisionCard choice={decisionChoice} />
+
           <View style={styles.choiceContainer}>
             {renderChoices()}
           </View>
-          
+          <Animated.View style={{ width: '80%', height: 50, backgroundColor: 'blue', transform: [{scale: springValue}] }} >
+            <DecisionCard choice={decisionChoice} />
+          </Animated.View>
           {isLoggedIn? <Button title="Delete This Question" onPress={deleteQuestion}/> : null }
           <Button title='ReRun' onPress={reRun}/>
           {isOld? null : <Button title="New Question" onPress={navigateBack}/>}

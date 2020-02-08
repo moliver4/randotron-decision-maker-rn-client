@@ -1,18 +1,30 @@
-import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Button, Animated, Image, Easing, StyleSheet } from 'react-native';
 import FadeInView from './AnimatedView'
 
 
 const DecisionCard = ( { choice } ) => {
-  console.log(choice.title)
+ 
+  // const [springValue, setSpringValue] = useState(new Animated.Value(0.3))
+
+  // const spring = () => {
+  //   this.springValue.setValue(0.3)
+  //   Animated.spring(
+  //     this.springValue,
+  //     {
+  //       toValue: 1,
+  //       friction: 1
+  //     }
+  //   ).start()
+  // }
 
   return (
-    <FadeInView style={styles.container}>
+    <View style={styles.container}>
         <Text>
             Your Answer:
             {choice.title}
         </Text>
-    </FadeInView>
+    </View>
   );
 };
 
