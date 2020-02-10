@@ -6,14 +6,13 @@ const QuestionForm = (props) => {
     return (
         <TouchableWithoutFeedback  onPress={()=> Keyboard.dismiss()}>
             <View style={styles.questionContainer}>
-                <Text style={styles.text} htmlFor='decision'>What's the Question?</Text>
+                <Text style={styles.text} htmlFor='decision'>What can we help you with?</Text>
 
                 <TextInput 
                     style={styles.input} 
                     value={props.newQuestion.title} 
                     onChangeText={text=> props.handleNewQuestionChange(text)} 
                     placeholder="Your Question Here"
-                    placeholderTextColor='grey'
                 />
             </View>
         </TouchableWithoutFeedback>
@@ -35,7 +34,7 @@ const styles = StyleSheet.create({
         height: 30,
         width: '70%',
         borderBottomColor: 'white',
-        borderBottomWidth: 1,
+        borderBottomWidth: 2,
         marginVertical: 10
     }
 })
