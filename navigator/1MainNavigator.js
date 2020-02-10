@@ -149,8 +149,7 @@ const DashboardNewHelpTabNavigator =
         shifting: true,
         barStyle: {
           backgroundColor: Colors.extra
-        },
-        initialRouteName: 'New'
+        }
       }
       )
     : createBottomTabNavigator(tabScreenConfig, {
@@ -159,8 +158,7 @@ const DashboardNewHelpTabNavigator =
             fontFamily: 'open-sans'
           },
           activeTintColor: Colors.extra
-        },
-        initialRouteName: 'New'
+        }
       }
 
   );

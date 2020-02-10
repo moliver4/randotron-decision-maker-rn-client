@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
 import { View, Text, Dimensions, StyleSheet } from 'react-native';
+
 let winSize = Dimensions.get('window');
 
 const DecisionCard = ( { choice } ) => {
 
   return (
-    <View style={styles.container}>
+ 
         <Text style={styles.answer}> 
           {choice.title}
         </Text>
-    </View>
+
   );
 };
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
+      padding: 10,
+      flexShrink: 1,
       alignItems: "center",
       justifyContent: 'center',
       textAlign: 'center'

@@ -110,8 +110,6 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
     //If a user is logged in, will send GET request for new user questions list and repopulate list of questions
     const getUpdate = (body) => {
       if (isLoggedIn) {
-        // let promise = ServerAdapter.getSignedInUser(user.id)
-        // promise.then(data => handleUserData(data))
         editQuestion(body)
       } 
     }
@@ -151,7 +149,7 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
             style={styles.container}>
    
           <QuestionCard question= {question}/>
-          <Animated.View style={{ width: '80%', alignItems: "center", borderRadius: 15, height: 50, backgroundColor: Colors.accent, transform: [{scale: springValue}] }} >
+          <Animated.View style={{ width: '80%', alignItems: "center", justifyContent: 'center', flexShrink: 1, padding: 10, borderRadius: 15, height: 50, backgroundColor: Colors.accent, transform: [{scale: springValue}] }} >
             <DecisionCard choice={decisionChoice} />
           </Animated.View>
          

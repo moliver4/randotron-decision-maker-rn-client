@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput, Text, TouchableWithoutFeedback, StyleSheet } from 'react-native';
+import { View, TextInput, Text, TouchableWithoutFeedback, Keyboard, StyleSheet } from 'react-native';
 import Colors from '../constants/Colors';
 
 const QuestionForm = (props) => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { View, Alert, Text, ScrollView, Keyboard, Dimensions, TouchableOpacity, StyleSheet } from 'react-native';
 import { KeyboardAwareScrollView, KeyboardAwareFlatList } from 'react-native-keyboard-aware-scroll-view'
 import { LinearGradient } from 'expo-linear-gradient'
@@ -241,6 +241,7 @@ class FormScreen extends React.Component {
             this.props.addQuestion(body)
         }
         this.props.loadCurrentQuestion(body)
+        this.clearForm()
         this.props.navigation.navigate('Decision', {
             clearForm: this.clearForm
         })

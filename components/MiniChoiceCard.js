@@ -8,7 +8,7 @@ const MiniChoiceCard = ({ choice, index} ) => {
         <View style={styles.card}>
             <View style={styles.row}>
                 <View style={styles.column}>
-                    <Text> Choice {index+1}: {choice.title} </Text>
+                    <Text > Choice {index+1}: {choice.title} </Text>
                 </View>
                 <View style={styles.column}>
                     <Text> Weight: {choice.weight} </Text>
@@ -38,7 +38,9 @@ const styles=StyleSheet.create({
         alignItems: 'center',
     },
     column: {
-        alignItems: 'center'
+        flexShrink: 1,
+        alignItems: 'center',
+        paddingHorizontal: 5
     }
 })
 
