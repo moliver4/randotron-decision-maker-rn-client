@@ -28,7 +28,6 @@ const ChoiceForm = ( { newChoice, titleChange, weightChange, submitAddChoice, ca
                     <Text style={styles.text}>(Optional)</Text>
                     
                     <NumericInput 
-                        type='up-down' 
                         value={newChoice.weight} 
                         minValue={1}
                         maxValue={10}

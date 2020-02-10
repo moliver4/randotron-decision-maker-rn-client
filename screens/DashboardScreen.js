@@ -1,12 +1,13 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button, ActivityIndicator} from 'react-native';
+import { View, Text, StyleSheet, Button, ActivityIndicator, TouchableOpacity} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-
 import Colors from '../constants/Colors'
 import QuestionList from '../components/QuestionList';
 import { connect } from 'react-redux'
 import { LinearGradient } from 'expo-linear-gradient'
 import {loadQuestions, logout} from '../store/actions/questions'
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import LogoutButton from '../components/LogoutButton';
 
 
 
@@ -48,19 +49,20 @@ const DashboardScreen = props => {
     
 
 
-DashboardScreen.navigationOptions = props => {
+DashboardScreen.navigationOptions = navData => {
       return {
         headerTitle: 'Your Decisions', 
         headerRight: (
-          <Button
-            title='Logout' 
-            color='white'
+        <HeaderButtons HeaderButtonComponent={LogoutButton}>
+          <Item
+            title="logout"
             accessibilityLabel='back to login screen'
-            style={styles.button} 
+            iconName="logout"
             onPress={() => {
-                props.navigation.navigate('Auth');
-              }}
-            />
+              navData.navigation.navigate('Auth');
+            }}
+          />
+      </HeaderButtons>
         )
       };
   
@@ -83,10 +85,7 @@ const styles = StyleSheet.create({
       fontFamily: 'open-sans-bold',
       color: Colors.primary
     },
-    button: {
-      paddingRight: 10,
-      width: 10
-    }
+
   });
   
 const mapStateToProps = state => {

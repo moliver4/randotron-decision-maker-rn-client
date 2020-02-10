@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Animated, Image, Button, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient'
 import Colors from '../constants/Colors'
-import ChoiceCard from '../components/ChoiceCard'
+import MiniChoiceCard from '../components/MiniChoiceCard'
 import DecisionCard from '../components/DecisionCard'
 import QuestionCard from '../components/QuestionCard'
 import Calculator from '../services/Calculator'
@@ -42,7 +42,7 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
 
     const renderChoices = () => {
       return choices.map ((choice, index) => {
-          return <ChoiceCard choice={choice} key={`choice-${index}`} index={index} />
+          return <MiniChoiceCard choice={choice} key={`choice-${index}`} index={index} />
       })
     }
 

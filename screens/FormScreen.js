@@ -2,13 +2,17 @@ import React from 'react';
 import { View, Alert, Text, ScrollView, Button, TextInput, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, StyleSheet } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { LinearGradient } from 'expo-linear-gradient'
+import { AntDesign } from '@expo/vector-icons';
 import ChoiceForm from '../components/ChoiceForm'
+import LogoutButton from '../components/LogoutButton'
 import QuestionForm from '../components/QuestionForm'
 import Colors from '../constants/Colors'
 import ChoiceCard from '../components/ChoiceCard'
 import { connect } from 'react-redux'
 import Calculator from '../services/Calculator'
 import ServerAdapter from '../services/ServerAdapter'
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+
 import { addQuestion, loadCurrentQuestion, loadQuestions } from '../store/actions/questions'
 
 const INITIAL_STATE = {
@@ -19,7 +23,7 @@ const INITIAL_STATE = {
         choices: [],
         newChoice: {
             title: '',
-            weight: null
+            weight: 1
         },
         decision: null
     }
@@ -112,6 +116,13 @@ class FormScreen extends React.Component {
         if (this.state.choices.length < 1) {
             return
         }
+        if (this.state.choices.length < 3) {
+            return (
+                <View style={styles.choiceContainer}>
+                    {this.showChoices()}
+                </View>
+            )
+        }
      
         return  (
             <ScrollView style={styles.choiceContainer}>
@@ -135,12 +146,9 @@ class FormScreen extends React.Component {
 
 
       handleSubmitforDecision = (props) => {
-        if(this.state.newQuestion.title.length < 1) {
-            Alert.alert('Oops!', 'Please at least enter *something* as your question.', [{text: 'Okay', style: 'destructive'}])
-            return
-        }
+
         if(this.state.choices.length < 2 ) {
-            Alert.alert('Oops!', 'You need at least 2 choices to make a decision...', [{text: 'Okay', style: 'destructive'}])
+            Alert.alert('Oops!', 'We need at least 2 choices to make a decision...', [{text: 'Okay', style: 'destructive'}])
             return
         }
         if (props.user.id !== null) {
@@ -291,8 +299,19 @@ const styles = StyleSheet.create({
 
 FormScreen.navigationOptions = navData => {
     return {
-      headerTitle: 'New Question'
-    };
+      headerTitle: 'New Question',
+      headerRight: (
+        <HeaderButtons HeaderButtonComponent={LogoutButton}>
+          <Item
+            title="logout"
+            accessibilityLabel='back to login screen'
+            iconName="logout"
+            onPress={() => {
+              navData.navigation.navigate('Auth');
+            }}
+          />
+      </HeaderButtons>
+      )};
   };
 
   const mapStatetoProps = state => {

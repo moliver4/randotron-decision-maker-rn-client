@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View, Text, Dimensions, StyleSheet } from 'react-native';
-import FadeInView from './AnimatedView'
 let winSize = Dimensions.get('window');
 
 const DecisionCard = ( { choice } ) => {
