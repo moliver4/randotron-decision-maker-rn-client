@@ -1,21 +1,22 @@
 import React from 'react';
-import { View, TextInput, Text, Button, StyleSheet } from 'react-native';
+import { View, TextInput, Text, TouchableWithoutFeedback, StyleSheet } from 'react-native';
 import Colors from '../constants/Colors';
 
 const QuestionForm = (props) => {
     return (
-        <View style={styles.questionContainer}>
-            <Text style={styles.text} htmlFor='decision'>What's the Question?</Text>
+        <TouchableWithoutFeedback  onPress={()=> Keyboard.dismiss()}>
+            <View style={styles.questionContainer}>
+                <Text style={styles.text} htmlFor='decision'>What's the Question?</Text>
 
-            <TextInput 
-                style={styles.input} 
-                value={props.newQuestion.title} 
-                onChangeText={text=> props.handleNewQuestionChange(text)} 
-                placeholder="Your Question Here"
-                placeholderTextColor='grey'
-            />
-
-        </View>
+                <TextInput 
+                    style={styles.input} 
+                    value={props.newQuestion.title} 
+                    onChangeText={text=> props.handleNewQuestionChange(text)} 
+                    placeholder="Your Question Here"
+                    placeholderTextColor='grey'
+                />
+            </View>
+        </TouchableWithoutFeedback>
     );
 }
 const styles = StyleSheet.create({

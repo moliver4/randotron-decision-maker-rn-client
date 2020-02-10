@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput, KeyboardAvoidingView, Text, Button, StyleSheet } from 'react-native';
+import { View, TextInput, TouchableWithoutFeedback, Text, Button, StyleSheet } from 'react-native';
 import NumericInput from 'react-native-numeric-input'
 import Colors from '../constants/Colors';
 
@@ -7,7 +7,8 @@ const ChoiceForm = ( { newChoice, titleChange, weightChange, submitAddChoice, ca
 
    
     return (
-        <View style={styles.container}>
+        <TouchableWithoutFeedback onPress={()=> Keyboard.dismiss()}>
+            <View style={styles.container}>
             <View >
 
                 <View style={styles.choiceInputContainer}> 
@@ -43,7 +44,8 @@ const ChoiceForm = ( { newChoice, titleChange, weightChange, submitAddChoice, ca
                 <Button title='cancel' onPress={cancelAddChoice}/>
                 <Button title='save choice' onPress={submitAddChoice}/>
             </View>
-        </View>
+            </View>
+        </TouchableWithoutFeedback>
             
     )
 }

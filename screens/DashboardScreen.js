@@ -29,6 +29,7 @@ const DashboardScreen = props => {
               start={{ x: 0, y: 0 }}
               end={{ x: 0, y: 1 }}
               style={styles.container}> 
+
                   {props.isLoggedIn? 
                   <Text style={styles.text}>
                       Hey { props.user.name }!
@@ -40,7 +41,7 @@ const DashboardScreen = props => {
                     <Text style={styles.text}> Your Answers Won't Be Saved :( </Text>
                   </View>
                   }
-                  {props.isLoggedIn? <QuestionList questions={props.questions} navigation={props.navigation}/> : null}
+                  {props.questions.length > 0 ? <QuestionList questions={props.questions} navigation={props.navigation}/> : null}
                 
           
             </LinearGradient>

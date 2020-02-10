@@ -1,13 +1,15 @@
 import React from 'react';
-import { View, Alert, Text, ScrollView, Button, TextInput, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, StyleSheet } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { View, Alert, Text, ScrollView, FlatList, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, StyleSheet } from 'react-native';
+import { KeyboardAwareScrollView, KeyboardAwareFlatList } from 'react-native-keyboard-aware-scroll-view'
 import { LinearGradient } from 'expo-linear-gradient'
 import { AntDesign } from '@expo/vector-icons';
 import ChoiceForm from '../components/ChoiceForm'
 import LogoutButton from '../components/LogoutButton'
+
 import QuestionForm from '../components/QuestionForm'
 import Colors from '../constants/Colors'
 import ChoiceCard from '../components/ChoiceCard'
+import MainButton from '../components/MainButton';
 import { connect } from 'react-redux'
 import Calculator from '../services/Calculator'
 import ServerAdapter from '../services/ServerAdapter'
@@ -112,6 +114,11 @@ class FormScreen extends React.Component {
             return <ChoiceCard choice={choice} key={index} index={index} deleteChoice={this.deleteChoiceHandler} decision={this.state.decision}/>
         })
     }
+    showListChoices = (itemData) => {
+       
+        return <ChoiceCard choice={itemData.item} deleteChoice={this.deleteChoiceHandler} decision={this.state.decision}/>
+   
+    }
     renderChoices = () => {
         if (this.state.choices.length < 1) {
             return
@@ -125,9 +132,13 @@ class FormScreen extends React.Component {
         }
      
         return  (
-            <ScrollView style={styles.choiceContainer}>
-                {this.showChoices()}
-            </ScrollView>
+            <KeyboardAwareFlatList
+                data={this.state.choices}
+                keyExtractor={(item, index) => `choice-${index}`}
+                renderItem={this.showListChoices}
+                style={styles.choiceContainer}
+            />
+ 
         )
         
     }
@@ -244,19 +255,22 @@ class FormScreen extends React.Component {
   render() {
     let { newChoice, newQuestion, isEditing } = this.state
     return (
-        <TouchableWithoutFeedback style = {{flex:1}} onPress={()=> Keyboard.dismiss()}>
+        
          <LinearGradient
               colors={[Colors.accent, Colors.extra]}
               start={{ x: 0, y: 0 }}
               end={{ x: 0, y: 1 }}
-              style = {{flex:1}}> 
+              style={{flex:1}}> 
             <KeyboardAwareScrollView contentContainerStyle={styles.container} extraScrollHeight={150}>
                 
                     <QuestionForm newQuestion={newQuestion} handleNewQuestionChange={this.handleNewQuestionChange}/>
                
                     {this.renderChoices()}
             
-                {!isEditing? <Button title='Add Choice' onPress={this.addChoice}/> : null}
+                {!isEditing? 
+                    <TouchableOpacity style={styles.button} onPress={this.addChoice}> 
+                            <Text style={styles.buttonText}>Add Choice</Text>
+                    </TouchableOpacity> : null}
                 {isEditing ? <ChoiceForm 
                     newChoice={newChoice} 
                     titleChange={this.handleChoiceTitleChange} 
@@ -266,13 +280,15 @@ class FormScreen extends React.Component {
                 /> : null
                 }
                 <View >
-                    <Button title='Submit'onPress={() => this.handleSubmitforDecision(this.props)}/>
+                    <TouchableOpacity style={styles.button} onPress={() => this.handleSubmitforDecision(this.props)}> 
+                            <Text style={styles.buttonText}>Submit</Text>
+                    </TouchableOpacity>
                 </View>
            
                     
             </KeyboardAwareScrollView>
             </LinearGradient>
-        </TouchableWithoutFeedback>
+
 
        
     )
@@ -283,7 +299,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'transparent',
         alignItems: "center",
-        paddingVertical: 50
+        paddingVertical: 50,
+        justifyContent: 'space-evenly'
       },
       choiceContainer: {
         width: '100%',
@@ -294,6 +311,17 @@ const styles = StyleSheet.create({
         width: '100%',
         alignItems: "center"
       },
+      button: {
+        backgroundColor: Colors.accent,
+        paddingVertical: 7,
+        paddingHorizontal: 30,
+        borderRadius: 25,   
+      },
+      buttonText: {
+        color: Colors.extra,
+        fontFamily: 'open-sans-bold',
+        fontSize: 18
+      }
 
 })
 
