@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Button, Text, TextInput, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Button, Text, TextInput, ScrollView, Dimensions, StyleSheet } from 'react-native';
 
-const ChoiceCard = ({ choice, index, deleteChoice } ) => {
+const MiniChoiceCard = ({ choice, index} ) => {
 
     
     return (
@@ -21,6 +21,7 @@ const ChoiceCard = ({ choice, index, deleteChoice } ) => {
 const styles=StyleSheet.create({
     card: {
         shadowColor: 'black',
+        width: Dimensions.get('window').width * 0.85,
         shadowOffset: { width: 0, height: 2 },
         shadowRadius: 6,
         shadowOpacity: 0.26,
@@ -43,4 +44,4 @@ const styles=StyleSheet.create({
 
 
 
-export default ChoiceCard;
+export default MiniChoiceCard;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Animated, Image, Button, StyleSheet } from 'react-native';
+import { View, Text, Animated, FlatList, Dimensions, Button, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient'
 import Colors from '../constants/Colors'
 import MiniChoiceCard from '../components/MiniChoiceCard'
@@ -41,10 +41,40 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
       const clearForm = navigation.getParam('clearForm', 'nothing')
 
     const renderChoices = () => {
+        if (choices.length < 3) {
+            return (
+                <View style={styles.choiceContainer}>
+                    {showChoices()}
+                </View>
+            )
+        }
+     
+        return  (
+            <FlatList
+                data={choices}
+                keyExtractor={(item, index) => `choice-${index}`}
+                renderItem={showListChoices}
+                style={styles.choiceContainer}
+            />
+  
+        )
+        
+    }
+    
+
+
+    const showChoices = () => {
       return choices.map ((choice, index) => {
-          return <MiniChoiceCard choice={choice} key={`choice-${index}`} index={index} />
+          return <MiniChoiceCard choice={choice} key={index} index={index} />
       })
     }
+    const showListChoices = (itemData) => {     
+        return <MiniChoiceCard choice={itemData.item} index={itemData.index}/>
+    }
+  
+
+
+
 
     const reRun = () => {
       console.log('running again!')
@@ -124,9 +154,9 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
           <Animated.View style={{ width: '80%', alignItems: "center", borderRadius: 15, height: 50, backgroundColor: Colors.accent, transform: [{scale: springValue}] }} >
             <DecisionCard choice={decisionChoice} />
           </Animated.View>
-          <View style={styles.choiceContainer}>
+         
             {renderChoices()}
-          </View>
+   
           
           <View style={styles.buttonContainer}> 
             <Button title='ReRun' onPress={reRun}/>
@@ -146,7 +176,7 @@ const styles = StyleSheet.create({
   },
   choiceContainer: {
     maxHeight: '30%',
-    width: '80%',
+    width: Dimensions.get('window').width * 0.9,
   },
   buttonContainer: {
     alignItems: "center",

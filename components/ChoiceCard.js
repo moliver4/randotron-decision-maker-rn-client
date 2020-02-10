@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Button, Text, TextInput, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Button, Text, TextInput, Dimensions, StyleSheet } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
 const ChoiceCard = ({ choice, index, deleteChoice } ) => {

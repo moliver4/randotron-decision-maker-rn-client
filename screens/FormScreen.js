@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Alert, Text, ScrollView, Dimensions, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Alert, Text, ScrollView, Keyboard, Dimensions, TouchableOpacity, StyleSheet } from 'react-native';
 import { KeyboardAwareScrollView, KeyboardAwareFlatList } from 'react-native-keyboard-aware-scroll-view'
 import { LinearGradient } from 'expo-linear-gradient'
 import { AntDesign } from '@expo/vector-icons';
@@ -247,7 +247,6 @@ class FormScreen extends React.Component {
         
     }
 
-
   render() {
     let { newChoice, newQuestion, isEditing } = this.state
     return (
@@ -285,8 +284,6 @@ class FormScreen extends React.Component {
             </KeyboardAwareScrollView>
         </LinearGradient>
 
-
-       
     )
   }
 }
