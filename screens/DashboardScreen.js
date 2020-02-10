@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Button, ActivityIndicator} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import MyGradient from '../components/MyGradient'
+
 import Colors from '../constants/Colors'
 import QuestionList from '../components/QuestionList';
 import { connect } from 'react-redux'
@@ -70,7 +70,6 @@ DashboardScreen.navigationOptions = props => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
 

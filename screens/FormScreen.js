@@ -1,8 +1,10 @@
 import React from 'react';
 import { View, Alert, Text, ScrollView, Button, TextInput, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, StyleSheet } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { LinearGradient } from 'expo-linear-gradient'
 import ChoiceForm from '../components/ChoiceForm'
 import QuestionForm from '../components/QuestionForm'
+import Colors from '../constants/Colors'
 import ChoiceCard from '../components/ChoiceCard'
 import { connect } from 'react-redux'
 import Calculator from '../services/Calculator'
@@ -235,6 +237,11 @@ class FormScreen extends React.Component {
     let { newChoice, newQuestion, isEditing } = this.state
     return (
         <TouchableWithoutFeedback style = {{flex:1}} onPress={()=> Keyboard.dismiss()}>
+         <LinearGradient
+              colors={[Colors.accent, Colors.extra]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 0, y: 1 }}
+              style = {{flex:1}}> 
             <KeyboardAwareScrollView contentContainerStyle={styles.container} extraScrollHeight={150}>
                 
                     <QuestionForm newQuestion={newQuestion} handleNewQuestionChange={this.handleNewQuestionChange}/>
@@ -256,6 +263,7 @@ class FormScreen extends React.Component {
            
                     
             </KeyboardAwareScrollView>
+            </LinearGradient>
         </TouchableWithoutFeedback>
 
        
@@ -265,7 +273,7 @@ class FormScreen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
+        backgroundColor: 'transparent',
         alignItems: "center",
         paddingVertical: 50
       },

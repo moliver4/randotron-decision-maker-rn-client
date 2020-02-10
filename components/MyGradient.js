@@ -11,7 +11,7 @@ const MyGradient = (props) => {
             end={{ x: 1, y: 1 }}
             style={styles.container}>
             {props.children}
-            </LinearGradient>
+        </LinearGradient>
     );
 }
 

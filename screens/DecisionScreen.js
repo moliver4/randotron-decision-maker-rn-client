@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Animated, Image, Button, StyleSheet } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient'
+import Colors from '../constants/Colors'
 import ChoiceCard from '../components/ChoiceCard'
 import DecisionCard from '../components/DecisionCard'
 import QuestionCard from '../components/QuestionCard'
@@ -26,9 +28,7 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
     ).start()
   }
 
-  componentDidMount =() => {
-    spring()
-  }
+
 
   console.log('current question object on Decision screen', currentQuestion)
     const isOld = navigation.getParam('oldDecision', false)
@@ -107,7 +107,11 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
     }
 
     return (
-      <View style={styles.container}>
+      <LinearGradient
+            colors={[Colors.accent, Colors.extra]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0, y: 1 }}
+            style={styles.container}>
    
           <QuestionCard question= {question}/>
           <Animated.View style={{ width: '80%', height: 50, backgroundColor: 'blue', transform: [{scale: springValue}] }} >
@@ -120,7 +124,7 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
           {isLoggedIn? <Button title="Delete This Question" onPress={deleteQuestion}/> : null }
           <Button title='ReRun' onPress={reRun}/>
           {isOld? null : <Button title="New Question" onPress={navigateBack}/>}
-      </View>
+      </LinearGradient>
     );
 }
 
@@ -128,7 +132,6 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "space-evenly"
   },
