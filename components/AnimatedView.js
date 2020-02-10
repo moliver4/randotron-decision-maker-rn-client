@@ -5,8 +5,6 @@ const FadeInView = (props) => {
   const [fadeAnim] = useState(new Animated.Value(0))  // Initial value for opacity: 0
 
 
-  
-
   React.useEffect(() => {
     Animated.timing(
       fadeAnim,

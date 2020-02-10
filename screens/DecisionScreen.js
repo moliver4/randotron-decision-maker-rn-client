@@ -8,10 +8,10 @@ import QuestionCard from '../components/QuestionCard'
 import Calculator from '../services/Calculator'
 import ServerAdapter from '../services/ServerAdapter'
 import { connect } from 'react-redux'
-import { addQuestion, loadCurrentQuestion, loadQuestions } from '../store/actions/questions'
+import { addQuestion, loadCurrentQuestion, loadQuestions, editQuestion, deleteQuestion } from '../store/actions/questions'
 
 
-const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurrentQuestion, editQuestion, loadQuestions } ) => {
+const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurrentQuestion, editQuestion, loadQuestions, deleteQuestion } ) => {
   const [springValue] = useState(new Animated.Value(0.3))
   React.useEffect(() => {
     spring();
@@ -27,7 +27,6 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
       }
     ).start()
   }
-
 
 
   console.log('current question object on Decision screen', currentQuestion)
@@ -74,32 +73,40 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
         decision: dec
       }
       loadCurrentQuestion(body)
-      getUpdate()
+      getUpdate(body)
       spring()
     }
 
     //If a user is logged in, will send GET request for new user questions list and repopulate list of questions
-    const getUpdate = () => {
+    const getUpdate = (body) => {
       if (isLoggedIn) {
-        let promise = ServerAdapter.getSignedInUser(user.id)
-        promise.then(data => handleUserData(data))
+        // let promise = ServerAdapter.getSignedInUser(user.id)
+        // promise.then(data => handleUserData(data))
+        editQuestion(body)
       } 
     }
+
+    //TO DELETE LATER no longer need this function because not makign a server call. just updating state with current function. But then when user logs in next time, will be persisted.
     const handleUserData = (data) => {
       loadQuestions(data.questions)
     }
 
 
-    const deleteQuestion = () => {
+    const deleteQuestionHandler = () => {
       console.log('deleting this question', question.id)
       let prom = ServerAdapter.deleteQuestion(question.id)
-      prom.then(data => navigateBack(data))
+      prom.then(data => handleDelete(data))
+    }
+
+    const handleDelete = (question) => {
+      deleteQuestion(question)
+      navigateBack()
     }
 
     const navigateBack=(data) => {
       //whenever we navigate to form, we want to get update
-      console.log('question deleted, going back to form')
-      getUpdate()
+      // console.log('question deleted, going back to form')
+      // getUpdate()
       if (!isOld) {
         clearForm()
       }
@@ -121,8 +128,9 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
             {renderChoices()}
           </View>
           
-          {isLoggedIn? <Button title="Delete This Question" onPress={deleteQuestion}/> : null }
+          
           <Button title='ReRun' onPress={reRun}/>
+          {isLoggedIn? <Button title="Delete This Question" onPress={deleteQuestionHandler}/> : null }
           {isOld? null : <Button title="New Question" onPress={navigateBack}/>}
       </LinearGradient>
     );
@@ -143,7 +151,7 @@ const styles = StyleSheet.create({
 
 DecisionScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'Final Answer'
+    headerTitle: 'Decision'
   };
 };
 
@@ -152,6 +160,7 @@ const mapDispatchtoProps = dispatch => {
       loadQuestions: (questions) => dispatch(loadQuestions(questions)), 
       addQuestion: (question) => dispatch(addQuestion(question)),
       editQuestion: (question) => dispatch(editQuestion(question)),
+      deleteQuestion: (question) => dispatch(deleteQuestion(question)),
       loadCurrentQuestion: (question) => dispatch(loadCurrentQuestion(question))
     }
 }

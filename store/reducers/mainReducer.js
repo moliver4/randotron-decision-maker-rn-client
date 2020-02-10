@@ -1,5 +1,5 @@
 import { LOGIN, LOGOUT, GUEST } from '../actions/userAuth';
-import { LOAD_QUESTIONS, EDIT_QUESTION, LOAD_CURRENT_QUESTION, ADD_QUESTION } from '../actions/questions';
+import { LOAD_QUESTIONS, EDIT_QUESTION, LOAD_CURRENT_QUESTION, ADD_QUESTION, DELETE_QUESTION } from '../actions/questions';
 
 const initialState = {
   isLoggedIn: false,
@@ -40,10 +40,17 @@ const initialState = {
         loaded: true
       } 
     case EDIT_QUESTION: 
-      let newQuestions = state.questions.map(question => question.question.id === action.question.question.id? action.question : question)
+      let newQuestions = state.questions.filter(question => question.question.id !== action.question.question.id)
+      //places the edited question on top.
       return {
         ...state,
-        questions: newQuestions
+        questions: [action.question, ...newQuestions]
+      }
+    case DELETE_QUESTION:  
+      let notDeleted = state.questions.filter(question => question.question.id !== action.question.id)
+      return {
+        ...state,
+        questions: notDeleted
       }
     case LOAD_CURRENT_QUESTION:
       return {
@@ -51,7 +58,6 @@ const initialState = {
         currentQuestion: action.question
       }
     case ADD_QUESTION: 
-
       return {
         ...state,
         questions: [action.question, ...state.questions]
