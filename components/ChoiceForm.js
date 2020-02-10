@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput, TouchableWithoutFeedback, Text, Button, StyleSheet } from 'react-native';
+import { View, TextInput, TouchableWithoutFeedback, Dimensions, TouchableOpacity, Text, Keyboard, StyleSheet } from 'react-native';
 import NumericInput from 'react-native-numeric-input'
 import Colors from '../constants/Colors';
 
@@ -41,8 +41,14 @@ const ChoiceForm = ( { newChoice, titleChange, weightChange, submitAddChoice, ca
                 </View>
             </View>
             <View style={styles.buttonRow} >
-                <Button title='cancel' onPress={cancelAddChoice}/>
-                <Button title='save choice' onPress={submitAddChoice}/>
+                <TouchableOpacity style={styles.button} onPress={cancelAddChoice}> 
+                    <Text style={styles.cancelButtonText}>Cancel</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.button} onPress={submitAddChoice}> 
+                    <Text style={styles.buttonText}>Add</Text>
+                </TouchableOpacity>
+               
             </View>
             </View>
         </TouchableWithoutFeedback>
@@ -58,18 +64,42 @@ const styles = StyleSheet.create({
     text: {
         padding: 5,
         fontSize: 15,
-        fontFamily: 'open-sans'
+        fontFamily: 'open-sans',
+        color: Colors.primary
     },
     input: {
             height: 40,
-            borderBottomColor: 'grey',
+            borderBottomColor: 'white',
             borderBottomWidth: 1,
             marginVertical: 10
     },
     buttonRow: {
         flexDirection: 'row',
         justifyContent: 'space-evenly'
-    }
+    },
+    button: {
+        marginVertical: Dimensions.get('window').height / 40,
+        backgroundColor: 'white',
+        paddingVertical: 5,
+        width: Dimensions.get('window').width /4,
+        borderRadius: 25,   
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 5,
+        shadowOpacity: 0.26,
+        elevation: 5,
+        alignItems: 'center'
+      },
+      cancelButtonText: {
+        color: 'red',
+        fontFamily: 'open-sans',
+        fontSize: 14
+      },
+      buttonText: {
+        color: 'darkgreen',
+        fontFamily: 'open-sans',
+        fontSize: 14
+      }
 })
 
 

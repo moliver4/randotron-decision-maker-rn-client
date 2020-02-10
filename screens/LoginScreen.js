@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Modal, Text, Image, TouchableHighlight, StyleSheet } from 'react-native';
+import { View, Modal, Text, Image,  StyleSheet, Dimensions } from 'react-native';
 import { SocialIcon, Button } from 'react-native-elements'
 import MyGradient from '../components/MyGradient'
 import InfoButton from '../components/InfoButton'
@@ -86,24 +86,25 @@ class LoginScreen extends React.Component {
           </View>
         </View>
     
-          <View style={styles.buttonContainer}>
+         
             <SocialIcon
                 title='Login with Google'
                 button
-                style={{height: 50}}
+                style={styles.buttonContainer}
+                raised
                 type='google'
                 Component={TouchableOpacity}
                 onPress={this.signInWithGoogle}
             />
-          </View>
+        
 
-          <View style={styles.buttonContainer}>
+     
             <Button 
-              buttonStyle={styles.buttonGuest} 
+              buttonStyle={styles.buttonGuest}
               raised 
               title="Continue as Guest" 
               onPress={this.continueAsGuest} />
-          </View>
+
           
           <InfoButton setModalVisible={this.setModalVisible}/>
           <Modal
@@ -162,15 +163,14 @@ const styles = StyleSheet.create({
     marginBottom: 100
   },
   buttonContainer: {
-    width: '80%',
-    height: 70,
+    width: Dimensions.get('window').width * 0.8,
+    height: Dimensions.get('window').height / 16,
     marginBottom: 10
   },
   buttonGuest: {
-    paddingHorizontal: 20,
-    height: 45,
-    borderRadius:70,
- 
+    height: Dimensions.get('window').height / 17,
+    borderRadius: 25,
+    width: Dimensions.get('window').width * 0.80
   },
   text: {
     color: 'slategrey',

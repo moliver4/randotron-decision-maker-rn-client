@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Alert, Text, ScrollView, FlatList, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Alert, Text, ScrollView, Dimensions, TouchableOpacity, StyleSheet } from 'react-native';
 import { KeyboardAwareScrollView, KeyboardAwareFlatList } from 'react-native-keyboard-aware-scroll-view'
 import { LinearGradient } from 'expo-linear-gradient'
 import { AntDesign } from '@expo/vector-icons';
@@ -9,7 +9,7 @@ import LogoutButton from '../components/LogoutButton'
 import QuestionForm from '../components/QuestionForm'
 import Colors from '../constants/Colors'
 import ChoiceCard from '../components/ChoiceCard'
-import MainButton from '../components/MainButton';
+
 import { connect } from 'react-redux'
 import Calculator from '../services/Calculator'
 import ServerAdapter from '../services/ServerAdapter'
@@ -103,7 +103,7 @@ class FormScreen extends React.Component {
                 isEditing: false,
                 newChoice: {
                     title: '',
-                    weight: null
+                    weight: 1
                 },
                 choices: [...prevState.choices, this.state.newChoice]
             }
@@ -114,10 +114,8 @@ class FormScreen extends React.Component {
             return <ChoiceCard choice={choice} key={index} index={index} deleteChoice={this.deleteChoiceHandler} decision={this.state.decision}/>
         })
     }
-    showListChoices = (itemData) => {
-       
-        return <ChoiceCard choice={itemData.item} deleteChoice={this.deleteChoiceHandler} decision={this.state.decision}/>
-   
+    showListChoices = (itemData) => {     
+        return <ChoiceCard choice={itemData.item} index={itemData.index} deleteChoice={this.deleteChoiceHandler} decision={this.state.decision}/>
     }
     renderChoices = () => {
         if (this.state.choices.length < 1) {
@@ -181,7 +179,6 @@ class FormScreen extends React.Component {
 
     findUserAnswer=(data) => {
         let final = Calculator.getDecision(data.choices)
-        console.log('here is my answer', final)
         let body = {
             question_id: data.question.id,
             choice_id: final.id
@@ -240,16 +237,15 @@ class FormScreen extends React.Component {
             choices: this.state.choices,
             decision: this.state.decision
         }  
-        this.props.addQuestion(body)
+        if (this.props.isLoggedIn) {
+            this.props.addQuestion(body)
+        }
         this.props.loadCurrentQuestion(body)
         this.props.navigation.navigate('Decision', {
             clearForm: this.clearForm
         })
         
     }
-
-
-    /////////////////////////////////////////////////////////
 
 
   render() {
@@ -267,10 +263,6 @@ class FormScreen extends React.Component {
                
                     {this.renderChoices()}
             
-                {!isEditing? 
-                    <TouchableOpacity style={styles.button} onPress={this.addChoice}> 
-                            <Text style={styles.buttonText}>Add Choice</Text>
-                    </TouchableOpacity> : null}
                 {isEditing ? <ChoiceForm 
                     newChoice={newChoice} 
                     titleChange={this.handleChoiceTitleChange} 
@@ -279,7 +271,11 @@ class FormScreen extends React.Component {
                     submitAddChoice={this.submitAddChoice}
                 /> : null
                 }
-                <View >
+                <View style={{justifyConteint: 'center', alignItems: 'center'}}>
+                    {!isEditing? 
+                    <TouchableOpacity style={styles.button} onPress={this.addChoice}> 
+                            <Text style={styles.buttonText}>+  Add Choice</Text>
+                    </TouchableOpacity> : null}
                     <TouchableOpacity style={styles.button} onPress={() => this.handleSubmitforDecision(this.props)}> 
                             <Text style={styles.buttonText}>Submit</Text>
                     </TouchableOpacity>
@@ -287,7 +283,7 @@ class FormScreen extends React.Component {
            
                     
             </KeyboardAwareScrollView>
-            </LinearGradient>
+        </LinearGradient>
 
 
        
@@ -312,14 +308,20 @@ const styles = StyleSheet.create({
         alignItems: "center"
       },
       button: {
-        backgroundColor: Colors.accent,
+        backgroundColor: 'white',
         paddingVertical: 7,
         paddingHorizontal: 30,
         borderRadius: 25,   
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 5,
+        shadowOpacity: 0.26,
+        elevation: 5,
+        marginVertical: Dimensions.get('window').height * 0.01
       },
       buttonText: {
         color: Colors.extra,
-        fontFamily: 'open-sans-bold',
+        fontFamily: 'open-sans',
         fontSize: 18
       }
 
