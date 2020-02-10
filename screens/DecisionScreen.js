@@ -121,17 +121,18 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
             style={styles.container}>
    
           <QuestionCard question= {question}/>
-          <Animated.View style={{ width: '80%', height: 50, backgroundColor: 'blue', transform: [{scale: springValue}] }} >
+          <Animated.View style={{ width: '80%', alignItems: "center", borderRadius: 15, height: 50, backgroundColor: Colors.accent, transform: [{scale: springValue}] }} >
             <DecisionCard choice={decisionChoice} />
           </Animated.View>
           <View style={styles.choiceContainer}>
             {renderChoices()}
           </View>
           
-          
-          <Button title='ReRun' onPress={reRun}/>
-          {isLoggedIn? <Button title="Delete This Question" onPress={deleteQuestionHandler}/> : null }
-          {isOld? null : <Button title="New Question" onPress={navigateBack}/>}
+          <View style={styles.buttonContainer}> 
+            <Button title='ReRun' onPress={reRun}/>
+            {isLoggedIn? <Button title="Delete This Question" onPress={deleteQuestionHandler}/> : null }
+            {isOld? null : <Button title="New Question" onPress={navigateBack}/>}
+          </View>
       </LinearGradient>
     );
 }
@@ -147,6 +148,10 @@ const styles = StyleSheet.create({
     maxHeight: '30%',
     width: '80%',
   },
+  buttonContainer: {
+    alignItems: "center",
+    justifyContent: "space-evenly"
+  }
 });
 
 DecisionScreen.navigationOptions = navData => {
