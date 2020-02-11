@@ -277,7 +277,7 @@ class FormScreen extends React.Component {
                             <Text style={styles.buttonText}>+  Add Choice</Text>
                     </TouchableOpacity> : null}
                     <TouchableOpacity style={styles.button} onPress={() => this.handleSubmitforDecision(this.props)}> 
-                            <Text style={styles.buttonText}>Submit</Text>
+                            <Text style={{...styles.buttonText, color: Colors.additional}}>Submit</Text>
                     </TouchableOpacity>
                 </View>
            

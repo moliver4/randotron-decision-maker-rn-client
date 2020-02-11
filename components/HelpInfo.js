@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Dimensions, StyleSheet } from 'react-native';
 import { Divider } from 'react-native-elements';
 import Colors from '../constants/Colors'
 
@@ -14,7 +14,7 @@ const HelpInfo = () => {
                 <Text style={styles.text}>
                     We make so many decisions throughout our day that we end up mentally drained.
                 </Text>
-                <Text style={styles.text}>
+                <Text style={{...styles.text, fontStyle: 'italic'}}>
                     It adds up. 
                 </Text>
                 <Text style={styles.text}>Can't decide where to eat? Who should foot the bill? What movie to watch?</Text>
@@ -39,7 +39,8 @@ const HelpInfo = () => {
       
     );
 }
-
+const height = Dimensions.get('window').height
+const width = Dimensions.get('window').width
 const styles = StyleSheet.create({
     container: {
         padding: 10,
@@ -48,12 +49,13 @@ const styles = StyleSheet.create({
     },
     title: {
         fontFamily: 'open-sans-bold',
-        paddingBottom: 20
+        paddingBottom: 20,
+        color: Colors.additional,
+        
     },
     text: {
         textAlign: 'center',
-        fontFamily: 'open-sans',
-        paddingBottom: 8,
+        paddingBottom: height/30,
         color: Colors.primary
     }
 })

@@ -2,14 +2,14 @@ import React from 'react';
 import { View, FlatList, Text,  StyleSheet } from 'react-native';
 import DefaultText from './DefaultText';
 
-import MiniCard from './MiniCard';
+import DashboardDecisionCard from './DashboardDecisionCard';
 
 const QuestionList = props => {
 
   const renderQuestionItem = itemData => {
     //itemData has an index and an item (question object)
     return (
-      <MiniCard
+      <DashboardDecisionCard
         question={itemData.item}
         index={itemData.index}
         onSelectQuestion={() => {

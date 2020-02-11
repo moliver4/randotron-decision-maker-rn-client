@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Button, Text, TextInput, Dimensions, StyleSheet } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import Colors from '../constants/Colors'
 
 const ChoiceCard = ({ choice, index, deleteChoice } ) => {
 
@@ -9,8 +10,9 @@ const ChoiceCard = ({ choice, index, deleteChoice } ) => {
         <View style={styles.card}>
             <View style={styles.row}>
                 <View style={styles.column}>
-                    <Text> Choice {index+1}: {choice.title} </Text>
-                    <Text> Weight: {choice.weight} </Text>
+                    <Text style={styles.header}> Choice {index+1}: </Text> 
+                    <Text style={styles.input}> {choice.title} </Text>
+                    <Text style={styles.header}> Weight:  {choice.weight}</Text>
                 </View>
                 {deleteChoice ? <AntDesign name="delete" size={20} color='firebrick' onPress={()=>deleteChoice(choice)} /> : null}
             </View>
@@ -31,13 +33,21 @@ const styles=StyleSheet.create({
         marginBottom: 10
       },
     row: {
-        padding: 5,
+        padding: 3,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
     },
     column: {
-        alignItems: 'center'
+        alignItems: 'flex-start',
+    },
+    header: {        
+        color: Colors.primary
+    },
+    input: {
+        color: Colors.primary,
+        paddingLeft: 15,
+        paddingBottom: 3
     }
 })
 

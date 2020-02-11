@@ -18,11 +18,12 @@ const styles = StyleSheet.create({
     container: {
       alignItems: "center",
       justifyContent: "center",
-     
+      borderBottomColor: 'white',
+      borderBottomWidth: 1
     }, 
     text: {
-      fontFamily: 'open-sans',
-      color: Colors.additional,
+      fontFamily: 'open-sans-bold',
+      color: Colors.extra,
       fontSize: 60/Dimensions.get('window').scale
     }
 })

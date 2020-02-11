@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, SafeAreaView, Dimensions } from 'react-native';
 import MyGradient from '../components/MyGradient'
 import HelpInfo from '../components/HelpInfo'
 
@@ -12,9 +12,9 @@ import HelpInfo from '../components/HelpInfo'
     return (
       
         <MyGradient>
-          <View style={{padding: 50}}> 
+         
             <HelpInfo/>
-          </View>
+
           </MyGradient>
           
           

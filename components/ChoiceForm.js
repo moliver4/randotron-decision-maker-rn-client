@@ -68,10 +68,12 @@ const styles = StyleSheet.create({
         color: Colors.primary
     },
     input: {
-            height: 40,
+            minHeight: 40,
+            textAlign: 'center',
             borderBottomColor: 'white',
-            borderBottomWidth: 2,
-            marginVertical: 20
+            borderBottomWidth: 1,
+            marginVertical: 20,
+            color: Colors.primary
     },
     buttonRow: {
         flexDirection: 'row',
@@ -91,12 +93,12 @@ const styles = StyleSheet.create({
         alignItems: 'center'
       },
       cancelButtonText: {
-        color: 'red',
+        color: 'firebrick',
         fontFamily: 'open-sans',
         fontSize: 14
       },
       buttonText: {
-        color: 'darkgreen',
+        color: 'green',
         fontFamily: 'open-sans',
         fontSize: 14
       }

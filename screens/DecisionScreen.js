@@ -143,7 +143,7 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
             style={styles.container}>
    
           <QuestionCard question= {question}/>
-          <Animated.View style={{ width: '80%', alignItems: "center", justifyContent: 'center', flexShrink: 1, padding: 10, borderRadius: 15, borderWidth: 2, borderColor:Colors.extra, backgroundColor: Colors.additional, transform: [{scale: springValue}] }} >
+          <Animated.View style={{ width: '80%', alignItems: "center", justifyContent: 'center', flexShrink: 1, padding: 10, borderRadius: 15, borderWidth: 4, borderColor:Colors.extra, backgroundColor: Colors.additional, transform: [{scale: springValue}] }} >
             <DecisionCard choice={decisionChoice} />
           </Animated.View>
          
@@ -160,7 +160,7 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
                 </TouchableOpacity> : null}
             {!isOld? 
               <TouchableOpacity style={styles.button} onPress={navigateBack}> 
-                      <Text style={styles.buttonText}>NewQuestion</Text>
+                      <Text style={{...styles.buttonText, color: Colors.additional}}>New Question</Text>
               </TouchableOpacity> : null}
           </View>
       </LinearGradient>

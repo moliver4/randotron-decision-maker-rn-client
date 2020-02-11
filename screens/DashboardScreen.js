@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     },
     hello: {
       fontFamily: 'open-sans-bold',
-      color: Colors.additional
+      color: Colors.extra
     },
     text: {
       fontFamily: 'open-sans-bold',
