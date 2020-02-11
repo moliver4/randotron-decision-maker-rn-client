@@ -47,6 +47,7 @@ const initialState = {
         questions: [action.question, ...newQuestions]
       }
     case DELETE_QUESTION:  
+    
       let notDeleted = state.questions.filter(question => question.question.id !== action.question.id)
       return {
         ...state,

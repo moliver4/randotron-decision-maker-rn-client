@@ -213,24 +213,6 @@ class FormScreen extends React.Component {
         }, () => this.handleFinalNavigation())
     }
 
-    // reloadQuestions = () => {
-    //     if (this.props.isLoggedIn){
-    //         let promise = ServerAdapter.getSignedInUser(this.props.user.id)
-    //         promise.then(data => this.handleUserData(data))
-    //     }
-    //     else {
-    //         console.log('user not logged in right now')
-    //     }
-    // }
-
-    // handleUserData = (data) => {
-    //     if (data.questions.length > 0) {
-    //       this.props.loadQuestions(data.questions)
-    //     }
-    //     this.handleFinalNavigation()
-    // }
-
-    //can be used regardless of if user is signed in or not
     handleFinalNavigation = () => {
         const body = {
             question: this.state.newQuestion,
@@ -335,7 +317,18 @@ FormScreen.navigationOptions = navData => {
             accessibilityLabel='back to login screen'
             iconName="logout"
             onPress={() => {
-              navData.navigation.navigate('Auth');
+                Alert.alert(
+                'Are You Sure You Want To Go Back To The Login Screen?',
+                'If you are not signed in, you will loose your question.',
+                [
+                  {
+                    text: 'Cancel',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                  },
+                  {text: 'Yes', onPress: () => navData.navigation.navigate('Auth')},
+                ],
+              )
             }}
           />
       </HeaderButtons>

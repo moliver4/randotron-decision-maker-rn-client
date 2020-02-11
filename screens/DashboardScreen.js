@@ -19,7 +19,7 @@ const DashboardScreen = props => {
             start={{ x: 0, y: 0 }}
             end={{ x: 0, y: 1 }}
             style={styles.container}>
-              <ActivityIndicator size="large" color="#0000ff" />
+              <ActivityIndicator size="large" color={Colors.additional} />
             </LinearGradient>
           )
         }
@@ -60,7 +60,18 @@ DashboardScreen.navigationOptions = navData => {
             accessibilityLabel='back to login screen'
             iconName="logout"
             onPress={() => {
-              navData.navigation.navigate('Auth');
+              Alert.alert(
+                'Are You Sure You Want To Go Back To The Login Screen?',
+                'If you are not signed in, you will loose your question.',
+                [
+                  {
+                    text: 'Cancel',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                  },
+                  {text: 'Yes', onPress: () => navData.navigation.navigate('Auth')},
+                ],
+              )
             }}
           />
       </HeaderButtons>

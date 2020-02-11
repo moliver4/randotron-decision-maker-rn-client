@@ -1,14 +1,12 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Alert, StyleSheet } from 'react-native';
 import { TouchableOpacity} from 'react-native-gesture-handler';
-
+import ServerAdapter from '../services/ServerAdapter'
 import { connect } from 'react-redux'
 import Colors from '../constants/Colors'
-import { loadCurrentQuestion} from '../store/actions/questions'
+import { loadCurrentQuestion, deleteQuestion} from '../store/actions/questions'
 
 const MiniCard = ( props ) => {
-    // console.log(props)
-    //props have index, onselect question, question object with all the info
 
 
     const handleSelectQuestion = () => {
@@ -34,9 +32,36 @@ const MiniCard = ( props ) => {
         })
 
     }
+
+    const handleDeleteRequest = () => {
+      Alert.alert('Delete this Question?', 'Are you sure you want to delete this question?', [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
+          text: 'Yes', 
+          onPress: () => deleteQuestionHandler(),
+          style: 'destructive'
+        },
+      ])
+    }
+
+    const deleteQuestionHandler = () => {
+
+      console.log('deleting this question', props.question.question.id)
+      let id = props.question.question.id
+      let prom = ServerAdapter.deleteQuestion(id)
+      prom.then(data => handleDelete(data))
+    }
+
+    const handleDelete = (question) => {
+      props.deleteQuestion(question)
+    }
     return (
            
-                <TouchableOpacity  style={styles.card} onPress={handleSelectQuestion}> 
+                <TouchableOpacity  style={styles.card} onPress={handleSelectQuestion} onLongPress={handleDeleteRequest}> 
                     <View>
                         <View style={{...styles.header }}>
                     
@@ -116,7 +141,9 @@ const styles = StyleSheet.create({
 
   const mapDispatchtoProps = dispatch => {
     return {
-        loadCurrentQuestion: (question) => dispatch(loadCurrentQuestion(question))
+        loadCurrentQuestion: (question) => dispatch(loadCurrentQuestion(question)),
+        deleteQuestion: (question) => dispatch(deleteQuestion(question))
+
       }
   }
 
