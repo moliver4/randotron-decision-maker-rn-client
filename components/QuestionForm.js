@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, TextInput, Text, TouchableWithoutFeedback, Keyboard, StyleSheet } from 'react-native';
+import { View, TextInput, Dimensions, Text, TouchableWithoutFeedback, Keyboard, StyleSheet } from 'react-native';
 import Colors from '../constants/Colors';
+
 
 const QuestionForm = (props) => {
     return (
@@ -26,16 +27,18 @@ const styles = StyleSheet.create({
       },
       text: {
           fontFamily: 'open-sans-bold',
-          fontSize: 15,
+          fontSize: 50/Dimensions.get('window').scale,
           paddingBottom: 10,
           color: Colors.primary
       },
       input: {
-        height: 30,
-        width: '70%',
+        height: Dimensions.get('window').height / 20,
+        width: Dimensions.get('window').width * 0.7,
         borderBottomColor: 'white',
-        borderBottomWidth: 2,
-        marginVertical: 10
+        borderBottomWidth: 1,
+        marginVertical: 10,
+        textAlign: 'center',
+        color: Colors.primary
     }
 })
 export default QuestionForm;

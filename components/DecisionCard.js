@@ -15,14 +15,9 @@ const DecisionCard = ( { choice } ) => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-      padding: 10,
-      flexShrink: 1,
-      alignItems: "center",
-      justifyContent: 'center',
-      textAlign: 'center'
-    }, 
+
     answer: {
+      textAlign: 'center',
       fontSize: 80/winSize.scale
     }
 })
