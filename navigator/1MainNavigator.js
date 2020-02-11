@@ -32,7 +32,7 @@ const defaultNavOptions = {
   headerBackTitleStyle: {
     fontFamily: 'open-sans'
   },
-  headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primary
+  headerTintColor: Platform.OS === 'android' ? 'white' : Colors.additional
   
 };
 
@@ -148,7 +148,7 @@ const DashboardNewHelpTabNavigator =
         activeTintColor: 'white',
         shifting: true,
         barStyle: {
-          backgroundColor: Colors.extra
+          backgroundColor: Colors.additional
         },
         initialRouteName: 'New'
       }
@@ -158,7 +158,7 @@ const DashboardNewHelpTabNavigator =
           labelStyle: {
             fontFamily: 'open-sans'
           },
-          activeTintColor: Colors.extra
+          activeTintColor: Colors.additional
         },
         initialRouteName: 'New'
       }
@@ -166,47 +166,6 @@ const DashboardNewHelpTabNavigator =
   );
 
 
-// const AppDrawerNavigator = createDrawerNavigator(
-//     {
-//       DashboardHome: {
-//         //screen: DashboardScreen
-//         screen: DashboardNewHelpTabNavigator,
-//         navigationOptions: {
-//           drawerLabel: 'Home'
-//         }
-//       }
-//     },
-//     {
-//       contentOptions: {
-//         activeTintColor: Colors.accent,
-//         labelStyle: {
-//           fontFamily: 'open-sans-bold'
-//         }
-//       }
-//     },
-//       {contentComponent: props => {
-//                 //   const dispatch = useDispatch();
-//                   return (
-//                     <View style={{ flex: 1, paddingTop: 20 }}>
-//                       <SafeAreaView forceInset={{ top: 'always', horizontal: 'never' }}>
-//                         <DrawerItems {...props} />
-//                         <Button
-//                           title="Logout"
-//                           color={Colors.primary}
-//                           onPress={() => {
-//                               console.log('this should log us out')
-//                             {/* dispatch(authActions.logout()); */}
-//                             // props.navigation.navigate('Auth');
-//                           }}
-//                         />
-//                       </SafeAreaView>
-//                     </View>
-//                   );
-//                 }
-        
-//     }
-    
-//   );
 
 
 const MainNavigator = createSwitchNavigator({

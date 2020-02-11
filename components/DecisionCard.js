@@ -18,7 +18,8 @@ const styles = StyleSheet.create({
 
     answer: {
       textAlign: 'center',
-      color: Colors.extra,
+      fontFamily: 'open-sans-bold',
+      color: Colors.accent,
       fontSize: 80/winSize.scale
     }
 })

@@ -11,7 +11,7 @@ const LogoutButton= props => {
       {...props}
       IconComponent={AntDesign}
       iconSize={20}
-      color={Platform.OS === 'android' ? 'white' : Colors.primary}
+      color={Platform.OS === 'android' ? 'white' : Colors.extra}
     />
   );
 };

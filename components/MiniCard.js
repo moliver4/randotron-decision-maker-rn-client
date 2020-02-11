@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
       shadowRadius: 5,
       shadowOpacity: 0.26,
       elevation: 8,
-      backgroundColor: 'rgba(255, 255, 255, 0.4)',
+      backgroundColor: 'white',
       padding: 10,
       borderRadius: 10,
       marginBottom: 10,
@@ -79,7 +79,8 @@ const styles = StyleSheet.create({
     decision: {
         paddingHorizontal: 10,
         height: 30,
-        fontFamily: 'open-sans-bold'
+        fontFamily: 'open-sans-bold',
+        color: Colors.extra
     },
     choice: {
         paddingHorizontal: 10,
@@ -94,7 +95,7 @@ const styles = StyleSheet.create({
       title: {
         fontFamily: 'open-sans-bold',
         fontSize: 20,
-        color: Colors.primary,
+        color: Colors.additional,
         textAlign: 'center'
       }
 

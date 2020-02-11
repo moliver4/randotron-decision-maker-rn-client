@@ -114,12 +114,6 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
       } 
     }
 
-    //TO DELETE LATER no longer need this function because not makign a server call. just updating state with current function. But then when user logs in next time, will be persisted.
-    const handleUserData = (data) => {
-      loadQuestions(data.questions)
-    }
-
-
     const deleteQuestionHandler = () => {
       console.log('deleting this question', question.id)
       let prom = ServerAdapter.deleteQuestion(question.id)
@@ -149,7 +143,7 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
             style={styles.container}>
    
           <QuestionCard question= {question}/>
-          <Animated.View style={{ width: '80%', alignItems: "center", justifyContent: 'center', flexShrink: 1, padding: 10, borderRadius: 15, backgroundColor: Colors.accent, transform: [{scale: springValue}] }} >
+          <Animated.View style={{ width: '80%', alignItems: "center", justifyContent: 'center', flexShrink: 1, padding: 10, borderRadius: 15, borderWidth: 2, borderColor:Colors.extra, backgroundColor: Colors.additional, transform: [{scale: springValue}] }} >
             <DecisionCard choice={decisionChoice} />
           </Animated.View>
          

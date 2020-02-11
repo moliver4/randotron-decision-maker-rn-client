@@ -31,7 +31,7 @@ const DashboardScreen = props => {
               style={styles.container}> 
 
                   {props.isLoggedIn? 
-                  <Text style={styles.text}>
+                  <Text style={styles.hello}>
                       Hey { props.user.name }!
                   </Text>
                   :
@@ -80,8 +80,11 @@ const styles = StyleSheet.create({
     greeting: {
       alignItems: 'center',
       justifyContent: 'center',
-    }
-    ,
+    },
+    hello: {
+      fontFamily: 'open-sans-bold',
+      color: Colors.additional
+    },
     text: {
       fontFamily: 'open-sans-bold',
       color: Colors.primary
