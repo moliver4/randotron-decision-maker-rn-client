@@ -10,8 +10,7 @@ const ChoiceCard = ({ choice, index, deleteChoice } ) => {
         <View style={styles.card}>
             <View style={styles.row}>
                 <View style={styles.column}>
-                    <Text style={styles.header}> Choice {index+1}: </Text> 
-                    <Text style={styles.input}> {choice.title} </Text>
+                    <Text style={styles.header}> Choice {index+1}:  {choice.title} </Text>
                     <Text style={styles.header}> Weight:  {choice.weight}</Text>
                 </View>
                 {deleteChoice ? <AntDesign name="delete" size={20} color='firebrick' onPress={()=>deleteChoice(choice)} /> : null}

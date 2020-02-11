@@ -19,9 +19,17 @@ const MiniCard = ( props ) => {
     const showChoices = () => {
         return props.question.choices.map( choice => {
             if (choice.id === props.question.decision.choice.id) {
-                return <Text key={choice.id} style={ {...styles.decision}}> {choice.title} </Text>
+                return (
+                <View style={styles.column} key={choice.id}> 
+                  <Text key={choice.id} style={{...styles.decision}}> {choice.title} </Text>
+                </View>
+                )
             } else {
-                return <Text key={choice.id} style={styles.choice}> {choice.title}</Text>
+                return (
+                <View style={styles.column} key={choice.id}>
+                  <Text key={choice.id} style={styles.choice}> {choice.title}</Text>
+                </View>
+                )
             }
         })
 
@@ -30,7 +38,7 @@ const MiniCard = ( props ) => {
            
                 <TouchableOpacity  style={styles.card} onPress={handleSelectQuestion}> 
                     <View>
-                        <View style={{...styles.row, ...styles.header }}>
+                        <View style={{...styles.header }}>
                     
                                 <Text style={styles.title} numberOfLines={1}>
                                     
@@ -39,9 +47,9 @@ const MiniCard = ( props ) => {
                         
                         </View>
             
-                    <View style={{ ...styles.row, ...styles.decision }}>
-                        {showChoices()}
-                    </View>
+                      <View style={{ ...styles.row}}>
+                          {showChoices()}
+                      </View>
                     
                     </View>
                 </TouchableOpacity>
@@ -69,12 +77,13 @@ const styles = StyleSheet.create({
     row: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center',
-        height: '50%'
+        justifyContent: 'space-evenly',
+        height: '50%',
     },
     header: {
+        paddingTop: 10,
         textAlign: 'center',
-        height: 50
+        minHeight: 50
     },
     decision: {
         paddingHorizontal: 10,
@@ -94,10 +103,13 @@ const styles = StyleSheet.create({
         paddingHorizontal: 12
       },
     title: {
-    fontFamily: 'open-sans-bold',
-    fontSize: 20,
-    color: Colors.additional,
-    textAlign: 'center'
+      fontFamily: 'open-sans-bold',
+      fontSize: 20,
+      color: Colors.additional,
+      textAlign: 'center'
+    }, 
+    column: {
+      flexShrink: 1
     }
 
   });
