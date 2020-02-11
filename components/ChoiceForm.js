@@ -12,7 +12,7 @@ const ChoiceForm = ( { newChoice, titleChange, weightChange, submitAddChoice, ca
             <View >
 
                 <View style={styles.choiceInputContainer}> 
-                    <Text style={styles.text}> Choice: </Text>
+                   
                     <TextInput
                         style={styles.input}
                         onChangeText={text=>titleChange(text)}
@@ -70,8 +70,8 @@ const styles = StyleSheet.create({
     input: {
             height: 40,
             borderBottomColor: 'white',
-            borderBottomWidth: 1,
-            marginVertical: 10
+            borderBottomWidth: 2,
+            marginVertical: 20
     },
     buttonRow: {
         flexDirection: 'row',

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, Dimensions, StyleSheet } from 'react-native';
+import Colors from '../constants/Colors'
 
 let winSize = Dimensions.get('window');
 
 const DecisionCard = ( { choice } ) => {
 
   return (
- 
         <Text style={styles.answer}> 
           {choice.title}
         </Text>
@@ -15,14 +15,10 @@ const DecisionCard = ( { choice } ) => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-      padding: 10,
-      flexShrink: 1,
-      alignItems: "center",
-      justifyContent: 'center',
-      textAlign: 'center'
-    }, 
+
     answer: {
+      textAlign: 'center',
+      color: Colors.extra,
       fontSize: 80/winSize.scale
     }
 })

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Animated, FlatList, Dimensions, Button, StyleSheet } from 'react-native';
+import { View, Text, Animated, FlatList, Dimensions, TouchableOpacity, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient'
 import Colors from '../constants/Colors'
 import MiniChoiceCard from '../components/MiniChoiceCard'
@@ -149,7 +149,7 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
             style={styles.container}>
    
           <QuestionCard question= {question}/>
-          <Animated.View style={{ width: '80%', alignItems: "center", justifyContent: 'center', flexShrink: 1, padding: 10, borderRadius: 15, height: 50, backgroundColor: Colors.accent, transform: [{scale: springValue}] }} >
+          <Animated.View style={{ width: '80%', alignItems: "center", justifyContent: 'center', flexShrink: 1, padding: 10, borderRadius: 15, backgroundColor: Colors.accent, transform: [{scale: springValue}] }} >
             <DecisionCard choice={decisionChoice} />
           </Animated.View>
          
@@ -157,9 +157,17 @@ const DecisionScreen= ({ navigation, user, isLoggedIn, currentQuestion, loadCurr
    
           
           <View style={styles.buttonContainer}> 
-            <Button title='ReRun' onPress={reRun}/>
-            {isLoggedIn? <Button title="Delete This Question" onPress={deleteQuestionHandler}/> : null }
-            {isOld? null : <Button title="New Question" onPress={navigateBack}/>}
+              <TouchableOpacity style={styles.button} onPress={reRun}> 
+                <Text style={styles.buttonText}>ReRun</Text>
+              </TouchableOpacity>
+            {isLoggedIn? 
+                <TouchableOpacity style={styles.button} onPress={deleteQuestionHandler}> 
+                        <Text style={styles.buttonText}>Delete Question</Text>
+                </TouchableOpacity> : null}
+            {!isOld? 
+              <TouchableOpacity style={styles.button} onPress={navigateBack}> 
+                      <Text style={styles.buttonText}>NewQuestion</Text>
+              </TouchableOpacity> : null}
           </View>
       </LinearGradient>
     );
@@ -175,10 +183,28 @@ const styles = StyleSheet.create({
   choiceContainer: {
     maxHeight: '30%',
     width: Dimensions.get('window').width * 0.9,
+    borderRadius: 10
   },
   buttonContainer: {
     alignItems: "center",
     justifyContent: "space-evenly"
+  },
+  button: {
+    backgroundColor: 'white',
+    paddingVertical: 7,
+    paddingHorizontal: 30,
+    borderRadius: 25,   
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 5,
+    shadowOpacity: 0.26,
+    elevation: 5,
+    marginVertical: Dimensions.get('window').height * 0.01
+  },
+  buttonText: {
+    color: Colors.extra,
+    fontFamily: 'open-sans',
+    fontSize: 18
   }
 });
 
