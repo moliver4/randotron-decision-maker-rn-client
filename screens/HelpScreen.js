@@ -15,7 +15,7 @@ import HelpInfo from '../components/HelpInfo'
          
             <HelpInfo/>
 
-          </MyGradient>
+        </MyGradient>
           
           
       

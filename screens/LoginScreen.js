@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Modal, Text, Image,  StyleSheet, Dimensions } from 'react-native';
+import { View, Modal, ScrollView, Text, Image,  StyleSheet, Dimensions } from 'react-native';
 import { SocialIcon, Button } from 'react-native-elements'
 import MyGradient from '../components/MyGradient'
 import InfoButton from '../components/InfoButton'
