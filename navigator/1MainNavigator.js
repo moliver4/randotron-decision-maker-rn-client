@@ -1,11 +1,12 @@
 import React from 'react';
 import {
+  createStackNavigator,
   createBottomTabNavigator,
+  // createMaterialBottomTabNavigator,
   createSwitchNavigator,
   createAppContainer
 } from 'react-navigation';
-import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
-import { createStackNavigator } from 'react-navigation-stack'
+
 import { Platform, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import LoginScreen from '../screens/LoginScreen'
@@ -98,7 +99,7 @@ const tabScreenConfig = {
       tabBarColor: Colors.primary,
       tabBarLabel:
         Platform.OS === 'android' ? (
-          <Text style={{ fontFamily: 'open-sans-bold' }}>Home</Text>
+          null
         ) : (
           'Home'
         )
@@ -115,7 +116,7 @@ const tabScreenConfig = {
       tabBarColor: Colors.primary,
       tabBarLabel:
         Platform.OS === 'android' ? (
-          <Text style={{ fontFamily: 'open-sans-bold' }}>New Question</Text>
+          null
         ) : (
           'New Question'
         )
@@ -132,7 +133,7 @@ const tabScreenConfig = {
       tabBarColor: Colors.primary,
       tabBarLabel:
         Platform.OS === 'android' ? (
-          <Text style={{ fontFamily: 'open-sans-bold' }}>Help</Text>
+          null
         ) : (
           'Help'
         )
@@ -143,9 +144,9 @@ const tabScreenConfig = {
 
 const DashboardNewHelpTabNavigator =
   Platform.OS === 'android'
-    ? createMaterialBottomTabNavigator(tabScreenConfig, {
+    ? createBottomTabNavigator(tabScreenConfig, {
         activeTintColor: 'white',
-        shifting: true,
+        shifting: false,
         barStyle: {
           backgroundColor: Colors.additional
         },
