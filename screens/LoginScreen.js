@@ -5,13 +5,12 @@ import MyGradient from '../components/MyGradient'
 import InfoButton from '../components/InfoButton'
 import CloseModalButton from '../components/CloseModalButton'
 import HelpInfo from '../components/HelpInfo'
-import DefaultText from '../components/DefaultText';
 import * as Google from "expo-google-app-auth";
 import {login, guest, logout} from '../store/actions/userAuth'
 import {loadQuestions} from '../store/actions/questions'
 import { connect } from 'react-redux'
 import ServerAdapter from '../services/ServerAdapter'
-import Colors from '../constants/Colors'
+
 
 import { IOS_CLIENT_ID } from '../config'
 import { TouchableOpacity } from 'react-native-gesture-handler';

@@ -1,13 +1,12 @@
 import React from 'react';
 import {
-  createStackNavigator,
   createBottomTabNavigator,
-  createDrawerNavigator,
   createSwitchNavigator,
-  createAppContainer,
-  DrawerItems
+  createAppContainer
 } from 'react-navigation';
-import { Platform, SafeAreaView, Button, View } from 'react-native';
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
+import { createStackNavigator } from 'react-navigation-stack'
+import { Platform, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import LoginScreen from '../screens/LoginScreen'
 import DashboardScreen from '../screens/DashboardScreen'
