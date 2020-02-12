@@ -75,7 +75,7 @@ class LoginScreen extends React.Component {
       <MyGradient>
      
         <View>
-          <Image source={require('../assets/cat-logo.png')} style={{width:60, height: 60, marginBottom: 40}}/>
+          <Image source={require('../assets/ChoicesSmall.png')} style={{resizeMode: 'stretch', marginBottom: 40}}/>
         </View>
         <View style={styles.titleContainer}>
           <View>

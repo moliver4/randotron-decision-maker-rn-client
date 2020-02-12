@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "rn-randotron-client",
-    "slug": "rn-randotron-client",
+    "name": "rn-choices-client",
+    "slug": "rn-choices-client",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
@@ -13,7 +13,9 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "backgroundColor": "#D7F5EF"
+      "image": "./assets/Choices.png",
+      "resize": "contain",
+      "backgroundColor": "#fff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
