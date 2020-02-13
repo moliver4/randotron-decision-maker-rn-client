@@ -39,12 +39,25 @@ npm start
 ```
 Scan the QR code or use with your local device emulator. 
 
+## Made with:
+Google firebase
+Expo
+React ~ 16.9.0
+React-Native
+    Supported operating systems are >= Android 4.1 (API 16) and >= iOS 8.0.
+[React Native numeric input](https://www.npmjs.com/package/react-native-numeric-input)
+Redux/React-Redux
+
+
 ## TODOS 
+I would like to transfer the backend server to firebase so it can all be used at once with Google Auth. Otherwise, would like to publish in the android and ios app stores. 
+
+I would also like to add a social aspect in terms of sharing decisions amoung groups.
 
 ## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+Logo designed at [Canvo](www.canvo.com)
