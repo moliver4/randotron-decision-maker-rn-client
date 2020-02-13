@@ -44,13 +44,13 @@ npm start
 Scan the QR code or use with your local device emulator. 
 
 ## Made with:
-Google firebase
-Expo
-React ~ 16.9.0
-React-Native
-    Supported operating systems are >= Android 4.1 (API 16) and >= iOS 8.0.
-[React Native numeric input](https://www.npmjs.com/package/react-native-numeric-input)
-Redux/React-Redux
+*Google firebase
+*Expo
+*React ~ 16.9.0
+*React-Native
+    (Supported operating systems are >= Android 4.1 (API 16) and >= iOS 8.0.)
+*[React Native numeric input](https://www.npmjs.com/package/react-native-numeric-input)
+*Redux/React-Redux
 
 
 ## TODOS 
