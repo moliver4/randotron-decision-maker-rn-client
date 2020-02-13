@@ -1,35 +1,45 @@
 # Choices aka Randotron Decision Maker
 
-Choices Decision Maker (previously was affectionately named Randotron thanks to a Rick and Morty Heist episode inspiration). I created this React Native app to be used on ios (mainly what I developed for) and android.
+Choices Decision Maker (previously was affectionately named Randotron thanks to a Rick and Morty Heist episode inspiration). 
+I created this React Native app to be used on ios (mainly what I developed for) and android.
+
 Decision fatigue is something that affects everyone on a daily basis, whether we notice it or not. There have been many studies that show professionals' decision making abilities deteriorate as the day wears on. 
+
 Sometimes, we spend so much time deciding things relating to our job or our family, we don't want to waste any more precious energy on just deciding where to eat or what to watch. 
 
-This is why I created this Choices App. This app is meant to help with those trivial decisions and to alleviate some awkward social situations (like deciding whose car to take or who foots the bill). 
+So I created this Choices App. This app is meant to help with those trivial decisions and to alleviate some awkward social situations (like deciding whose car to take or who foots the bill). 
 
+DISCLAIMER: It is (obviously) absolutely not meant for huge life decisions like deciding if you should get married or buy a house and all advice should be taken with a grain of salt. Use common sense. 
 
-It is absolutely not meant for huge life decisions like deciding if you should get married and all advice should be taken with a grain of salt.  
+## App Usage
 
+This app is currently published with the Expo library. To Access, please download the Expo application and scan the QR code at this link with your camera and launch the Expo app.
 
-## Installation
+Choose your login as a Guest or with Google.
+
+If you Login with Google, your account will be created/fetched, and your questions will be persisted if you desire them to be. This is great if you always eat similar things and just want to re-run the same question.
+
+The most recently run question will always be pushed to the top so you won't loose any.
+
+As a guest, nothing will be saved, but the current question can be rerun.
+
+If you or your group are leaning more toward one option than another, feel free to add additional 'weight' to that option. This will be taken into account as needed during the random, but now weighted, calculation.
+
+## Installation && Usage Locally
 
 To access the code, feel free to Fork, copy your url and ```git clone <url>```
-Use the package manager [npm](https://www.npmjs.com/) to install foobar.
-
-If one choice is more heavily desired, an additional weight can be added to it and it will be taken into account. 
+Use the package manager [npm](https://www.npmjs.com/) to install needed dependencies.
 
 ```bash
-pip install foobar
+npm install
 ```
-
-## Usage
-
-```python
-import foobar
-
-foobar.pluralize('word') # returns 'words'
-foobar.pluralize('goose') # returns 'geese'
-foobar.singularize('phenomena') # returns 'phenomenon'
+To launch the local expo development: 
+```bash
+npm start
 ```
+Scan the QR code or use with your local device emulator. 
+
+## TODOS 
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
