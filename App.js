@@ -4,7 +4,7 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import MainApp from './MainApp'
 import reducer from './store/reducers/mainReducer'
-
+console.disableYellowBox = true
 const store = createStore(reducer)
 
 class App extends Component {
