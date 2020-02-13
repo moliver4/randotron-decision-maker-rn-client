@@ -3,6 +3,11 @@ const QUESTIONSURL = 'https://immense-ocean-72084.herokuapp.com/questions'
 
 const DECISIONSURL = 'https://immense-ocean-72084.herokuapp.com/decisions'
 
+// const USERSURL = 'http://10.137.3.150:3000/users'
+// const QUESTIONSURL = 'http://10.137.3.150:3000/questions'
+
+// const DECISIONSURL = 'http://10.137.3.150:3000/decisions'
+
 
  class ServerAdapter {
   static fetchUser(body){
