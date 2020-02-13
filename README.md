@@ -11,6 +11,10 @@ So I created this Choices App. This app is meant to help with those trivial deci
 
 DISCLAIMER: It is (obviously) absolutely not meant for huge life decisions like deciding if you should get married or buy a house and all advice should be taken with a grain of salt. Use common sense. 
 
+![DEMO PART 1](https://github.com/moliver4/randotron-decision-maker-rn-client/blob/master/assets/demo1.gif)
+
+![DEMO PART 2](https://github.com/moliver4/randotron-decision-maker-rn-client/blob/master/assets/demo2.gif)
+
 ## App Usage
 
 This app is currently published with the Expo library. To Access, please download the Expo application and scan the QR code at this link with your camera and launch the Expo app.
