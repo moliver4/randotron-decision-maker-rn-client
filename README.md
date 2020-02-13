@@ -17,7 +17,7 @@ DISCLAIMER: It is (obviously) absolutely not meant for huge life decisions like 
 
 ## App Usage
 
-This app is currently published with the Expo library. To Access, please download the Expo application and scan the QR code at this link with your camera and launch the Expo app.
+This app is currently published with the Expo library. To Access, please download the Expo application and scan the QR code at this [link]https://exp.host/@moliver/rn-choices-client with your camera and launch the Expo app.
 
 Choose your login as a Guest or with Google.
 
@@ -43,14 +43,16 @@ npm start
 ```
 Scan the QR code or use with your local device emulator. 
 
-## Made with:
-*Google firebase
-*Expo
-*React ~ 16.9.0
-*React-Native
+## Made with/Dependencies:
+-Google firebase ~ 7.7.0
+-Expo ~ 36.0.0
+-React ~ 16.9.0
+-React-Native
     (Supported operating systems are >= Android 4.1 (API 16) and >= iOS 8.0.)
-*[React Native numeric input](https://www.npmjs.com/package/react-native-numeric-input)
-*Redux/React-Redux
+-[React Native numeric input](https://www.npmjs.com/package/react-native-numeric-input)
+-Redux/React-Redux (7.1.0, 4.0.4)
+-React Native Elements [~1.2.7](https://react-native-elements.github.io/react-native-elements/)
+-React Navigation [~3.11.1](https://www.npmjs.com/package/@react-navigation/native)
 
 
 ## TODOS 

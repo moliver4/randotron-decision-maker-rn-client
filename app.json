@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "rn-choices-client",
+    "description": "An App that makes random/weighted/unweighted choices for you!",
     "slug": "rn-choices-client",
     "privacy": "public",
     "sdkVersion": "36.0.0",
