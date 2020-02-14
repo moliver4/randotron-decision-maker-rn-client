@@ -12,16 +12,18 @@ export default InfoButton = (props) => {
         </TouchableOpacity>
     )
 }
+const height = Dimensions.get('window').height
+const width = Dimensions.get('window').width
 
 const styles=StyleSheet.create({
     position:{
         position: 'absolute', 
-        bottom: 50, 
-        right: 30
+        bottom: height/20, 
+        right: width/10
     },
     buttonContainer: {
-        width: 40,
-        height: 40,
+        width: width/10,
+        height: width/10,
         borderRadius: 25,
         alignItems: 'center',
         justifyContent: 'center',

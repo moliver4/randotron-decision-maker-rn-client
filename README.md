@@ -15,20 +15,6 @@ DISCLAIMER: It is (obviously) absolutely not meant for huge life decisions like 
 
 ![DEMO PART 2](https://github.com/moliver4/randotron-decision-maker-rn-client/blob/master/assets/demo2.gif)
 
-## App Usage
-
-This app is currently published with the Expo library. To Access, please download the Expo application and scan the QR code at this [link]https://exp.host/@moliver/rn-choices-client with your camera and launch the Expo app.
-
-Choose your login as a Guest or with Google.
-
-If you Login with Google, your account will be created/fetched, and your questions will be persisted if you desire them to be. This is great if you always eat similar things and just want to re-run the same question.
-
-The most recently run question will always be pushed to the top so you won't loose any.
-
-As a guest, nothing will be saved, but the current question can be rerun.
-
-If you or your group are leaning more toward one option than another, feel free to add additional 'weight' to that option. This will be taken into account as needed during the random, but now weighted, calculation.
-
 ## Installation && Usage Locally
 
 To access the code, feel free to Fork, copy your url and ```git clone <url>```
@@ -43,6 +29,23 @@ npm start
 ```
 Scan the QR code or use with your local device emulator. 
 
+## App Usage
+
+This app is currently published with the Expo library. This is available to Android users to use as a Guest (No google login on android at this time). 
+To Access, please download the Expo application and scan the QR code at this [link]https://exp.host/@moliver/rn-choices-client with your camera and launch the Expo app.
+
+Choose your login as a Guest.
+
+--
+If you Login with Google, your account will be created/fetched, and your questions will be persisted if you desire them to be. This is great if you always eat similar things and just want to re-run the same question.
+
+The most recently run question will always be pushed to the top so you won't loose any.
+
+As a guest, nothing will be saved, but the current question can be rerun.
+
+If you or your group are leaning more toward one option than another, feel free to add additional 'weight' to that option. This will be taken into account as needed during the random, but now weighted, calculation.
+
+
 ## Made with/Dependencies:
 -Google firebase ~ 7.7.0
 -Expo ~ 36.0.0
@@ -56,7 +59,7 @@ Scan the QR code or use with your local device emulator.
 
 
 ## TODOS 
-I would like to transfer the backend server to firebase so it can all be used at once with Google Auth. Otherwise, would like to publish in the android and ios app stores. 
+I would like to transfer the backend server to firebase so it can all be used at once with Google Auth. Otherwise, would like to publish in the android and ios app stores once I add in more Accessibility features as well as make the screens rotatable by adding event listeners to the Dimensions. 
 
 I would also like to add a social aspect in terms of sharing decisions amoung groups.
 

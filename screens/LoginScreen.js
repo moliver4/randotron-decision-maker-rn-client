@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Modal, ScrollView, Text, Image,  StyleSheet, Dimensions } from 'react-native';
+import { View, Modal, ScrollView, TouchableOpacity, Text, Image,  StyleSheet, Dimensions } from 'react-native';
 import { SocialIcon, Button } from 'react-native-elements'
 import MyGradient from '../components/MyGradient'
 import InfoButton from '../components/InfoButton'
@@ -13,7 +13,7 @@ import ServerAdapter from '../services/ServerAdapter'
 
 
 import { IOS_CLIENT_ID } from '../config'
-import { TouchableOpacity } from 'react-native-gesture-handler';
+
 
 class LoginScreen extends React.Component {
   state = {
@@ -84,8 +84,7 @@ class LoginScreen extends React.Component {
             <Text style={styles.text}> We can help.</Text>
           </View>
         </View>
-    
-         
+            
             <SocialIcon
                 title='Login with Google'
                 button
@@ -96,8 +95,6 @@ class LoginScreen extends React.Component {
                 onPress={this.signInWithGoogle}
             />
         
-
-     
             <Button 
               buttonStyle={styles.buttonGuest}
               raised 
