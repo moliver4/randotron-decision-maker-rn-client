@@ -37,6 +37,7 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
+    "logkitty": ">=0.7.1",
     "babel-preset-expo": "^8.0.0",
     "@babel/core": "^7.0.0"
   },
